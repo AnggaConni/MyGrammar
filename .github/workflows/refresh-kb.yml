@@ -46,7 +46,9 @@ jobs:
       - name: Build offline Harper bundle
         run: |
           mkdir -p vendor
-          npx esbuild scripts/harper_entry.mjs --bundle --format=iife --platform=browser --target=es2020 --minify --outfile=vendor/harper.bundle.js
+          # Harper contains a Node-only dynamic import of `fs` for file:// binaries.
+          # Our browser build uses the inlined data URL, so keep that branch external.
+          npx esbuild scripts/harper_entry.mjs --bundle --format=iife --platform=browser --target=es2020 --external:fs --minify --outfile=vendor/harper.bundle.js
 
       - name: Refresh Knowledge Base
         run: python scripts/build_kb.py --force
