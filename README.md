@@ -68,3 +68,12 @@ Generated files:
 Source attribution and license information are documented in `DATA_SOURCES.md` and `licenses/`.
 
 LanguageTool rules remain separately identified as LGPL-2.1-or-later data, and wordfreq-derived data remains identified as CC BY-SA 4.0.
+
+
+## Document Checker
+
+`Document.html` provides long-document offline grammar checking using a vendored Harper.js WebAssembly bundle. It supports pasted text plus TXT/Markdown import and keeps the document in the browser.
+
+The Knowledge Base pipeline stores the complete imported LanguageTool catalog for reference in `data/external/languagetool_catalog.json`, while only explicitly safe single-token rules are eligible for the lightweight browser rule set.
+
+The Harper bundle is rebuilt from the pinned `harper.js@2.12.0` package by GitHub Actions.
