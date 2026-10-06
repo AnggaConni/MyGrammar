@@ -6,6 +6,11 @@ on:
       - 'scripts/build_kb.py'
       - 'scripts/harper_entry.mjs'
       - 'scripts/qa.py'
+      - 'scripts/test_grammar_engine.js'
+      - 'tests/grammar_cases.json'
+      - 'grammar-engine.js'
+      - 'app.js'
+      - 'toefl.js'
       - '.github/workflows/refresh-kb.yml'
   workflow_dispatch:
     inputs:
@@ -61,6 +66,7 @@ jobs:
           node --check app.js
           node --check toefl.js
           node --check document.js
+          node --check grammar-engine.js
           node scripts/test_grammar_engine.js
 
       - name: Show generated statistics
