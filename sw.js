@@ -1,4 +1,4 @@
-const CACHE='mygrammar-v7';
+const CACHE='mygrammar-v8';
 const ASSETS=[
   './','./index.html','./Toefl.html','./Document.html',
   './style.css','./grammar-engine.js','./app.js','./toefl.js','./document.js',
