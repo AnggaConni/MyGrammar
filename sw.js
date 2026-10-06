@@ -1,8 +1,11 @@
-const CACHE='mygrammar-v4';
+const CACHE='mygrammar-v5';
 const ASSETS=[
   './','./index.html','./Toefl.html','./Document.html',
   './style.css','./app.js','./toefl.js','./document.js',
-  './manifest.json','./vendor/harper.bundle.js'
+  './manifest.json','./vendor/harper.bundle.js',
+  './data/grammar_rules.json','./data/tenses.json','./data/common_errors.json',
+  './data/contractions.json','./data/verbs.json','./data/samples.json',
+  './data/external/languagetool_runtime.json'
 ];
 self.addEventListener('install',function(event){
   event.waitUntil(caches.open(CACHE).then(function(cache){return cache.addAll(ASSETS);}));
