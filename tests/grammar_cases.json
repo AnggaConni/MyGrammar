@@ -112,8 +112,8 @@
       "input": "I am agree with you.",
       "expected": [
         {
-          "wrong": "I am agree",
-          "correct": "I agree",
+          "wrong": "I am agree with",
+          "correct": "I agree with",
           "category": "Suggestion",
           "title": "Common learner error"
         }
