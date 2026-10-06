@@ -24,10 +24,12 @@
 <h1>Document Checker</h1>
 <p>Paste a long English document and check grammar, spelling and style locally. The document never needs to leave your browser.</p>
 <div class="doc-toolbar">
-<label for="fileInput" class="file-label">📄 Import TXT / MD</label><input id="fileInput" class="file-input" type="file" accept=".txt,.md,text/plain,text/markdown">
+<label for="fileInput" class="file-label">📄 Import TXT / MD</label>
+<label style="display:flex;align-items:center;gap:6px;font-size:11px;color:#475569;font-weight:800">English dialect<select id="dialectSelect" style="border:1px solid #cbd5e1;border-radius:8px;padding:7px 9px;background:#fff;font-weight:700"><option value="American">American</option><option value="British">British</option><option value="Australian">Australian</option><option value="Canadian">Canadian</option><option value="Indian">Indian</option></select></label><input id="fileInput" class="file-input" type="file" accept=".txt,.md,text/plain,text/markdown">
 <button id="checkBtn" class="doc-btn primary">🔍 Check Document</button>
 <button id="clearBtn" class="doc-btn">Clear</button>
-<button id="copyBtn" class="doc-btn">Copy Clean Text</button>
+<button id="applyAllBtn" class="doc-btn">✓ Apply All Safe</button>
+<button id="copyBtn" class="doc-btn">Copy Text</button>
 <a href="Toefl.html" class="file-label" style="text-decoration:none">📝 Writing Lab</a>
 </div>
 </header>
