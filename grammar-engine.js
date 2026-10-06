@@ -326,7 +326,7 @@
     list.forEach(function(issue){
       const duplicateOverlap=filtered.some(function(existing){
         return existing.start===issue.start &&
-          existing.correct===issue.correct &&
+          existing.category===issue.category &&
           existing.end>=issue.end;
       });
       if(!duplicateOverlap)filtered.push(issue);
