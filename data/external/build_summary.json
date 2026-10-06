@@ -1,0 +1,14 @@
+{
+  "builder": "MyGrammar Knowledge Base Builder",
+  "forced": true,
+  "sources": {
+    "languagetool": {
+      "all_rules": 4044,
+      "runtime_safe_rules": 133,
+      "advanced_or_skipped": 2642
+    },
+    "wordfreq": {
+      "words": 25000
+    }
+  }
+}

@@ -1,13 +1,1344 @@
 {
   "source": {
     "name": "LanguageTool English",
-    "url": "https://github.com/languagetool-org/languagetool",
+    "url": "https://raw.githubusercontent.com/languagetool-org/languagetool/master/languagetool-language-modules/en/src/main/resources/org/languagetool/rules/en/grammar.xml",
     "license": "LGPL-2.1-or-later"
   },
   "stats": {
-    "all_rules": 0,
-    "runtime_safe_rules": 0,
-    "advanced_or_skipped": 0
+    "all_rules": 4044,
+    "runtime_safe_rules": 133,
+    "advanced_or_skipped": 2642
   },
-  "rules": []
+  "rules": [
+    {
+      "id": "CAPITALIZATION",
+      "name": "capitalize proper names, geographic terms, historic episodes...",
+      "category": "capitalize proper names, geographic terms, historic episodes...",
+      "message": "Capitalize holidays.",
+      "regex": "\\bNew\\b\\s+\\bYear\\b\\s+'s\\s+day|eve",
+      "suggestion": "New Year's",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "CAPITALIZATION",
+      "name": "capitalize proper names, geographic terms, historic episodes...",
+      "category": "capitalize proper names, geographic terms, historic episodes...",
+      "message": "Capitalize holidays.",
+      "regex": "\\bveterans\\b\\s+\\bday\\b",
+      "suggestion": "Day",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "CAPITALIZATION",
+      "name": "capitalize proper names, geographic terms, historic episodes...",
+      "category": "capitalize proper names, geographic terms, historic episodes...",
+      "message": "Capitalize specific historic events, episodes, and eras.",
+      "regex": "\\bthe\\b",
+      "suggestion": "Middle Ages",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "CAPITALIZATION",
+      "name": "capitalize proper names, geographic terms, historic episodes...",
+      "category": "capitalize proper names, geographic terms, historic episodes...",
+      "message": "Capitalize specific geographical places.",
+      "regex": "\\bCape\\b\\s+\\bof\\b\\s+\\bGood\\b\\s+\\bHope\\b",
+      "suggestion": "Cape of Good Hope",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "CAPITALIZATION",
+      "name": "capitalize proper names, geographic terms, historic episodes...",
+      "category": "capitalize proper names, geographic terms, historic episodes...",
+      "message": "If you're referring to a specific and known geographical location, the name should be capitalized.",
+      "regex": "along\\|off\\|over\\s+\\bthe\\b\\s+off\\?",
+      "suggestion": "Coast",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "CHRISTMAS",
+      "name": "Christmas",
+      "category": "Christmas",
+      "message": "The name of the day before Christmas is normally capitalized.",
+      "regex": "\\bchristmas\\b\\s+\\beve\\b",
+      "suggestion": "Christmas Eve",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "IN_LONG_BEACH",
+      "name": "long beach (Long Beach)",
+      "category": "long beach (Long Beach)",
+      "message": "Capitalize this word if you mean the city in California.",
+      "regex": "in|from|to|of|at|near",
+      "suggestion": "Beach",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "IN_LONG_ISLAND",
+      "name": "long island (Long Island)",
+      "category": "long island (Long Island)",
+      "message": "Capitalize this word if you mean the island near New York City.",
+      "regex": "in|on|from|to|of|at",
+      "suggestion": "Long Island",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "IT_IS_2",
+      "name": "its vs it is",
+      "category": "its vs it is",
+      "message": "It seems that a verb is missing.",
+      "regex": "(any|some|every|no-?)(body|one|thing)",
+      "suggestion": "it's",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "POSSESSIVE_APOSTROPHE_2",
+      "name": "somethings ('s) wrong",
+      "category": "somethings ('s) wrong",
+      "message": "The apostrophe is misplaced.",
+      "regex": "a|one\\s+\\bleave\\b",
+      "suggestion": "'s",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "POSSESSIVE_APOSTROPHE_2",
+      "name": "somethings ('s) wrong",
+      "category": "somethings ('s) wrong",
+      "message": "It seems that an apostrophe is missing, or the word is misspelled.",
+      "regex": "(some|any|every|no)(thing)s",
+      "suggestion": "thing's",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "POSSESSIVE_APOSTROPHE_2",
+      "name": "somethings ('s) wrong",
+      "category": "somethings ('s) wrong",
+      "message": "It seems that an apostrophe is missing, or the word is misspelled.",
+      "regex": "(some|any|every)(where|one|body)s",
+      "suggestion": "'s",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "POSSESSIVE_APOSTROPHE_2",
+      "name": "somethings ('s) wrong",
+      "category": "somethings ('s) wrong",
+      "message": "It seems that an apostrophe is missing, or the word is misspelled.",
+      "regex": "no(where|body)s",
+      "suggestion": "'s",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "POSSESSIVE_APOSTROPHE_2",
+      "name": "somethings ('s) wrong",
+      "category": "somethings ('s) wrong",
+      "message": "It seems that an apostrophe is missing, or the word is misspelled.",
+      "regex": "\\beverybodies\\b",
+      "suggestion": "everybody's",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "POSSESSIVE_APOSTROPHE_2",
+      "name": "somethings ('s) wrong",
+      "category": "somethings ('s) wrong",
+      "message": "It seems that an apostrophe is missing, or the word is misspelled.",
+      "regex": "\\bTrust\\b",
+      "suggestion": "Prince's",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "SPECIFIC_POSSESSIVE_APOSTROPHE",
+      "name": "Possessive apostrophe error",
+      "category": "Possessive apostrophe error",
+      "message": "A possessive apostrophe is missing.",
+      "regex": "\\bHitchhikers\\b\\s+\\bGuide\\b",
+      "suggestion": "Hitchhiker's Guide",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "SPECIFIC_POSSESSIVE_APOSTROPHE",
+      "name": "Possessive apostrophe error",
+      "category": "Possessive apostrophe error",
+      "message": "A possessive apostrophe is missing.",
+      "regex": "\\bReaders\\b\\s+\\bDigest\\b",
+      "suggestion": "Reader's Digest",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "SPECIFIC_POSSESSIVE_APOSTROPHE",
+      "name": "Possessive apostrophe error",
+      "category": "Possessive apostrophe error",
+      "message": "A possessive apostrophe is missing.",
+      "regex": "hunting[dt]ons?\\s+disease|chorea",
+      "suggestion": "Huntington's disease",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "SPECIFIC_POSSESSIVE_APOSTROPHE",
+      "name": "Possessive apostrophe error",
+      "category": "Possessive apostrophe error",
+      "message": "It seems that a possessive apostrophe is missing.",
+      "regex": "appointments?|offices?|stuff|certificate",
+      "suggestion": "doctor's",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "SPECIFIC_POSSESSIVE_APOSTROPHE",
+      "name": "Possessive apostrophe error",
+      "category": "Possessive apostrophe error",
+      "message": "A possessive apostrophe is missing if you're referring to Valentine's Day.",
+      "regex": "day|sale|gifts?|discounts?|message|letter|cakes?|cand(y|ies)|flowers?|cookies?|eve|events?|earrings?|food|dinner|ideas?|jewelry|jewellery|necklace|recipes?|roses?|songs?|music|underwear|videos?|week|drinks?|yards?|trees?",
+      "suggestion": "Valentine's",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "SPECIFIC_POSSESSIVE_APOSTROPHE",
+      "name": "Possessive apostrophe error",
+      "category": "Possessive apostrophe error",
+      "message": "It appears that a possessive apostrophe is missing.",
+      "regex": "break|heal|sit\\s+on|at\\s+the|an?\\s+\\bback\\b",
+      "suggestion": "'s",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "SETUP_VERB",
+      "name": "setup (set up)",
+      "category": "setup (set up)",
+      "message": "The verb 'set up' is spelled as two words. The noun 'setup' is spelled as one.",
+      "regex": "been|was|were|ve|did|ha([ds]|ve)|help|is|are|'re|am|'m|to|who",
+      "suggestion": "set up",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "SETUP_VERB",
+      "name": "setup (set up)",
+      "category": "setup (set up)",
+      "message": "The verb 'set up' is spelled as two words. The noun 'setup' is spelled as one.",
+      "regex": "an?|the|my|y?our|her|his|its A",
+      "suggestion": "set up",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "VICE_VERSA",
+      "name": "If you read a lot, you’ll learn a lot, and vice a versa (vice versa)",
+      "category": "If you read a lot, you’ll learn a lot, and vice a versa (vice versa)",
+      "message": "Did you mean to use the expression \"vice versa\"?",
+      "regex": "\\bvice\\b\\s+\\ba\\b\\s+\\bversa\\b",
+      "suggestion": "vice versa",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "VICE_VERSA",
+      "name": "If you read a lot, you’ll learn a lot, and vice a versa (vice versa)",
+      "category": "If you read a lot, you’ll learn a lot, and vice a versa (vice versa)",
+      "message": "The expression \"vice versa\" is spelled without hyphens.",
+      "regex": "vi[cs]e-(a-)?versa",
+      "suggestion": "vice versa",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "SIGN_IN_HYPHEN",
+      "name": "...because your Mac has been signed-out (signed out) from iCloud",
+      "category": "...because your Mac has been signed-out (signed out) from iCloud",
+      "message": "This phrasal verb does not require a hyphen.",
+      "regex": "signs\\-in",
+      "suggestion": "signs in",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "SIGN_IN_HYPHEN",
+      "name": "...because your Mac has been signed-out (signed out) from iCloud",
+      "category": "...because your Mac has been signed-out (signed out) from iCloud",
+      "message": "This phrasal verb does not require a hyphen.",
+      "regex": "signs\\-out",
+      "suggestion": "signs out",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "SIGN_IN_HYPHEN",
+      "name": "...because your Mac has been signed-out (signed out) from iCloud",
+      "category": "...because your Mac has been signed-out (signed out) from iCloud",
+      "message": "This phrasal verb does not require a hyphen.",
+      "regex": "signed\\-in",
+      "suggestion": "signed in",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "SIGN_IN_HYPHEN",
+      "name": "...because your Mac has been signed-out (signed out) from iCloud",
+      "category": "...because your Mac has been signed-out (signed out) from iCloud",
+      "message": "This phrasal verb does not require a hyphen.",
+      "regex": "signed\\-out",
+      "suggestion": "signed out",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "SIGN_IN_HYPHEN",
+      "name": "...because your Mac has been signed-out (signed out) from iCloud",
+      "category": "...because your Mac has been signed-out (signed out) from iCloud",
+      "message": "This phrasal verb does not require a hyphen.",
+      "regex": "signing\\-in",
+      "suggestion": "signing in",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "SIGN_IN_HYPHEN",
+      "name": "...because your Mac has been signed-out (signed out) from iCloud",
+      "category": "...because your Mac has been signed-out (signed out) from iCloud",
+      "message": "This phrasal verb does not require a hyphen.",
+      "regex": "signing\\-out",
+      "suggestion": "signing out",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "SIGN_IN_HYPHEN",
+      "name": "...because your Mac has been signed-out (signed out) from iCloud",
+      "category": "...because your Mac has been signed-out (signed out) from iCloud",
+      "message": "When used as a verb, a hyphen is not required.",
+      "regex": "of|from",
+      "suggestion": "sign out",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "YEARS_OLD",
+      "name": "years-old (years old|year-old)",
+      "category": "years-old (years old|year-old)",
+      "message": "'Years old' does not directly modify a noun in this context, and should be written without a hyphen.",
+      "regex": "years\\-old",
+      "suggestion": "years old",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "ASIDE",
+      "name": "I will put it a side (aside) for later",
+      "category": "I will put it a side (aside) for later",
+      "message": "The adverb 'aside' is spelled as one word.",
+      "regex": "step|stand",
+      "suggestion": "aside",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "THIS_PLURAL_OF",
+      "name": "This (These) types of projects",
+      "category": "This (These) types of projects",
+      "message": "The singular determiner 'this' does not agree with the plural noun '\\2'. Did you mean to write 'these'?",
+      "regex": "kinds|types\\s+\\bof\\b",
+      "suggestion": "these",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "TOMFOOLERY",
+      "name": "Such torn foolery (tomfoolery) is inexcusable",
+      "category": "Such torn foolery (tomfoolery) is inexcusable",
+      "message": "Did you mean to write 'tomfoolery' here?",
+      "regex": "tor?n|tomb?\\s+\\bfoolery\\b",
+      "suggestion": "tomfoolery",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "TOMFOOLERY",
+      "name": "Such torn foolery (tomfoolery) is inexcusable",
+      "category": "Such torn foolery (tomfoolery) is inexcusable",
+      "message": "Did you mean to write 'tomfoolery' here?",
+      "regex": "(tor?n|tomb?)-foolery",
+      "suggestion": "tomfoolery",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "LATER_LATTER",
+      "name": "confusion/typo of 'later' and 'latter'",
+      "category": "confusion/typo of 'later' and 'latter'",
+      "message": "Possible typo detected: Did you mean to write 'latter' here?",
+      "regex": "\\bthe\\b\\s+groups?|category|categories|points?|options?|approach(es)?|terms?|types?|question?|views?|camps?|study|studies|figures?|scenarios?|courses?|kinds?|problems?|issues?|findings?|portions?|decades?|positions?",
+      "suggestion": "latter",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "SPOKED",
+      "name": "spoked (spoke/spoken)",
+      "category": "spoked (spoke/spoken)",
+      "message": "\"spoked\" is the past tense of \"spoke\" (= to furnish with spokes). Did you mean the past tense of \"speak\"?",
+      "regex": "Akan|Amharic|Arabic|Assamese|Awadhi|Azerbaijani|Balochi|Bangla|Belarusian|Bengali|Bhojpuri|Burmese|Cantonese|Cebuano|Chewa|Chhattisgarhi|Chinese|Chittagonian|Czech|Deccan|Dhundhari|Dutch|English|Filipino|French|Fula|Gaelic|German|Greek|Gujarati|Hakka|Haryanvi|Hausa|Hiligaynon|Hindi|Hmong|Hunanese|Hungarian|Igbo|Ilocano|Ilonggo|Indonesian|Italian|Ja[pv]anese|Jin|Kannada|Kazakh|Khmer|Kinyarwanda|Kirundi|Konkani|Korean|Kurdish|Madurese|Magahi|Maithili|Malagasy|Malay(alam)?|Malaysian|Mandarin|Marathi|Marwari|Mossi|Nepali|Odia|Oriya|Oromo|Pashto|Persian|Polish|Portuguese|Punjabi|Quechua|Romanian|Russian|Saraiki|Serbo-Croatian|Shona|Sindhi|Sinhalese|Somali|Spanish|Sundanese|Swedish|Sylheti|Tagalog|Tamil|Telugu|Thai|Turk(ish|men)|Ukrainian|Urdu|Uyghur|Uzbek|Vietnamese|Visayan|Wu|Xhosa|Xiang|Yoruba|Yue|Zhuang|Zulu",
+      "suggestion": "spoke",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "ITS_TO_IT_S",
+      "name": "I have to do laundry while its (it's) still sunny",
+      "category": "I have to do laundry while its (it's) still sunny",
+      "message": "Did you mean \"it's\" (contraction of \"it is/has\")?",
+      "regex": "\\bstill\\b",
+      "suggestion": "It's",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "ITS_TO_IT_S",
+      "name": "I have to do laundry while its (it's) still sunny",
+      "category": "I have to do laundry while its (it's) still sunny",
+      "message": "Did you mean \"it's\" (contraction of \"it is/has\")?",
+      "regex": "\\bneck\\b\\s+\\band\\b\\s+\\bneck\\b",
+      "suggestion": "It's",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "ITS_TO_IT_S",
+      "name": "I have to do laundry while its (it's) still sunny",
+      "category": "I have to do laundry while its (it's) still sunny",
+      "message": "Did you mean \"it's\" (contraction of \"it is/has\")?",
+      "regex": "(any|every|some|no)(body|thing|where)",
+      "suggestion": "It's",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "ITS_TO_IT_S",
+      "name": "I have to do laundry while its (it's) still sunny",
+      "category": "I have to do laundry while its (it's) still sunny",
+      "message": "Did you mean \"it's\" (contraction of \"it is/has\")?",
+      "regex": "(to|yester|Sun|Mon|Tues|Wednes|Thurs|Fri|Satur)day|January|February|March|April|May|Ju(ne|ly)|August|September|October|November|December march|may",
+      "suggestion": "It's",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "SHOW_COMPOUNDS",
+      "name": "show case (showcase)",
+      "category": "show case (showcase)",
+      "message": "This is normally spelled as one word.",
+      "regex": "\\bshow\\b\\s+case[ds]?|casing|stoppers?",
+      "suggestion": "show",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "HAND_COMPOUNDS",
+      "name": "before hand (beforehand)",
+      "category": "before hand (beforehand)",
+      "message": "This adverb or adjective is spelled as one word.",
+      "regex": "\\bbefore\\b\\s+\\bhand\\b",
+      "suggestion": "beforehand",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "HAND_COMPOUNDS",
+      "name": "before hand (beforehand)",
+      "category": "before hand (beforehand)",
+      "message": "This word is normally spelled as one.",
+      "regex": "\\bhand\\b\\s+written|writing|crafted|crafting|washing|picking|stitched",
+      "suggestion": "hand",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "AIR_COMPOUNDS",
+      "name": "air line (air line)",
+      "category": "air line (air line)",
+      "message": "This word is normally spelled as one.",
+      "regex": "\\bair\\b\\s+crafts?|borne|ports?|bags?|space",
+      "suggestion": "air",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "UNDER_COMPOUNDS",
+      "name": "under appreciate (underappreciate)",
+      "category": "under appreciate (underappreciate)",
+      "message": "This is normally spelled as one word.",
+      "regex": "\\bunder\\b\\s+appreciate|estimate|achieve|whelm|line|rate|report|represent|mine|score|stand|go|take|cut|lie|statement|pass|dose|write|staff|invest|value|sell|predict|throw|count",
+      "suggestion": "under",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "UNDER_COMPOUNDS",
+      "name": "under appreciate (underappreciate)",
+      "category": "under appreciate (underappreciate)",
+      "message": "This is normally spelled as one word.",
+      "regex": "\\bunder\\b\\s+pants|water|neath|wear|graduates?|ground|age|dog|privileged|investments?|sized?|developed|clothing|garments?|mentioned|explored|prediction|population|populated",
+      "suggestion": "under",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "IT_IT",
+      "name": "it it (it is)",
+      "category": "it it (it is)",
+      "message": "It seems you either mean it is , it or there is a comma missing.",
+      "regex": "\\bif\\b",
+      "suggestion": "it, it",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "IT_IT",
+      "name": "it it (it is)",
+      "category": "it it (it is)",
+      "message": "It seems you either mean if it , it or there is a comma missing.",
+      "regex": "is|'s|was",
+      "suggestion": "it, it",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "IT_IT",
+      "name": "it it (it is)",
+      "category": "it it (it is)",
+      "message": "It seems you either mean it is , if it , it or there is a comma missing.",
+      "regex": "[Ii]t\\s+[Ii]t",
+      "suggestion": "it, it",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "ARRIVE_NNP",
+      "name": "'arrive' + proper noun ('arrive in' + proper noun)",
+      "category": "'arrive' + proper noun ('arrive in' + proper noun)",
+      "message": "Consider inserting a preposition after 'arrive'.",
+      "regex": "Monday|Wednesday|T(ue|hur)sday|Friday|S(atur|un)day|Mon?|Tu(e|es)?|We(d|ds)?|Th(u|ur|urs)?|Fri?|Sat?|Sun?|January|February|March|April|May|Ju(ne|ly)|August|September|October|November|December",
+      "suggestion": "arrive on",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "THE_ADD_ON",
+      "name": "the + add on",
+      "category": "the + add on",
+      "message": "This noun is usually spelled with a hyphen.",
+      "regex": "firefox|mozilla|google|chrome|safari|docs|browser|edge|opera|software|system|hardware|game|third\\-party|windows|word|gmail|mail",
+      "suggestion": "-",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "NORTH_POLE",
+      "name": "north pole (North Pole)",
+      "category": "north pole (North Pole)",
+      "message": "Consider capitalizing this term if you mean the northernmost point of the earth.",
+      "regex": "\\bnorth\\b\\s+\\bpole\\b",
+      "suggestion": "North Pole",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "NORTH_POLE",
+      "name": "north pole (North Pole)",
+      "category": "north pole (North Pole)",
+      "message": "Consider capitalizing this term if you mean the southernmost point of the earth.",
+      "regex": "\\bsouth\\b\\s+\\bpole\\b",
+      "suggestion": "South Pole",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "BEEN_PART_AGREEMENT",
+      "name": "Agreement: 'been' or 'was' + past tense",
+      "category": "Agreement: 'been' or 'was' + past tense",
+      "message": "The base form \"be\" cannot follow the helping verbs \"is\" or \"has\". Double-check the helping verb and the form of \"be\".",
+      "regex": "'s\\s+\\bbe\\b",
+      "suggestion": "'d be",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "IN_1990s",
+      "name": "Missing definite article in the date",
+      "category": "Missing definite article in the date",
+      "message": "The article is probably missing here.",
+      "regex": "in|during\\s+(1\\d|20)\\d0s",
+      "suggestion": "the",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "IN_1990s",
+      "name": "Missing definite article in the date",
+      "category": "Missing definite article in the date",
+      "message": "The article is probably missing here.",
+      "regex": "in|during\\s+(1[89]|20)\\d0\\s+'s",
+      "suggestion": "the",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "AFFORD_VBG",
+      "name": "'afford', 'choose', 'deserve', 'pretend', 'learn', 'strive', 'want' and 'struggle' used with gerund instead of infinitive",
+      "category": "'afford', 'choose', 'deserve', 'pretend', 'learn', 'strive', 'want' and 'struggle' used with gerund instead of infinitive",
+      "message": "If '\\1' is used as a verb, it usually requires the infinitive.",
+      "regex": "\\bwant\\b\\s+the|an?|my|y?our|his|her|its|their|this|many|any|some|these|those",
+      "suggestion": "to",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "AFFORD_VBG",
+      "name": "'afford', 'choose', 'deserve', 'pretend', 'learn', 'strive', 'want' and 'struggle' used with gerund instead of infinitive",
+      "category": "'afford', 'choose', 'deserve', 'pretend', 'learn', 'strive', 'want' and 'struggle' used with gerund instead of infinitive",
+      "message": "If '\\1' is used as a verb, it usually requires the infinitive.",
+      "regex": "afford|choose|deserve|pretend|strive|struggle|learn\\s+\\bnot\\b",
+      "suggestion": "to",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "ADVISE_VBG",
+      "name": "'advise', 'help' and 'remind' used with gerund instead of infinitive",
+      "category": "'advise', 'help' and 'remind' used with gerund instead of infinitive",
+      "message": "The verb '\\1' is used with an infinitive.",
+      "regex": "\\bhelp\\b",
+      "suggestion": "to",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "ADVISE_VBG",
+      "name": "'advise', 'help' and 'remind' used with gerund instead of infinitive",
+      "category": "'advise', 'help' and 'remind' used with gerund instead of infinitive",
+      "message": "The verb '\\1' is used with an infinitive.",
+      "regex": "\\bhelp\\b\\s+\\bnot\\b",
+      "suggestion": "to",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "POPULAR_AMONG_WITH",
+      "name": "Collocation: Popular among/with",
+      "category": "Common collocation errors",
+      "message": "The usual collocation for \"popular\" is \"with\", not \"among\".",
+      "regex": "\\bpopular\\b\\s+\\bamong\\b",
+      "suggestion": "popular with",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "TIRED_OF_FROM",
+      "name": "Collocation: Tired of/from",
+      "category": "Common collocation errors",
+      "message": "The usual preposition in this context is \"from\".",
+      "regex": "\\btired\\b\\s+\\bof\\b\\s+\\bthe\\b\\s+\\blast\\b\\s+\\bnight\\b",
+      "suggestion": "tired from last night",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "PASSIONATE_BY_ABOUT",
+      "name": "Collocation: Passionate by/about",
+      "category": "Common collocation errors",
+      "message": "The usual preposition for \"passionate\" is \"about\", not \"by\".",
+      "regex": "passionated?\\s+\\bby\\b",
+      "suggestion": "passionate about",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "IN_AT_A_PARTY",
+      "name": "Collocation: in/at a party",
+      "category": "Common collocation errors",
+      "message": "Unless you mean \"in a political party\", the usual preposition for a party is \"at\".",
+      "regex": "\\bin\\b\\s+\\ba\\b\\s+\\bparty\\b",
+      "suggestion": "at a party",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "VULNERABLE_FROM_TO",
+      "name": "Collocation: vulnerable from/to",
+      "category": "Common collocation errors",
+      "message": "The usual collocation for the word \"vulnerable\" is \"to\", not \"from\", as in \"vulnerable to attack\".",
+      "regex": "\\bvulnerable\\b\\s+\\bfrom\\b",
+      "suggestion": "vulnerable to",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "PERSPECTIVES_ABOUT_ON",
+      "name": "Collocation: perspectives about/on",
+      "category": "Common collocation errors",
+      "message": "The usual preposition for \"perspectives\" is \"on\", not \"about\".",
+      "regex": "\\bperspectives\\b\\s+\\babout\\b",
+      "suggestion": "perspectives on",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "VARIETIES_IN_OF",
+      "name": "Collocation: varieties in/of",
+      "category": "Common collocation errors",
+      "message": "The usual preposition for \"varieties\" is \"of\", not \"in\".",
+      "regex": "\\bvarieties\\b\\s+\\bin\\b",
+      "suggestion": "varieties of",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "DO_HAVE_A_MEETING",
+      "name": "Collocation: do/have a meeting",
+      "category": "Common collocation errors",
+      "message": "The usual verb for \"a meeting\" is \"have\", not \"do\"",
+      "regex": "\\bdo\\b\\s+\\ba\\b\\s+\\bmeeting\\b",
+      "suggestion": "have a meeting",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "FAR_OF_FROM",
+      "name": "Collocation: far of/from",
+      "category": "Common collocation errors",
+      "message": "The usual preposition for \"far\" is \"from\".",
+      "regex": "\\bfar\\b\\s+\\bof\\b",
+      "suggestion": "far from",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "NEAR_FROM_TO",
+      "name": "Collocation: near from/to",
+      "category": "Common collocation errors",
+      "message": "The usual preposition for \"near\" is \"to\".",
+      "regex": "\\bnear\\b\\s+\\bfrom\\b",
+      "suggestion": "near to",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "ANALYSIS_ABOUT",
+      "name": "Collocation: analysis about/of",
+      "category": "Common collocation errors",
+      "message": "The usual collocation for \"analysis\" is \"of\".",
+      "regex": "\\banalysis\\b\\s+\\babout\\b",
+      "suggestion": "analysis of",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "DO_A_PARTY",
+      "name": "Collocation: do/throw/have a party",
+      "category": "Collocation: do/throw/have a party",
+      "message": "The common collocation for \"party\" is \"have\" or \"throw\".",
+      "regex": "\\bto\\b\\s+do|make\\s+\\ba\\b\\s+\\bparty\\b",
+      "suggestion": "to throw a party",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "HYPHEN_TO_EN",
+      "name": "40-70 (40–70)",
+      "category": "40-70 (40–70)",
+      "message": "If you're specifying a range, consider using an en dash instead of a hyphen.",
+      "regex": "[0-9]+\\s+BC|AD\\s+[0-9]+|BC|AD\\s+[0-9]+|BC|AD",
+      "suggestion": "–",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "ABBREVIATION_PUNCTUATION",
+      "name": "missing period after last letter in abbreviations",
+      "category": "missing period after last letter in abbreviations",
+      "message": "The abbreviation/initialism is missing a period after the last letter.",
+      "regex": "U\\ \\.\\s+\\.\\s+\\bS\\b\\s+\\.\\s+A\\ \\\\\\.\\|…",
+      "suggestion": "U.S.A.",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "ABBREVIATION_PUNCTUATION",
+      "name": "missing period after last letter in abbreviations",
+      "category": "missing period after last letter in abbreviations",
+      "message": "The abbreviation/initialism is missing a period after the last letter.",
+      "regex": "U\\ \\.\\s+\\.\\s+[SK] \\.|…",
+      "suggestion": "U. .",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "ABBREVIATION_PUNCTUATION",
+      "name": "missing period after last letter in abbreviations",
+      "category": "missing period after last letter in abbreviations",
+      "message": "The abbreviation/initialism is missing a period after the last letter.",
+      "regex": "L\\ \\.\\s+\\.\\s+A\\ \\\\\\.\\|…",
+      "suggestion": "L.A.",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "ABBREVIATION_PUNCTUATION",
+      "name": "missing period after last letter in abbreviations",
+      "category": "missing period after last letter in abbreviations",
+      "message": "The abbreviation/initialism is missing a period after the last letter.",
+      "regex": "N\\ \\.\\s+\\.\\s+\\bY\\b\\s+\\.\\s+C\\ \\\\\\.\\|…",
+      "suggestion": "N.Y.C.",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "ABBREVIATION_PUNCTUATION",
+      "name": "missing period after last letter in abbreviations",
+      "category": "missing period after last letter in abbreviations",
+      "message": "The abbreviation/initialism is missing a period after the last letter.",
+      "regex": "U\\ \\.\\s+\\.\\s+\\bA\\b\\s+\\.\\s+E\\ \\\\\\.\\|…",
+      "suggestion": "U.A.E.",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "ABBREVIATION_PUNCTUATION",
+      "name": "missing period after last letter in abbreviations",
+      "category": "missing period after last letter in abbreviations",
+      "message": "The abbreviation/initialism is missing a period after the last letter.",
+      "regex": "F\\ \\.\\s+\\.\\s+\\bB\\b\\s+\\.\\s+I\\ \\\\\\.\\|…",
+      "suggestion": "F.B.I.",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "ABBREVIATION_PUNCTUATION",
+      "name": "missing period after last letter in abbreviations",
+      "category": "missing period after last letter in abbreviations",
+      "message": "The abbreviation/initialism is missing a period after the last letter.",
+      "regex": "C\\ \\.\\s+\\.\\s+\\bI\\b\\s+\\.\\s+A\\ \\\\\\.\\|…",
+      "suggestion": "C.I.A.",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "EG_SPACE",
+      "name": "abbreviations with spaces in between (e. g.)",
+      "category": "abbreviations with spaces in between (e. g.)",
+      "message": "There should be no space here.",
+      "regex": "[Ee]\\s+\\.\\s+\\bg\\b\\s+\\.",
+      "suggestion": "e.g.",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "EG_SPACE",
+      "name": "abbreviations with spaces in between (e. g.)",
+      "category": "abbreviations with spaces in between (e. g.)",
+      "message": "There should be no space here.",
+      "regex": "\\bi\\b\\s+\\.\\s+\\be\\b\\s+\\.",
+      "suggestion": "i.e.",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "DASH_RULE",
+      "name": "Hyphen, n-dash and m-dash",
+      "category": "Hyphen, n-dash and m-dash",
+      "message": "To join two clauses or introduce examples, consider using an em dash.",
+      "regex": "\\-\\|–\\|:\\|;\\s+\\-\\|–",
+      "suggestion": "—",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "DASH_RULE",
+      "name": "Hyphen, n-dash and m-dash",
+      "category": "Hyphen, n-dash and m-dash",
+      "message": "If this is a parenthetical clause, finish it with an em dash.",
+      "regex": ",",
+      "suggestion": "—",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "DASH_RULE",
+      "name": "Hyphen, n-dash and m-dash",
+      "category": "Hyphen, n-dash and m-dash",
+      "message": "If you want to indicate numerical ranges or time ranges, consider using an en dash.",
+      "regex": "\\d+|January|February|March|April|May|Ju(ne|ly)|August|September|October|November|December|Jan|Feb|Mar|Apr|Ju[ln]|Aug|Sept?|Oct|Nov|Dec|Monday|Wednesday|T(ue|hur)sday|Friday|S(atur|un)day|Mon?|Tu(e|es)?|We(d|ds)?|Th(u|ur|urs)?|Fri?|Sat?|Sun?\\s+\\d+|January|February|March|April|May|Ju(ne|ly)|August|September|October|November|December|Jan|Feb|Mar|Apr|Ju[ln]|Aug|Sept?|Oct|Nov|Dec|Monday|Wednesday|T(ue|hur)sday|Friday|S(atur|un)day|Mon?|Tu(e|es)?|We(d|ds)?|Th(u|ur|urs)?|Fri?|Sat?|Sun?",
+      "suggestion": "–",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "DASH_RULE",
+      "name": "Hyphen, n-dash and m-dash",
+      "category": "Hyphen, n-dash and m-dash",
+      "message": "If you want to indicate a time range, consider using an en dash.",
+      "regex": "\\d{1,2}(a|p)m\\s+\\d{1,2}(a|p)m",
+      "suggestion": "–",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "PRINCIPA_PRINCIPL",
+      "name": "The principle (principal) will hold an assembly tomorrow",
+      "category": "The principle (principal) will hold an assembly tomorrow",
+      "message": "Did you mean to use \"principal\" here? A principle is a guiding rule/belief, and a principal is a school administrator.",
+      "regex": "\\bthe\\b\\s+(pre)?school|kindergarten|elementary|high|teachers?|students?|educators?|office|faculty|campus(es)?|assembly|assemblies elementary|high",
+      "suggestion": "principal",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "ACCESS_EXCESS",
+      "name": "The twins have an access (excess) of energy",
+      "category": "The twins have an access (excess) of energy",
+      "message": "Did you mean to write \"excess\" here?",
+      "regex": "\\bof\\b\\s+\\$.+|caution|demand|emotion|energy|enthusiasm|food|income|light|loss|material|matter|money|nutrients|oxygen|power",
+      "suggestion": "excess",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "AIR_HEIR",
+      "name": "He was the air (heir) to the throne",
+      "category": "He was the air (heir) to the throne",
+      "message": "Did you mean to use \"heir\" here instead of \"air\"?",
+      "regex": "\\bapparent\\b",
+      "suggestion": "heir",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "AISLE_ISLE",
+      "name": "We will walk down the (a)isle in less than three months",
+      "category": "We will walk down the (a)isle in less than three months",
+      "message": "An \"isle\" is a small island. Did you mean to write \"aisle\" here?",
+      "regex": "across|down\\s+\\bthe\\b",
+      "suggestion": "aisle",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "AISLE_ISLE",
+      "name": "We will walk down the (a)isle in less than three months",
+      "category": "We will walk down the (a)isle in less than three months",
+      "message": "An \"isle\" is a small island. Did you mean to write \"aisle\" here?",
+      "regex": "sides?\\s+\\bof\\b\\s+\\bthe\\b",
+      "suggestion": "aisle",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "EMIGRATE_IMMIGRATE_CONFUSION",
+      "name": "confusion of emigrate and immigrate",
+      "category": "confusion of emigrate and immigrate",
+      "message": "The verb \"immigrate\" describes moving to a place, and \"emigrate\" describes moving away from a place. Did you mean \" immigrate to\" or \" emigrate from\"?",
+      "regex": "\\bemigrate\\b\\s+\\bto\\b",
+      "suggestion": "immigrate to",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "EMIGRATE_IMMIGRATE_CONFUSION",
+      "name": "confusion of emigrate and immigrate",
+      "category": "confusion of emigrate and immigrate",
+      "message": "The verb \"emigrate\" describes moving away from a place, and \"immigrate\" describes moving to a place. Did you mean \" emigrate from\" or \" immigrate to\"?",
+      "regex": "\\bimmigrate\\b\\s+\\bfrom\\b",
+      "suggestion": "emigrate from",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "CONFUSION_WORSE_WORST",
+      "name": "It's the worse (worst) possible outcome",
+      "category": "It's the worse (worst) possible outcome",
+      "message": "'Worst' seems more likely than 'worse' in this context.",
+      "regex": "always\\|for\\s+\\bthe\\b",
+      "suggestion": "worst",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "RELAY_RELY",
+      "name": "relay vs rely",
+      "category": "relay vs rely",
+      "message": "Did you mean \"rely\" (= depend on with full trust)?",
+      "regex": "[Oo]n|[Uu]pon",
+      "suggestion": "relies",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "MASSAGE_MESSAGE",
+      "name": "error massage (message)",
+      "category": "error massage (message)",
+      "message": "Are you sure you meant \"massage\" (= rubbing and kneading of muscles)?",
+      "regex": "thanks?\\s+\\byou\\b\\s+\\bfor\\b\\s+\\byour\\b",
+      "suggestion": "message",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "MASSAGE_MESSAGE",
+      "name": "error massage (message)",
+      "category": "error massage (message)",
+      "message": "Are you sure you meant \"massage\" (= rubbing and kneading of muscles)?",
+      "regex": "kind|friendly|verbal",
+      "suggestion": "message",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "BACHELOR_ABBR",
+      "name": "abbreviation for bachelor's degree",
+      "category": "abbreviation for bachelor's degree",
+      "message": "Consider using a more common abbreviation of this university degree.",
+      "regex": "[BM]\\s+\\.\\s+Sc|Eng|Comp|Arch\\s+\\.",
+      "suggestion": ". .",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "BACHELOR_ABBR",
+      "name": "abbreviation for bachelor's degree",
+      "category": "abbreviation for bachelor's degree",
+      "message": "Consider using a more common abbreviation of this university degree.",
+      "regex": "[BM](Sc|Eng|Comp|Arch)\\s+\\.",
+      "suggestion": ". .",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "BACHELOR_ABBR",
+      "name": "abbreviation for bachelor's degree",
+      "category": "abbreviation for bachelor's degree",
+      "message": "Consider using a more common abbreviation of this university degree.",
+      "regex": "[BM](Sc|Eng|Comp|Arch) .",
+      "suggestion": ". .",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "BACHELOR_ABBR",
+      "name": "abbreviation for bachelor's degree",
+      "category": "abbreviation for bachelor's degree",
+      "message": "Consider using a more common abbreviation of this university degree.",
+      "regex": "B|M\\s+\\.\\s+Sc|Eng|Comp|Arch",
+      "suggestion": ". .",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "COMMA_PERIOD_CONFUSION",
+      "name": "12,5% → 12.5%",
+      "category": "12,5% → 12.5%",
+      "message": "In English-speaking countries (except for South Africa), the correct decimal separator is a point.",
+      "regex": "\\d+\\s+,\\s+(\\d{1,2}|\\d{4,30})(%|[$€£¥฿₹₿\\u8371])",
+      "suggestion": ".",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "COMMA_PERIOD_CONFUSION",
+      "name": "12,5% → 12.5%",
+      "category": "12,5% → 12.5%",
+      "message": "In English-speaking countries (except for South Africa), the correct decimal separator is a point.",
+      "regex": "([$€£¥฿₹₿\\u8371]|US\\$)\\d+\\s+,\\s+\\d{1,2}",
+      "suggestion": ".",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "EN_QUOTES",
+      "name": "Smart quotes (“”)",
+      "category": "Smart quotes (“”)",
+      "message": "Consider using a typographic opening quote here.",
+      "regex": "`\\s+`",
+      "suggestion": "“",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "EN_QUOTES",
+      "name": "Smart quotes (“”)",
+      "category": "Smart quotes (“”)",
+      "message": "Possibly wrong opening quote.",
+      "regex": "„",
+      "suggestion": "“",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "ARROWS",
+      "name": "Arrows: -> (→)",
+      "category": "Arrows: -> (→)",
+      "message": "Do you wish to insert an arrow?",
+      "regex": "<",
+      "suggestion": "→",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "ARROWS",
+      "name": "Arrows: -> (→)",
+      "category": "Arrows: -> (→)",
+      "message": "Do you wish to insert an arrow?",
+      "regex": ">",
+      "suggestion": "←",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "ARROWS",
+      "name": "Arrows: -> (→)",
+      "category": "Arrows: -> (→)",
+      "message": "Do you wish to insert an arrow?",
+      "regex": "<\\s+\\-|=\\s+>",
+      "suggestion": "↔",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "HYPOTHESIS_TYPOGRAPHY",
+      "name": "Typography for hypotheses",
+      "category": "Typography for hypotheses",
+      "message": "Replace by the typographical symbol.",
+      "regex": "H0",
+      "suggestion": "H₀",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "HYPOTHESIS_TYPOGRAPHY",
+      "name": "Typography for hypotheses",
+      "category": "Typography for hypotheses",
+      "message": "Replace by the typographical symbol.",
+      "regex": "H1",
+      "suggestion": "H₁",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "HYPOTHESIS_TYPOGRAPHY",
+      "name": "Typography for hypotheses",
+      "category": "Typography for hypotheses",
+      "message": "Replace by the typographical symbol.",
+      "regex": "H2",
+      "suggestion": "H₂",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "HYPOTHESIS_TYPOGRAPHY",
+      "name": "Typography for hypotheses",
+      "category": "Typography for hypotheses",
+      "message": "Replace by the typographical symbol.",
+      "regex": "H3",
+      "suggestion": "H₃",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "HYPOTHESIS_TYPOGRAPHY",
+      "name": "Typography for hypotheses",
+      "category": "Typography for hypotheses",
+      "message": "Replace by the typographical symbol.",
+      "regex": "H4",
+      "suggestion": "H₄",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "HYPOTHESIS_TYPOGRAPHY",
+      "name": "Typography for hypotheses",
+      "category": "Typography for hypotheses",
+      "message": "Replace by the typographical symbol.",
+      "regex": "H5",
+      "suggestion": "H₅",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "HYPOTHESIS_TYPOGRAPHY",
+      "name": "Typography for hypotheses",
+      "category": "Typography for hypotheses",
+      "message": "Replace by the typographical symbol.",
+      "regex": "H6",
+      "suggestion": "H₆",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "HYPOTHESIS_TYPOGRAPHY",
+      "name": "Typography for hypotheses",
+      "category": "Typography for hypotheses",
+      "message": "Replace by the typographical symbol.",
+      "regex": "H7",
+      "suggestion": "H₇",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "HYPOTHESIS_TYPOGRAPHY",
+      "name": "Typography for hypotheses",
+      "category": "Typography for hypotheses",
+      "message": "Replace by the typographical symbol.",
+      "regex": "H8",
+      "suggestion": "H₈",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "HYPOTHESIS_TYPOGRAPHY",
+      "name": "Typography for hypotheses",
+      "category": "Typography for hypotheses",
+      "message": "Replace by the typographical symbol.",
+      "regex": "H9",
+      "suggestion": "H₉",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "MULTIPLICATION_SIGN",
+      "name": "Mathematics: Multiplication: x - × ",
+      "category": "Mathematics: Multiplication: x - × ",
+      "message": "Replace with the typographical symbol.",
+      "regex": "[a-z]|[\\d\\.,⁻¹²³⁴⁵⁶⁷⁸⁹⁰]+?[a-z]{0,1}\\s+[a-z]|[\\d\\.,⁻¹²³⁴⁵⁶⁷⁸⁹⁰]+?[a-z]{0,1}",
+      "suggestion": "×",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "PLUS_MINUS",
+      "name": "Mathematics: +- - ± ",
+      "category": "Mathematics: +- - ± ",
+      "message": "Replace by the typographical symbol.",
+      "regex": "\\+\\s+(?:[–\\-—])",
+      "suggestion": "±",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "PLUS_MINUS",
+      "name": "Mathematics: +- - ± ",
+      "category": "Mathematics: +- - ± ",
+      "message": "Replace by the typographical symbol.",
+      "regex": "(?:[–\\-—])\\s+\\+",
+      "suggestion": "±",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "APPLE_PRODUCTS",
+      "name": "Apple product names",
+      "category": "Apple product names",
+      "message": "The operating system of the iPad is spelled as one word.",
+      "regex": "\\biPad\\b\\s+\\bOS\\b",
+      "suggestion": "iPadOS",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "APPLE_PRODUCTS",
+      "name": "Apple product names",
+      "category": "Apple product names",
+      "message": "This Apple product is spelled with a space in between.",
+      "regex": "Apple(Pay|Watch)",
+      "suggestion": "Apple",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "BLACK_LIVES_MATTER",
+      "name": "Black Lives Matter",
+      "category": "Black Lives Matter",
+      "message": "This needs to be capitalized if you are referring to the movement.",
+      "regex": "protests?|movements?|symbol",
+      "suggestion": "Black Lives Matter",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "APRIL_FOOLS",
+      "name": "April Fools' Day",
+      "category": "April Fools' Day",
+      "message": "The name of this day is normally capitalized and contains a possessive apostrophe.",
+      "regex": "\\bapril\\b\\s+\\bfools\\b\\s+['’`´‘ʻ]\\s+\\bday\\b",
+      "suggestion": "April Fools' Day",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "GOOGLE_PRODUCTS",
+      "name": "Google product names",
+      "category": "Google product names",
+      "message": "The name of this company should be capitalized.",
+      "regex": "[Oo]n|[Vv]ia|[Ww]ith(out)?|[Ff]rom|[Aa]t|[Ff]or|[Tt]hrough",
+      "suggestion": "Google",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "PRESIDENT_TRUMP",
+      "name": "president trump (Trump)",
+      "category": "president trump (Trump)",
+      "message": "It seems that a possessive apostrophe is missing.",
+      "regex": "donald|melania|ivank?a|fred|tiffany|barron|eric|president|mary|lara\\s+\\btrumps\\b",
+      "suggestion": "'s",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "PRESIDENT_TRUMP",
+      "name": "president trump (Trump)",
+      "category": "president trump (Trump)",
+      "message": "A possessive apostrophe is required here.",
+      "regex": "donald|melania|ivank?a|fred|tiffany|barron|eric|mary|lara|(ex-)?president|leader|ceo|commander-in-chief|candidate|if",
+      "suggestion": "Trump's",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "LANGUAGETOOL",
+      "name": "Proper spelling of LanguageTool",
+      "category": "Proper spelling of LanguageTool",
+      "message": "Possible typo detected.",
+      "regex": "\\bLanguageTool\\b\\s+'s",
+      "suggestion": "LanguageTool",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "id": "LANGUAGETOOL",
+      "name": "Proper spelling of LanguageTool",
+      "category": "Proper spelling of LanguageTool",
+      "message": "Possible typo detected.",
+      "regex": "language((?:[–\\-—]))tool",
+      "suggestion": "LanguageTool",
+      "source": "LanguageTool English",
+      "license": "LGPL-2.1-or-later"
+    }
+  ]
 }
