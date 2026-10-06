@@ -1,0 +1,287 @@
+{
+  "version": "1.0",
+  "description": "Behavior and regression cases for the shared MyGrammar grammar engine.",
+  "cases": [
+    {
+      "id": "SVA-001",
+      "type": "detect",
+      "input": "She go to the office every day.",
+      "expected": [
+        {
+          "wrong": "She go",
+          "correct": "She goes",
+          "category": "Grammar",
+          "title": "Subject–verb agreement"
+        }
+      ]
+    },
+    {
+      "id": "SVA-002",
+      "type": "detect",
+      "input": "He work here every day.",
+      "expected": [
+        {
+          "wrong": "He work",
+          "correct": "He works",
+          "category": "Grammar",
+          "title": "Subject–verb agreement"
+        }
+      ]
+    },
+    {
+      "id": "AUX-001",
+      "type": "detect",
+      "input": "He dont like coffee.",
+      "expected": [
+        {
+          "wrong": "dont",
+          "correct": "don't",
+          "category": "Spelling",
+          "title": "Spelling"
+        }
+      ]
+    },
+    {
+      "id": "AUX-002",
+      "type": "detect",
+      "input": "I doesnt understand this problem.",
+      "expected": [
+        {
+          "wrong": "doesnt",
+          "correct": "doesn't",
+          "category": "Spelling",
+          "title": "Spelling"
+        }
+      ]
+    },
+    {
+      "id": "CON-001",
+      "type": "detect",
+      "input": "I wouldnt mind marrying you.",
+      "expected": [
+        {
+          "wrong": "wouldnt",
+          "correct": "wouldn't",
+          "category": "Spelling",
+          "title": "Spelling"
+        }
+      ]
+    },
+    {
+      "id": "CON-002",
+      "type": "detect",
+      "input": "She cant come today.",
+      "expected": [
+        {
+          "wrong": "cant",
+          "correct": "can't",
+          "category": "Spelling",
+          "title": "Spelling"
+        }
+      ]
+    },
+    {
+      "id": "TENSE-001",
+      "type": "detect",
+      "input": "Yesterday, I go to Jakarta.",
+      "expected": [
+        {
+          "wrong": "I go",
+          "correct": "I went",
+          "category": "Tense",
+          "title": "Past Simple"
+        }
+      ]
+    },
+    {
+      "id": "TENSE-002",
+      "type": "detect",
+      "input": "They work there last year.",
+      "expected": [
+        {
+          "wrong": "They work",
+          "correct": "They worked",
+          "category": "Tense",
+          "title": "Past Simple"
+        }
+      ]
+    },
+    {
+      "id": "LEARNER-001",
+      "type": "detect",
+      "input": "I am agree with you.",
+      "expected": [
+        {
+          "wrong": "I am agree",
+          "correct": "I agree",
+          "category": "Suggestion",
+          "title": "Common learner error"
+        }
+      ]
+    },
+    {
+      "id": "LEARNER-002",
+      "type": "detect",
+      "input": "We discussed about the problem.",
+      "expected": [
+        {
+          "wrong": "Discuss about",
+          "correct": "Discuss",
+          "category": "Suggestion",
+          "title": "Preposition"
+        }
+      ]
+    },
+    {
+      "id": "LEARNER-003",
+      "type": "detect",
+      "input": "I already send it.",
+      "expected": [
+        {
+          "wrong": "I already send it",
+          "correct": "I have already sent it",
+          "category": "Suggestion",
+          "title": "Tense / verb form"
+        }
+      ]
+    },
+    {
+      "id": "LEARNER-004",
+      "type": "detect",
+      "input": "She very beautiful.",
+      "expected": [
+        {
+          "wrong": "She very beautiful",
+          "correct": "She is very beautiful",
+          "category": "Suggestion",
+          "title": "Missing auxiliary"
+        }
+      ]
+    },
+    {
+      "id": "LT-001",
+      "type": "detect",
+      "input": "He is 20 years-old.",
+      "expected": [
+        {
+          "wrong": "years-old",
+          "correct": "years old",
+          "category": "LanguageTool",
+          "title": "years-old (years old|year-old)"
+        }
+      ]
+    },
+    {
+      "id": "LT-002",
+      "type": "detect",
+      "input": "Everybody's welcome.",
+      "expected": []
+    },
+    {
+      "id": "LT-003",
+      "type": "detect",
+      "input": "This is everybodies problem.",
+      "expected": [
+        {
+          "wrong": "everybodies",
+          "correct": "everybody's",
+          "category": "LanguageTool",
+          "title": "somethings ('s) wrong"
+        }
+      ]
+    },
+    {
+      "id": "LT-004",
+      "type": "detect",
+      "input": "Please sign-out of the system.",
+      "expected": [
+        {
+          "wrong": "sign-out",
+          "correct": "sign out",
+          "category": "LanguageTool",
+          "title": "...because your Mac has been signed-out (signed out) from iCloud"
+        }
+      ]
+    },
+    {
+      "id": "LT-005",
+      "type": "detect",
+      "input": "This is language-tool.",
+      "expected": [
+        {
+          "wrong": "language-tool",
+          "correct": "LanguageTool",
+          "category": "LanguageTool",
+          "title": "Proper spelling of LanguageTool"
+        }
+      ]
+    },
+    {
+      "id": "CLEAN-001",
+      "type": "clean",
+      "input": "She goes to the office every day.",
+      "expected": []
+    },
+    {
+      "id": "CLEAN-002",
+      "type": "clean",
+      "input": "He doesn't like coffee.",
+      "expected": []
+    },
+    {
+      "id": "CLEAN-003",
+      "type": "clean",
+      "input": "Yesterday, I went to Jakarta.",
+      "expected": []
+    },
+    {
+      "id": "CLEAN-004",
+      "type": "clean",
+      "input": "I agree with you.",
+      "expected": []
+    },
+    {
+      "id": "CLEAN-005",
+      "type": "clean",
+      "input": "We discussed the problem.",
+      "expected": []
+    },
+    {
+      "id": "CLEAN-006",
+      "type": "clean",
+      "input": "She is very beautiful.",
+      "expected": []
+    },
+    {
+      "id": "CLEAN-007",
+      "type": "clean",
+      "input": "I have already sent it.",
+      "expected": []
+    },
+    {
+      "id": "CLEAN-008",
+      "type": "clean",
+      "input": "This is 20 years old.",
+      "expected": []
+    },
+    {
+      "id": "MULTI-001",
+      "type": "detect",
+      "input": "She go to work every day. He dont like coffee.",
+      "expected": [
+        {
+          "wrong": "She go",
+          "correct": "She goes",
+          "category": "Grammar",
+          "title": "Subject–verb agreement"
+        },
+        {
+          "wrong": "dont",
+          "correct": "don't",
+          "category": "Spelling",
+          "title": "Spelling"
+        }
+      ]
+    }
+  ]
+}
