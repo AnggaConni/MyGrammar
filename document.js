@@ -5,6 +5,8 @@ let currentDialect=localStorage.getItem('mygrammar-dialect')||'American';
 let currentFilter='all';
 let selectedIssue=-1;
 let KB=null;
+let writingMode=localStorage.getItem('mygrammar-writing-mode')||'General';
+let personalDictionary=loadDictionary();
 
 const textArea=document.getElementById('docText');
 const results=document.getElementById('results');
@@ -21,28 +23,123 @@ function updateStats(){
   document.getElementById('paraStat').textContent=(t.trim()?t.trim().split(/\n\s*\n/).length:0)+' paragraphs';
 }
 function updateHealth(){
-  const counts={Grammar:0,Verb:0,Learner:0,Spelling:0,Style:0};
+  const counts={Grammar:0,Verb:0,Learner:0,Spelling:0};
   findings.forEach(function(f){
-    const c=f.category||'Style';
-    if(c==='Grammar')counts.Grammar++;
-    else if(c==='Verb'||c==='Verb pattern'||c==='Tense')counts.Verb++;
+    const c=f.category||'';
+    if(c==='Grammar'||c==='Tense')counts.Grammar++;
+    else if(c==='Verb'||c==='Verb form'||c==='Verb pattern')counts.Verb++;
     else if(c==='Indonesian learner pattern'||c==='Learner pattern')counts.Learner++;
     else if(c==='Spelling')counts.Spelling++;
-    else counts.Style++;
   });
   document.getElementById('healthGrammar').textContent=counts.Grammar;
   document.getElementById('healthVerb').textContent=counts.Verb;
   document.getElementById('healthLearner').textContent=counts.Learner;
   document.getElementById('healthSpelling').textContent=counts.Spelling;
-  document.getElementById('healthStyle').textContent=counts.Style;
+
+  const stats=sentenceHealth(currentText,findings);
+  document.getElementById('healthScore').textContent=stats.score;
+  document.getElementById('healthScoreLabel').textContent=stats.label;
+  document.getElementById('healthSentence').textContent=stats.count;
+  document.getElementById('sentenceMeta').textContent=stats.avg.toFixed(1)+' words avg';
+  document.getElementById('sentenceNote').textContent=stats.count
+    ? 'Sentence Health: '+stats.label+'. Average '+stats.avg.toFixed(1)+' words/sentence; '+stats.long+' sentence(s) exceed 30 words; '+stats.issueDensity.toFixed(2)+' findings per sentence.'
+    : 'Sentence Health will summarize average sentence length and long-sentence pressure after a check.';
 }
-function normalizeText(s){return s.replace(/\u00a0/g,' ');}
+function sentenceHealth(text,issues){
+  const clean=String(text||'').trim();
+  if(!clean)return {score:0,label:'waiting',count:0,avg:0,long:0,issueDensity:0};
+  const sentences=clean.split(/(?<=[.!?])\s+/).filter(Boolean);
+  const count=Math.max(1,sentences.length);
+  const lens=sentences.map(function(s){return words(s);});
+  const avg=lens.reduce(function(a,b){return a+b;},0)/count;
+  const long=lens.filter(function(n){return n>30;}).length;
+  const density=issues.length/count;
+  const score=Math.max(0,Math.min(100,Math.round(100-Math.min(40,density*14)-Math.min(30,long*5)-Math.max(0,avg-22)*1.1)));
+  const label=score>=90?'Excellent':score>=75?'Good':score>=60?'Needs review':'At risk';
+  return {score:score,label:label,count:count,avg:avg,long:long,issueDensity:density};
+}
+function normalizeText(s){return String(s||'').replace(/\u00a0/g,' ');}
 function dialectEnum(name){return MyGrammarHarper.Dialect[name] ?? MyGrammarHarper.Dialect.American;}
 function textFromSuggestion(s){
   if(s==null)return '';
   if(typeof s==='string')return s;
   if(typeof s.text==='string')return s.text;
   try{return String(s);}catch(e){return '';}
+}
+function loadDictionary(){
+  try{
+    const value=JSON.parse(localStorage.getItem('mygrammar-personal-dictionary')||'[]');
+    return Array.isArray(value)?value.filter(Boolean):[];
+  }catch(e){return [];}
+}
+function saveDictionary(){
+  localStorage.setItem('mygrammar-personal-dictionary',JSON.stringify(personalDictionary));
+}
+function dictionaryHas(value){
+  const target=String(value||'').trim().toLowerCase();
+  return target&&personalDictionary.some(function(item){return item.toLowerCase()===target;});
+}
+function renderDictionary(){
+  const list=document.getElementById('dictionaryList');
+  if(!list)return;
+  list.innerHTML=personalDictionary.length
+    ? personalDictionary.map(function(item,i){
+        return '<span class="dictionary-chip">'+esc(item)+'<button type="button" data-dict-remove="'+i+'" aria-label="Remove '+esc(item)+'">×</button></span>';
+      }).join('')
+    : '<span style="font-size:10px;color:#94a3b8">No saved words yet.</span>';
+}
+function addToDictionary(value){
+  const clean=String(value||'').trim();
+  if(!clean)return;
+  if(!personalDictionary.some(function(item){return item.toLowerCase()===clean.toLowerCase();})){
+    personalDictionary.push(clean);
+    personalDictionary.sort(function(a,b){return a.localeCompare(b);});
+    saveDictionary();
+  }
+  renderDictionary();
+}
+function styleModeIssues(text,mode){
+  const out=[];
+  const rules={
+    Academic:[
+      {re:/\b(a lot of)\b/gi,to:'many',title:'Academic precision',message:'Academic writing often benefits from more precise quantifiers.',priority:28},
+      {re:/\b(can't|cannot|don't|doesn't|didn't|won't|isn't|aren't|wasn't|weren't)\b/gi,toMap:{can't:'cannot',cannot:'cannot',don't:'do not',doesn't:'does not',didn't:'did not',won't:'will not',isn't:'is not',aren't:'are not',wasn't:'was not',weren't:'were not'},title:'Formal academic style',message:'Consider expanding the contraction in formal academic writing.',priority:26}
+    ],
+    Professional:[
+      {re:/\bASAP\b/gi,to:'as soon as possible',title:'Professional tone',message:'Consider replacing shorthand with a clearer professional phrase.',priority:28},
+      {re:/\b(a lot of)\b/gi,to:'many',title:'Professional precision',message:'Consider a more precise professional expression.',priority:25}
+    ],
+    Policy:[
+      {re:/\bI think\b/gi,to:'the evidence suggests',title:'Policy-neutral phrasing',message:'Policy writing often benefits from evidence-led phrasing rather than personal opinion.',priority:28},
+      {re:/\byou should\b/gi,to:'it is recommended that',title:'Policy recommendation',message:'Consider a more neutral recommendation structure for policy writing.',priority:27},
+      {re:/\bwe need to\b/gi,to:'there is a need to',title:'Policy-neutral phrasing',message:'Consider a more institutional formulation.',priority:25}
+    ],
+    Email:[
+      {re:/^\s*Hey\b/im,to:'Hello',title:'Formal email greeting',message:'Consider a more formal greeting for professional email.',priority:30},
+      {re:/\bThanks a lot\b/gi,to:'Thank you',title:'Formal email tone',message:'Consider a more neutral closing or acknowledgement.',priority:26},
+      {re:/\bASAP\b/gi,to:'as soon as possible',title:'Formal email tone',message:'Consider expanding shorthand in formal correspondence.',priority:27}
+    ]
+  };
+  (rules[mode]||[]).forEach(function(rule){
+    let m;
+    while((m=rule.re.exec(text))){
+      let replacement=rule.to;
+      if(rule.toMap)replacement=rule.toMap[String(m[0]).toLowerCase()]||m[0];
+      if(rule.re.ignoreCase&&m[0][0]===m[0][0].toUpperCase()&&replacement){
+        replacement=replacement.charAt(0).toUpperCase()+replacement.slice(1);
+      }
+      out.push({
+        start:m.index,end:m.index+m[0].length,wrong:m[0],correct:replacement,
+        message:rule.message,title:rule.title,category:'Style',source:'Writing mode',
+        safe:false,priority:rule.priority,suggestionText:replacement,reasoning:[
+          'Writing mode: '+mode,
+          'Style focus: '+rule.title,
+          'Suggested wording: '+replacement
+        ]
+      });
+    }
+  });
+  return out;
 }
 async function setupEngine(){
   if(!window.MyGrammarHarper)throw new Error('Harper bundle is missing.');
@@ -59,6 +156,7 @@ function dedupeFindings(list){
   const seen={};
   return list.filter(function(f){
     const key=f.start+'|'+f.end+'|'+String(f.suggestionText||'').toLowerCase();
+    if(dictionaryHas(f.wrong))return false;
     if(seen[key])return false;
     seen[key]=true;
     return true;
@@ -90,12 +188,11 @@ async function checkDocument(){
   try{
     if(!linter||!KB)await setupEngine();
     progressBar.style.width='15%';
-    results.innerHTML='<div style="padding:16px;color:#64748b;font-size:13px">Checking locally with two engines…</div>';
+    results.innerHTML='<div style="padding:16px;color:#64748b;font-size:13px">Checking locally with Harper + MyGrammar…</div>';
     const [harperLints,myIssues]=await Promise.all([
       linter.lint(raw,{language:'plaintext'}),
       Promise.resolve(MyGrammarGrammarEngine.analyze(raw,KB))
     ]);
-
     const unified=[];
     myIssues.forEach(function(issue){
       unified.push({
@@ -119,11 +216,12 @@ async function checkDocument(){
         suggestions:suggestions,index:index,lint:lint,reasoning:[]
       });
     });
+    unified.push.apply(unified,styleModeIssues(raw,writingMode));
     findings=dedupeFindings(unified);
     issueStat.textContent=findings.length+' issues';
     updateHealth();
     progressBar.style.width='100%';
-    selectedIssue=findings.length?0:-1;
+    selectedIssue=findings.length?findings[0].uid:-1;
     renderFindings();
   }catch(error){
     console.error(error);
@@ -136,7 +234,7 @@ async function checkDocument(){
 }
 function visibleFindings(){
   return findings.filter(function(f){
-    return currentFilter==='all'||f.category===currentFilter||(currentFilter==='Verb'&&['Verb','Verb pattern','Tense'].indexOf(f.category)>=0)||(currentFilter==='Style'&&['Style','LanguageTool','Suggestion'].indexOf(f.category)>=0);
+    return currentFilter==='all'||f.category===currentFilter||(currentFilter==='Verb'&&['Verb','Verb form','Verb pattern','Tense'].indexOf(f.category)>=0);
   });
 }
 function renderFindings(){
@@ -145,7 +243,7 @@ function renderFindings(){
     results.innerHTML=findings.length?'<div class="ok-state">✅ No findings in this filter.</div>':'<div class="ok-state">✅ No findings detected in this document.</div>';
     return;
   }
-  results.innerHTML=list.map(function(f,i){
+  results.innerHTML=list.map(function(f){
     const displayText=currentText.slice(f.start,f.end);
     const badge=f.safe?'<span class="badge safe">Safe fix</span>':'<span class="badge review">Review</span>';
     const source='<span class="badge">'+esc(f.source)+'</span>';
@@ -153,22 +251,17 @@ function renderFindings(){
     const actions=[];
     if(f.safe&&f.correct)actions.push('<button class="apply" data-apply-my="'+f.uid+'">✓ Apply</button>');
     else if(f.source==='Harper'&&f.suggestions&&f.suggestions.length)actions.push('<button class="apply" data-apply-harper="'+f.uid+'">✓ Apply suggestion</button>');
+    if(f.wrong&&f.wrong.trim())actions.push('<button data-dict-add="'+f.uid+'">📚 Add to dictionary</button>');
     actions.push('<button data-go="'+f.uid+'">Go to</button>');
-    return '<article class="result-item '+(f.safe?'safe':'review')+'"><div class="result-head"><h3>'+esc(f.title)+'</h3><div class="result-badges"><span class="badge">'+esc(f.category)+'</span>'+source+badge+'</div></div><p>'+esc(f.message)+'</p><div class="result-snippet">'+esc(displayText)+'</div>'+suggested+(actions.length?'<div class="result-actions">'+actions.join('')+'</div>':'')+'</article>';
+    return '<article class="result-item '+(f.safe?'safe':'review')+'"><div class="result-head"><h3>'+esc(f.title)+'</h3><div class="result-badges"><span class="badge">'+esc(f.category)+'</span>'+source+badge+'</div></div><p>'+esc(f.message)+'</p><div class="result-snippet">'+esc(displayText)+'</div>'+suggested+'<div class="result-actions">'+actions.join('')+'</div></article>';
   }).join('');
 }
 function selectIssue(uid){
   const f=findings.find(function(x){return x.uid===uid;});
   if(!f)return;
-  selectedIssue=uid;
-  textArea.focus();
-  textArea.setSelectionRange(f.start,f.end);
-  const visible=visibleFindings();
-  const idx=visible.findIndex(function(x){return x.uid===uid;});
-  if(idx>=0){
-    const node=results.querySelectorAll('.result-item')[idx];
-    if(node)node.scrollIntoView({block:'nearest'});
-  }
+  selectedIssue=uid;textArea.focus();textArea.setSelectionRange(f.start,f.end);
+  const visible=visibleFindings(),idx=visible.findIndex(function(x){return x.uid===uid;});
+  if(idx>=0){const node=results.querySelectorAll('.result-item')[idx];if(node)node.scrollIntoView({block:'nearest'});}
 }
 async function applyFinding(f){
   if(!f)return;
@@ -181,27 +274,30 @@ async function applyFinding(f){
       if(!suggestion)return;
       currentText=currentText.slice(0,f.start)+suggestion+currentText.slice(f.end);
     }
+  }else if(f.source==='Writing mode'){
+    currentText=currentText.slice(0,f.start)+f.correct+currentText.slice(f.end);
   }
-  textArea.value=currentText;
-  await checkDocument();
+  textArea.value=currentText;await checkDocument();
 }
 results.addEventListener('click',async function(e){
-  const my=e.target.closest('[data-apply-my]'),harper=e.target.closest('[data-apply-harper]'),go=e.target.closest('[data-go]');
-  if(my){await applyFinding(findings.find(function(f){return f.uid===Number(my.dataset.applyMy)}));}
-  else if(harper){await applyFinding(findings.find(function(f){return f.uid===Number(harper.dataset.applyHarper)}));}
-  else if(go){selectIssue(Number(go.dataset.go));}
+  const my=e.target.closest('[data-apply-my]'),harper=e.target.closest('[data-apply-harper]'),go=e.target.closest('[data-go]'),dict=e.target.closest('[data-dict-add]');
+  if(my)await applyFinding(findings.find(function(f){return f.uid===Number(my.dataset.applyMy)}));
+  else if(harper)await applyFinding(findings.find(function(f){return f.uid===Number(harper.dataset.applyHarper)}));
+  else if(go)selectIssue(Number(go.dataset.go));
+  else if(dict){
+    const f=findings.find(function(x){return x.uid===Number(dict.dataset.dictAdd)});
+    if(f){addToDictionary(f.wrong);await checkDocument();}
+  }
 });
 document.querySelectorAll('.filter-btn').forEach(function(btn){btn.addEventListener('click',function(){
   document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active')});
   btn.classList.add('active');currentFilter=btn.dataset.filter;renderFindings();
 });});
 function moveIssue(delta){
-  const list=visibleFindings();
-  if(!list.length)return;
+  const list=visibleFindings();if(!list.length)return;
   let idx=list.findIndex(function(f){return f.uid===selectedIssue;});
   if(idx<0)idx=delta>0?-1:list.length;
-  idx=(idx+delta+list.length)%list.length;
-  selectIssue(list[idx].uid);
+  idx=(idx+delta+list.length)%list.length;selectIssue(list[idx].uid);
 }
 document.getElementById('prevIssueBtn').addEventListener('click',function(){moveIssue(-1);});
 document.getElementById('nextIssueBtn').addEventListener('click',function(){moveIssue(1);});
@@ -211,6 +307,11 @@ document.getElementById('dialectSelect').addEventListener('change',async functio
   currentDialect=this.value;localStorage.setItem('mygrammar-dialect',currentDialect);
   if(linter){try{await linter.setDialect(dialectEnum(currentDialect));}catch(e){console.warn(e);}}
   if(textArea.value.trim())await checkDocument();
+});
+document.getElementById('writingMode').value=writingMode;
+document.getElementById('writingMode').addEventListener('change',function(){
+  writingMode=this.value;localStorage.setItem('mygrammar-writing-mode',writingMode);
+  if(textArea.value.trim())checkDocument();
 });
 document.getElementById('applyAllBtn').addEventListener('click',async function(){
   const safe=findings.filter(function(f){return f.safe&&f.correct;}).slice().sort(function(a,b){return b.start-a.start;});
@@ -228,10 +329,46 @@ document.getElementById('clearBtn').addEventListener('click',function(){
 document.getElementById('copyBtn').addEventListener('click',async function(){
   await navigator.clipboard.writeText(textArea.value);this.textContent='✓ Copied';setTimeout(()=>this.textContent='Copy Text',1200);
 });
-document.getElementById('fileInput').addEventListener('change',function(){
+document.getElementById('dictionaryBtn').addEventListener('click',function(){
+  const panel=document.getElementById('dictionaryPanel');
+  panel.hidden=!panel.hidden;if(!panel.hidden)document.getElementById('dictionaryInput').focus();
+});
+document.getElementById('dictionaryAddBtn').addEventListener('click',function(){
+  const input=document.getElementById('dictionaryInput');addToDictionary(input.value);input.value='';
+});
+document.getElementById('dictionaryInput').addEventListener('keydown',function(e){
+  if(e.key==='Enter'){e.preventDefault();document.getElementById('dictionaryAddBtn').click();}
+});
+document.getElementById('dictionaryList').addEventListener('click',function(e){
+  const button=e.target.closest('[data-dict-remove]');if(!button)return;
+  personalDictionary.splice(Number(button.dataset.dictRemove),1);saveDictionary();renderDictionary();
+});
+const fileInput=document.getElementById('fileInput');
+fileInput.addEventListener('change',async function(){
   const file=this.files[0];if(!file)return;
-  const reader=new FileReader();reader.onload=function(){textArea.value=String(reader.result||'');updateStats();};reader.readAsText(file);
+  try{
+    if(/\.docx$/i.test(file.name)){
+      if(!window.mammoth)throw new Error('DOCX reader is not available yet. Refresh after the offline bundle is built.');
+      const arrayBuffer=await file.arrayBuffer();
+      if(arrayBuffer.byteLength>25*1024*1024)throw new Error('DOCX file is larger than the 25 MB local import limit.');
+      const result=await mammoth.extractRawText({arrayBuffer:arrayBuffer});
+      textArea.value=normalizeText(result.value||'');
+      if(result.messages&&result.messages.length)console.info('DOCX conversion messages:',result.messages);
+    }else{
+      const reader=new FileReader();
+      reader.onload=function(){textArea.value=String(reader.result||'');updateStats();};
+      reader.readAsText(file);
+      return;
+    }
+    updateStats();
+    results.innerHTML='<div style="padding:16px;color:#166534;font-size:13px">✅ Imported '+esc(file.name)+'. Click Check Document.</div>';
+  }catch(error){
+    console.error(error);
+    results.innerHTML='<div class="ok-state" style="color:#b91c1c;background:#fef2f2;border-color:#fecaca">Could not import '+esc(file.name)+'. '+esc(error.message||'Unknown DOCX error')+'</div>';
+  }finally{this.value='';}
 });
 textArea.addEventListener('input',updateStats);
+renderDictionary();
+document.getElementById('writingMode').value=writingMode;
 updateStats();
 setupEngine().catch(function(error){engineStat.textContent='Engine: unavailable';console.error(error);});

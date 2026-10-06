@@ -13,6 +13,9 @@ on:
       - 'toefl.js'
       - 'index.html'
       - 'Document.html'
+      - 'document.js'
+      - 'sw.js'
+      - 'Document.html'
       - 'sw.js'
       - 'data/verbs.json'
       - 'data/learner_errors_id.json'
@@ -52,7 +55,7 @@ jobs:
           node-version: '20'
 
       - name: Install Harper bundler dependencies
-        run: npm install --no-save harper.js@2.10.0 esbuild@0.27.0
+        run: npm install --no-save harper.js@2.10.0 esbuild@0.27.0 mammoth@1.13.0
 
       - name: Build offline Harper bundle
         run: |
@@ -60,6 +63,11 @@ jobs:
           # Harper contains a Node-only dynamic import of `fs` for file:// binaries.
           # Our browser build uses the inlined data URL, so keep that branch external.
           npx esbuild scripts/harper_entry.mjs --bundle --format=iife --platform=browser --target=es2020 --external:fs --minify --outfile=vendor/harper.bundle.js
+
+      - name: Build offline DOCX reader
+        run: |
+          test -f node_modules/mammoth/mammoth.browser.min.js
+          cp node_modules/mammoth/mammoth.browser.min.js vendor/mammoth.bundle.js
 
       - name: Refresh Knowledge Base
         run: python scripts/build_kb.py --force
@@ -73,6 +81,7 @@ jobs:
           node --check toefl.js
           node --check document.js
           node --check grammar-engine.js
+          test -f vendor/mammoth.bundle.js
           node scripts/test_grammar_engine.js
 
       - name: Show generated statistics
@@ -83,7 +92,7 @@ jobs:
         run: |
           git config user.name "MyGrammar KB Bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/external/ vendor/harper.bundle.js
+          git add data/external/ vendor/harper.bundle.js vendor/mammoth.bundle.js
           if git diff --cached --quiet; then
             echo "No Knowledge Base changes."
           else

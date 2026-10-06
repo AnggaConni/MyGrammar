@@ -45,3 +45,14 @@ Version pinned for the offline browser bundle: `2.10.0` (the published npm packa
 License: Apache-2.0.
 
 Harper is used as the long-document browser grammar engine. Its WebAssembly build is bundled into the repository by GitHub Actions so the Document Checker can operate without a network connection.
+
+
+## 4. Mammoth.js
+
+Repository: https://github.com/mwilliamson/mammoth.js
+
+Version pinned for the offline browser bundle: `1.13.0`.
+
+License: BSD-2-Clause.
+
+Mammoth is used only for local DOCX-to-text extraction in the Document Checker. The input file remains in the browser; MyGrammar does not upload the document.

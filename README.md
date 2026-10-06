@@ -64,6 +64,7 @@ Generated files:
 - `data/external/languagetool_runtime.json`
 - `data/external/common_words.json`
 - `data/external/build_summary.json`
+- `vendor/mammoth.bundle.js`
 
 Source attribution and license information are documented in `DATA_SOURCES.md` and `licenses/`.
 
@@ -72,7 +73,14 @@ LanguageTool rules remain separately identified as LGPL-2.1-or-later data, and w
 
 ## Document Checker
 
-`Document.html` provides long-document offline grammar checking using a vendored Harper.js WebAssembly bundle. It supports pasted text plus TXT/Markdown import and keeps the document in the browser.
+`Document.html` provides long-document offline grammar checking using Harper.js plus the local MyGrammar engine. It supports pasted text, TXT/Markdown import, and local DOCX text extraction using a vendored Mammoth browser bundle.
+
+Current Document Checker features include:
+- Hybrid Harper + MyGrammar findings
+- Writing modes: General, Academic, Professional, Policy / UN, Formal Email
+- Sentence Health summary with average sentence length and long-sentence pressure
+- Local personal dictionary stored in browser localStorage
+- TXT / Markdown / DOCX import with no upload
 
 The Knowledge Base pipeline stores the complete imported LanguageTool catalog for reference in `data/external/languagetool_catalog.json`, while only explicitly safe single-token rules are eligible for the lightweight browser rule set.
 
