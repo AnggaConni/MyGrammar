@@ -52,33 +52,17 @@ function esc(v){return String(v).replace(/[&<>"']/g,function(c){return({'&':'&am
 function words(text){return text.trim()?text.trim().split(/\s+/).length:0;}
 function unique(arr){return Array.from(new Set(arr));}
 
+let grammarKB=MyGrammarGrammarEngine.defaultKnowledge();
+
 function localGrammarFeedback(text){
-  const findings=[];
-  const lower=text.toLowerCase();
-  const contractions=[
-    ['wouldnt',"wouldn't"],['couldnt',"couldn't"],['shouldnt',"shouldn't"],
-    ['dont',"don't"],['doesnt',"doesn't"],['didnt',"didn't"],['cant',"can't"],
-    ['wont',"won't"],['isnt',"isn't"],['arent',"aren't"],['wasnt',"wasn't"],
-    ['werent',"weren't"],['havent',"haven't"],['hasnt',"hasn't"],['hadnt',"hadn't"]
-  ];
-  contractions.forEach(function(pair){
-    const re=new RegExp('\\b'+pair[0]+'\\b','i');
-    if(re.test(text))findings.push('Spelling: use '+pair[1]+' instead of '+pair[0]+'.');
-  });
-  if(/\b(he|she|it)\s+(go|do|have|watch|wash|fix|study|try|play|work|live|like|want|need)\b/i.test(text))
-    findings.push('Subject–verb agreement: He/She/It normally takes V1+s/es in the Present Simple.');
-  if(/\b(he|she|it)\s+don't\b/i.test(text))
-    findings.push("Use doesn't with He/She/It in the Present Simple.");
-  if(/\b(i|you|we|they)\s+doesn't\b/i.test(text))
-    findings.push("Use don't with I/You/We/They in the Present Simple.");
-  if(/\b(yesterday|last\s+\w+|\d+\s+days?\s+ago)\b/i.test(text)&&/\b(i|he|she|they|we|you)\s+(go|come|see|eat|write|take)\b/i.test(text))
-    findings.push('Past-time markers such as yesterday normally call for a Past Simple V2 form.');
-  if(/\bi am agree\b/i.test(lower))findings.push("Common learner error: use 'I agree', not 'I am agree'.");
-  if(/\bdiscuss about\b/i.test(lower))findings.push("Use 'discuss the issue', not 'discuss about the issue'.");
-  if(!/[.!?]$/.test(text.trim())&&text.trim())findings.push('Consider ending the response with punctuation.');
-  if(words(text)>0&&words(text)<12)findings.push('Your response is very short. Add details, reasons or examples to develop the idea.');
-  return unique(findings);
+  return MyGrammarGrammarEngine.feedbackMessages(text,grammarKB);
 }
+
+MyGrammarGrammarEngine.loadKnowledge().then(function(kb){
+  grammarKB=kb;
+}).catch(function(error){
+  console.warn('Shared grammar knowledge could not be loaded:',error);
+});
 
 function scoreResponse(text,min){
   const wc=words(text);
