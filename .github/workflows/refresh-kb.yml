@@ -1,0 +1,49 @@
+name: Refresh MyGrammar Knowledge Base
+
+on:
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Force refresh all upstream sources"
+        required: false
+        default: true
+        type: boolean
+  schedule:
+    - cron: "17 3 * * 0"
+
+permissions:
+  contents: write
+
+jobs:
+  refresh-kb:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install builder dependency
+        run: python -m pip install lxml
+
+      - name: Refresh Knowledge Base
+        run: python scripts/build_kb.py --force
+
+      - name: Show generated statistics
+        run: |
+          cat data/external/build_summary.json
+
+      - name: Commit generated Knowledge Base
+        run: |
+          git config user.name "MyGrammar KB Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/external/
+          if git diff --cached --quiet; then
+            echo "No Knowledge Base changes."
+          else
+            git commit -m "chore: refresh offline grammar knowledge base"
+            git push
+          fi
