@@ -1,30 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#111827">
-<title>MyGrammar — Offline English Grammar Assistant</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#111827"><title>MyGrammar — Offline English Grammar Assistant</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <main class="app">
-  <header class="hero">
-    <span class="badge">100% OFFLINE</span>
-    <h1>MyGrammar</h1>
-    <p>Your personal English grammar assistant — powered by rules, not AI.</p>
-  </header>
-  <section class="card editor-card">
-    <div class="section-head"><h2>Check your sentence</h2><span id="status" class="status">Ready</span></div>
-    <textarea id="inputText" placeholder="Example: She go to the office every day."></textarea>
-    <div class="actions">
-      <button id="checkBtn" class="primary">🔍 Check Grammar</button>
-      <button id="clearBtn">Clear</button>
-      <button id="exampleBtn">Try Example</button>
-    </div>
-  </section>
-  <section id="results" class="results"></section>
-  <footer><span>MyGrammar</span><span>Offline Grammar Knowledge Base</span></footer>
+<header class="hero"><span class="badge">100% OFFLINE</span><h1>MyGrammar</h1><p>Write English with confidence — grammar rules, explanations and corrections without AI.</p></header>
+<section class="workspace">
+<div class="card editor-card">
+<div class="section-head"><div><h2>Your sentence</h2><p class="hint">Suggestions appear automatically while you type.</p></div><span id="status" class="status">Ready</span></div>
+<div class="editor-wrap"><pre id="highlightLayer" class="highlight-layer" aria-hidden="true"></pre><textarea id="inputText" aria-label="English text editor" spellcheck="true" placeholder="Try: She go to the office every day."></textarea></div>
+<div class="toolbar"><button id="exampleBtn">Try Example</button><button id="clearBtn">Clear</button><span id="score" class="score">—</span></div>
+</div>
+<aside class="card side-card"><div class="side-head"><h2>Suggestions</h2><span id="issueCount">0</span></div><div id="results" class="suggestions"><div class="empty">Start typing and MyGrammar will check your sentence automatically.</div></div></aside>
+</section>
+<footer><span>MyGrammar</span><span>Local rules + JSON Knowledge Base</span></footer>
 </main>
 <script src="app.js"></script>
 </body>
