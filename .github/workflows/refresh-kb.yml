@@ -11,6 +11,11 @@ on:
       - 'grammar-engine.js'
       - 'app.js'
       - 'toefl.js'
+      - 'index.html'
+      - 'sw.js'
+      - 'data/verbs.json'
+      - 'data/learner_errors_id.json'
+      - 'data/verb_patterns.json'
       - '.github/workflows/refresh-kb.yml'
   workflow_dispatch:
     inputs:

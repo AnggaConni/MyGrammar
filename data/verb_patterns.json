@@ -1,0 +1,154 @@
+[
+  {
+    "id": "SUGGEST_GERUND",
+    "kind": "gerund_after",
+    "verbs": [
+      "suggest"
+    ],
+    "title": "Verb pattern: suggest + gerund",
+    "formula": "suggest + V-ing",
+    "explanation": "Suggest is normally followed by a gerund (V-ing), not by to + infinitive.",
+    "priority": 114
+  },
+  {
+    "id": "ENJOY_GERUND",
+    "kind": "gerund_after",
+    "verbs": [
+      "enjoy"
+    ],
+    "title": "Verb pattern: enjoy + gerund",
+    "formula": "enjoy + V-ing",
+    "explanation": "Enjoy is followed by a gerund (V-ing), not by to + infinitive.",
+    "priority": 114
+  },
+  {
+    "id": "AVOID_GERUND",
+    "kind": "gerund_after",
+    "verbs": [
+      "avoid"
+    ],
+    "title": "Verb pattern: avoid + gerund",
+    "formula": "avoid + V-ing",
+    "explanation": "Avoid is followed by a gerund (V-ing), not by to + infinitive.",
+    "priority": 114
+  },
+  {
+    "id": "CONSIDER_GERUND",
+    "kind": "gerund_after",
+    "verbs": [
+      "consider"
+    ],
+    "title": "Verb pattern: consider + gerund",
+    "formula": "consider + V-ing",
+    "explanation": "Consider is followed by a gerund (V-ing), not by to + infinitive.",
+    "priority": 114
+  },
+  {
+    "id": "FINISH_GERUND",
+    "kind": "gerund_after",
+    "verbs": [
+      "finish"
+    ],
+    "title": "Verb pattern: finish + gerund",
+    "formula": "finish + V-ing",
+    "explanation": "Finish is followed by a gerund (V-ing), not by to + infinitive.",
+    "priority": 114
+  },
+  {
+    "id": "MIND_GERUND",
+    "kind": "gerund_after",
+    "verbs": [
+      "mind"
+    ],
+    "title": "Verb pattern: mind + gerund",
+    "formula": "mind + V-ing",
+    "explanation": "Mind is followed by a gerund (V-ing) in this pattern.",
+    "priority": 114
+  },
+  {
+    "id": "RECOMMEND_GERUND",
+    "kind": "gerund_after",
+    "verbs": [
+      "recommend"
+    ],
+    "title": "Verb pattern: recommend + gerund",
+    "formula": "recommend + V-ing",
+    "explanation": "Recommend can be followed directly by a gerund (V-ing); recommend + to + infinitive is not the standard pattern.",
+    "priority": 114
+  },
+  {
+    "id": "PRACTICE_GERUND",
+    "kind": "gerund_after",
+    "verbs": [
+      "practice"
+    ],
+    "title": "Verb pattern: practice + gerund",
+    "formula": "practice + V-ing",
+    "explanation": "Practice is followed by a gerund (V-ing), not by to + infinitive.",
+    "priority": 114
+  },
+  {
+    "id": "DECIDE_INFINITIVE",
+    "kind": "infinitive_after",
+    "verbs": [
+      "decide"
+    ],
+    "title": "Verb pattern: decide + infinitive",
+    "formula": "decide + to + V1",
+    "explanation": "Decide is normally followed by to + infinitive.",
+    "priority": 113
+  },
+  {
+    "id": "WANT_INFINITIVE",
+    "kind": "infinitive_after",
+    "verbs": [
+      "want"
+    ],
+    "title": "Verb pattern: want + infinitive",
+    "formula": "want + to + V1",
+    "explanation": "Want is normally followed by to + infinitive when expressing a desired action.",
+    "priority": 113
+  },
+  {
+    "id": "HOPE_INFINITIVE",
+    "kind": "infinitive_after",
+    "verbs": [
+      "hope"
+    ],
+    "title": "Verb pattern: hope + infinitive",
+    "formula": "hope + to + V1",
+    "explanation": "Hope is normally followed by to + infinitive when expressing a desired future action.",
+    "priority": 113
+  },
+  {
+    "id": "PLAN_INFINITIVE",
+    "kind": "infinitive_after",
+    "verbs": [
+      "plan"
+    ],
+    "title": "Verb pattern: plan + infinitive",
+    "formula": "plan + to + V1",
+    "explanation": "Plan is normally followed by to + infinitive.",
+    "priority": 113
+  },
+  {
+    "id": "MANAGE_INFINITIVE",
+    "kind": "infinitive_after",
+    "verbs": [
+      "manage"
+    ],
+    "title": "Verb pattern: manage + infinitive",
+    "formula": "manage + to + V1",
+    "explanation": "Manage is normally followed by to + infinitive.",
+    "priority": 113
+  },
+  {
+    "id": "LOOK_FORWARD_GERUND",
+    "kind": "fixed_gerund",
+    "phrase": "look forward to",
+    "title": "Verb pattern: look forward to + gerund",
+    "formula": "look forward to + V-ing",
+    "explanation": "In look forward to, to is a preposition, so the following verb takes the gerund form (V-ing).",
+    "priority": 114
+  }
+]

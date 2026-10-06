@@ -13,7 +13,8 @@ function escapeHtml(v){return String(v).replace(/[&<>"']/g,function(c){return({'
 async function loadKnowledge(){
   KB=await MyGrammarGrammarEngine.loadKnowledge();
   const ltCount=MyGrammarGrammarEngine.trustedLanguageToolCount(KB);
-  kbStatus.textContent='✓ Local knowledge loaded • '+ltCount+' vetted LanguageTool rules';
+  var verbCount=KB.verbs.length; var patternCount=KB.verbPatterns.length; var learnerCount=KB.learnerErrors.length;
+  kbStatus.textContent='✓ Local knowledge loaded • '+verbCount+' verbs • '+patternCount+' verb patterns • '+learnerCount+' ID learner patterns • '+ltCount+' vetted LT';
   renderVerbs();
   renderSamples();
   renderGuide();
@@ -54,8 +55,18 @@ function renderSamples(){
 document.getElementById('sampleList').addEventListener('click',function(e){var b=e.target.closest('[data-sample]');if(!b)return;input.value=KB.samples[Number(b.dataset.sample)].wrong;document.querySelector('[data-tab="corrector"]').click();runCheck();input.focus();});
 function renderVerbs(){
   var q=(document.getElementById('verbSearch').value||'').toLowerCase().trim();
-  var filtered=KB.verbs.filter(function(v){var hit=activeVerbFilter==='all'||v.type===activeVerbFilter;var text=(v.v1+' '+v.v2+' '+v.v3+' '+(v.example||'')).toLowerCase();return hit&&(!q||text.indexOf(q)>=0);}).slice(0,200);
-  document.getElementById('verbTable').innerHTML=filtered.map(function(v){return '<tr><td><strong>'+escapeHtml(v.v1)+'</strong></td><td>'+escapeHtml(v.v2)+'</td><td>'+escapeHtml(v.v3)+'</td><td class="type '+escapeHtml(v.type)+'">'+escapeHtml(v.type)+'</td><td>'+escapeHtml(v.example||'')+'</td></tr>';}).join('')||'<tr><td colspan="5">No verb found.</td></tr>';
+  var filtered=KB.verbs.filter(function(v){
+    var hit=activeVerbFilter==='all'||v.type===activeVerbFilter;
+    var patterns=KB.verbPatterns.filter(function(p){return Array.isArray(p.verbs)&&p.verbs.indexOf(v.v1)>=0;});
+    var patternText=patterns.map(function(p){return p.title+' '+p.formula;}).join(' ');
+    var text=(v.v1+' '+v.v2+' '+v.v3+' '+(v.example||'')+' '+patternText).toLowerCase();
+    return hit&&(!q||text.indexOf(q)>=0);
+  }).slice(0,200);
+  document.getElementById('verbTable').innerHTML=filtered.map(function(v){
+    var patterns=KB.verbPatterns.filter(function(p){return Array.isArray(p.verbs)&&p.verbs.indexOf(v.v1)>=0;});
+    var badges=patterns.map(function(p){return '<span class="verb-pattern-chip">'+escapeHtml(p.kind==='gerund_after'?'V-ing':p.kind==='infinitive_after'?'to + V1':p.formula)+'</span>';}).join('');
+    return '<tr><td><strong>'+escapeHtml(v.v1)+'</strong></td><td>'+escapeHtml(v.v2)+'</td><td>'+escapeHtml(v.v3)+'</td><td class="type '+escapeHtml(v.type)+'">'+escapeHtml(v.type)+'</td><td>'+escapeHtml(v.example||'')+'</td><td class="verb-patterns">'+(badges||'—')+'</td></tr>';
+  }).join('')||'<tr><td colspan="6">No verb found.</td></tr>';
 }
 document.getElementById('verbSearch').addEventListener('input',renderVerbs);
 document.querySelectorAll('.verb-filter').forEach(function(btn){btn.addEventListener('click',function(){document.querySelectorAll('.verb-filter').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');activeVerbFilter=btn.dataset.filter;renderVerbs();});});

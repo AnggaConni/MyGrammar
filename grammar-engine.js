@@ -51,6 +51,8 @@
     samples:[],
     externalRules:[],
     commonWords:[],
+    verbPatterns:[],
+    learnerErrors:[],
     loaded:false
   };
 
@@ -80,7 +82,9 @@
       loadJSON('data/verbs.json',FALLBACK.verbs),
       loadJSON('data/samples.json',FALLBACK.samples),
       loadJSON('data/external/languagetool_runtime.json',{rules:[]}),
-      loadJSON('data/external/common_words.json',{words:[]})
+      loadJSON('data/external/common_words.json',{words:[]}),
+      loadJSON('data/verb_patterns.json',[]),
+      loadJSON('data/learner_errors_id.json',[])
     ]);
 
     return {
@@ -92,6 +96,8 @@
       samples:data[5],
       externalRules:(data[6]&&Array.isArray(data[6].rules))?data[6].rules:[],
       commonWords:(data[7]&&Array.isArray(data[7].words))?data[7].words:[],
+      verbPatterns:Array.isArray(data[8])?data[8]:[],
+      learnerErrors:Array.isArray(data[9])?data[9]:[],
       loaded:true
     };
   }
@@ -127,7 +133,7 @@
   }
 
 function escapeRegex(value){
-    return String(value||'').replace(/[|\\{}()[\]^$+*?.-]/g,'\\  function buildReasoning(issue){');
+    return String(value||'').replace(/[|\\{}()[\]^$+*?.-]/g,'\\$&');
   }
 
 function splitForms(value){
@@ -356,7 +362,140 @@ function splitForms(value){
     return out;
   }
 
-  function buildReasoning(issue){
+  
+  function learnerErrorIssues(text,kb){
+    const out=[];
+    (kb.learnerErrors||[]).forEach(function(rule){
+      findExactRanges(text,rule.wrong).forEach(function(r){
+        out.push({
+          start:r[0],end:r[1],
+          wrong:text.slice(r[0],r[1]),correct:rule.correct,
+          title:rule.title||'Indonesian learner pattern',
+          category:rule.category||'Learner pattern',
+          severity:rule.severity||'error',
+          priority:rule.priority||108,
+          explanation:rule.explanation||'This is a common learner pattern.',
+          formula:rule.formula||'',
+          reasoning:[
+            'Learner pattern: '+rule.wrong+' → '+rule.correct,
+            'Grammar focus: '+(rule.formula||rule.title||'learner pattern'),
+            rule.explanation||'Use the standard English pattern.'
+          ]
+        });
+      });
+    });
+    return out;
+  }
+
+  function patternVerbRows(kb,verbs){
+    return (verbs||[]).map(function(base){
+      return (kb.verbs||[]).find(function(v){
+        return String(v.v1||'').toLowerCase()===String(base||'').toLowerCase();
+      });
+    }).filter(Boolean);
+  }
+
+  function verbPatternIssues(text,kb){
+    const out=[];
+    const lexicon=buildVerbLexicon(kb);
+    const baseForms=Object.keys(lexicon).filter(function(form){
+      const hit=lexicon[form]&&lexicon[form][0];
+      return hit&&hit.kind==='base';
+    }).sort(function(a,b){return b.length-a.length;});
+    const ingForms=Object.keys(lexicon).filter(function(form){
+      const hit=lexicon[form]&&lexicon[form][0];
+      return hit&&hit.kind==='ing';
+    }).sort(function(a,b){return b.length-a.length;});
+    const basePattern=baseForms.map(escapeRegex).join('|');
+    const ingPattern=ingForms.map(escapeRegex).join('|');
+    if(!basePattern)return out;
+
+    function surfacePattern(rows){
+      const surface=[];
+      rows.forEach(function(row){
+        surface.push(row.v1,row.v2,thirdPersonForm(row.v1));
+      });
+      return Array.from(new Set(surface.filter(Boolean)))
+        .sort(function(a,b){return b.length-a.length;})
+        .map(escapeRegex).join('|');
+    }
+
+    (kb.verbPatterns||[]).forEach(function(rule){
+      try{
+        if(rule.kind==='gerund_after'&&Array.isArray(rule.verbs)&&rule.verbs.length){
+          const verbSurface=surfacePattern(patternVerbRows(kb,rule.verbs));
+          if(!verbSurface)return;
+          const re=new RegExp('\\b('+verbSurface+')\\s+to\\s+('+basePattern+')\\b','gi');
+          let m;
+          while((m=re.exec(text))){
+            const next=findVerbMatch(lexicon,m[2]);
+            if(!next||next.kind!=='base')continue;
+            const correct=m[1]+' '+ingForm(next.row.v1);
+            out.push({
+              start:m.index,end:m.index+m[0].length,wrong:m[0],correct:correct,
+              title:rule.title||'Verb pattern',category:'Verb pattern',severity:'error',
+              priority:rule.priority||114,explanation:rule.explanation||'Use the standard verb pattern.',
+              formula:rule.formula||'',
+              reasoning:[
+                'Main verb: '+m[1],
+                'Rule: '+(rule.formula||'verb pattern'),
+                'Complement: '+m[2]+' must use V-ing here',
+                'Correction: '+correct
+              ]
+            });
+          }
+        }
+
+        if(rule.kind==='infinitive_after'&&Array.isArray(rule.verbs)&&rule.verbs.length&&ingPattern){
+          const verbSurface=surfacePattern(patternVerbRows(kb,rule.verbs));
+          if(!verbSurface)return;
+          const re=new RegExp('\\b('+verbSurface+')\\s+('+ingPattern+')\\b','gi');
+          let m;
+          while((m=re.exec(text))){
+            const next=findVerbMatch(lexicon,m[2]);
+            if(!next||next.kind!=='ing')continue;
+            const correct=m[1]+' to '+next.row.v1;
+            out.push({
+              start:m.index,end:m.index+m[0].length,wrong:m[0],correct:correct,
+              title:rule.title||'Verb pattern',category:'Verb pattern',severity:'error',
+              priority:rule.priority||113,explanation:rule.explanation||'Use the standard verb pattern.',
+              formula:rule.formula||'',
+              reasoning:[
+                'Main verb: '+m[1],
+                'Rule: '+(rule.formula||'verb pattern'),
+                'Complement: '+m[2]+' should use the infinitive here',
+                'Correction: '+correct
+              ]
+            });
+          }
+        }
+
+        if(rule.kind==='fixed_gerund'&&rule.phrase){
+          const re=new RegExp('\\b('+escapeRegex(rule.phrase)+')\\s+('+basePattern+')\\b','gi');
+          let m;
+          while((m=re.exec(text))){
+            const next=findVerbMatch(lexicon,m[2]);
+            if(!next||next.kind!=='base')continue;
+            const correct=m[1]+' '+ingForm(next.row.v1);
+            out.push({
+              start:m.index,end:m.index+m[0].length,wrong:m[0],correct:correct,
+              title:rule.title||'Verb pattern',category:'Verb pattern',severity:'error',
+              priority:rule.priority||114,explanation:rule.explanation||'Use the standard verb pattern.',
+              formula:rule.formula||'',
+              reasoning:[
+                'Fixed expression: '+m[1],
+                'Rule: '+(rule.formula||'phrase + V-ing'),
+                'Following verb: '+m[2]+' → '+ingForm(next.row.v1)
+              ]
+            });
+          }
+        }
+      }catch(e){}
+    });
+    return out;
+  }
+
+function buildReasoning(issue){
     if(issue.reasoning&&issue.reasoning.length)return issue.reasoning;
     const steps=[];
     if(issue.source==='LanguageTool'){
@@ -478,10 +617,6 @@ function splitForms(value){
     return out;
   }
 
-function escapeRegex(value){
-    return String(value||'').replace(/[|\\{}()[\]^$+*?.-]/g,'\\$&');
-  }
-
 function tenseIssues(text,kb){
     const out=[];
     const lower=text.toLowerCase();
@@ -522,6 +657,8 @@ function tenseIssues(text,kb){
   function analyze(text,kb){
     const source=kb||defaultKnowledge();
     let list=commonErrorIssues(text,source)
+      .concat(learnerErrorIssues(text,source))
+      .concat(verbPatternIssues(text,source))
       .concat(contractionIssues(text,source))
       .concat(thirdPersonIssues(text,source))
       .concat(auxiliaryIssues(text))

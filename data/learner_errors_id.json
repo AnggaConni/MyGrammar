@@ -1,0 +1,173 @@
+[
+  {
+    "id": "ID-001",
+    "wrong": "more better",
+    "correct": "better",
+    "category": "Indonesian learner pattern",
+    "title": "Avoid double comparative",
+    "formula": "better",
+    "explanation": "Better already expresses a comparative meaning; adding more creates a double comparative."
+  },
+  {
+    "id": "ID-002",
+    "wrong": "more easier",
+    "correct": "easier",
+    "category": "Indonesian learner pattern",
+    "title": "Avoid double comparative",
+    "formula": "easier",
+    "explanation": "Easier already expresses a comparative meaning; adding more creates a double comparative."
+  },
+  {
+    "id": "ID-003",
+    "wrong": "very agree",
+    "correct": "strongly agree",
+    "category": "Indonesian learner pattern",
+    "title": "Natural adverb with agree",
+    "formula": "strongly agree",
+    "explanation": "Agree is normally modified with an adverb such as strongly, completely or totally, not very."
+  },
+  {
+    "id": "ID-004",
+    "wrong": "very like",
+    "correct": "really like",
+    "category": "Indonesian learner pattern",
+    "title": "Natural adverb with like",
+    "formula": "really like",
+    "explanation": "In standard English, really is a natural intensifier for like; very like is not normally used this way."
+  },
+  {
+    "id": "ID-005",
+    "wrong": "according with",
+    "correct": "according to",
+    "category": "Indonesian learner pattern",
+    "title": "Preposition after according",
+    "formula": "according to + source",
+    "explanation": "The standard expression is according to, not according with."
+  },
+  {
+    "id": "ID-006",
+    "wrong": "responsible of",
+    "correct": "responsible for",
+    "category": "Indonesian learner pattern",
+    "title": "Preposition after responsible",
+    "formula": "responsible for + noun",
+    "explanation": "The standard collocation is responsible for."
+  },
+  {
+    "id": "ID-007",
+    "wrong": "interested with",
+    "correct": "interested in",
+    "category": "Indonesian learner pattern",
+    "title": "Preposition after interested",
+    "formula": "interested in + noun",
+    "explanation": "The standard collocation is interested in."
+  },
+  {
+    "id": "ID-008",
+    "wrong": "depends of",
+    "correct": "depends on",
+    "category": "Indonesian learner pattern",
+    "title": "Preposition after depend",
+    "formula": "depend on + noun",
+    "explanation": "The standard collocation is depend on, including depends on in the third-person singular."
+  },
+  {
+    "id": "ID-009",
+    "wrong": "different with",
+    "correct": "different from",
+    "category": "Indonesian learner pattern",
+    "title": "Preposition after different",
+    "formula": "different from + noun",
+    "explanation": "Different is normally followed by from in standard English."
+  },
+  {
+    "id": "ID-010",
+    "wrong": "married with",
+    "correct": "married to",
+    "category": "Indonesian learner pattern",
+    "title": "Preposition after married",
+    "formula": "married to + person",
+    "explanation": "The standard expression for a spouse relationship is married to someone."
+  },
+  {
+    "id": "ID-011",
+    "wrong": "ask to me",
+    "correct": "ask me",
+    "category": "Indonesian learner pattern",
+    "title": "Verb pattern: ask + person",
+    "formula": "ask + object",
+    "explanation": "Ask normally takes the person as a direct object: ask me, ask her, ask the manager."
+  },
+  {
+    "id": "ID-012",
+    "wrong": "say me",
+    "correct": "tell me",
+    "category": "Indonesian learner pattern",
+    "title": "Say vs tell",
+    "formula": "tell + person",
+    "explanation": "Tell normally takes a person directly: tell me. Say is usually followed by the words said or by to + person."
+  },
+  {
+    "id": "ID-013",
+    "wrong": "listen music",
+    "correct": "listen to music",
+    "category": "Indonesian learner pattern",
+    "title": "Preposition after listen",
+    "formula": "listen to + noun",
+    "explanation": "Listen normally takes to before the thing being heard."
+  },
+  {
+    "id": "ID-014",
+    "wrong": "wait me",
+    "correct": "wait for me",
+    "category": "Indonesian learner pattern",
+    "title": "Preposition after wait",
+    "formula": "wait for + person/thing",
+    "explanation": "Wait normally takes for before the person or thing that is awaited."
+  },
+  {
+    "id": "ID-015",
+    "wrong": "did a mistake",
+    "correct": "made a mistake",
+    "category": "Indonesian learner pattern",
+    "title": "Collocation: make a mistake",
+    "formula": "make a mistake",
+    "explanation": "The standard collocation is make a mistake, not do a mistake."
+  },
+  {
+    "id": "ID-016",
+    "wrong": "explain me",
+    "correct": "explain to me",
+    "category": "Indonesian learner pattern",
+    "title": "Verb pattern: explain + to",
+    "formula": "explain + thing + to + person",
+    "explanation": "Explain normally uses to before the person: explain the process to me."
+  },
+  {
+    "id": "ID-017",
+    "wrong": "mentioned about",
+    "correct": "mentioned",
+    "category": "Indonesian learner pattern",
+    "title": "Mention takes an object directly",
+    "formula": "mention + noun",
+    "explanation": "Mention normally takes its object directly: mention the issue, not mention about the issue."
+  },
+  {
+    "id": "ID-018",
+    "wrong": "return back",
+    "correct": "return",
+    "category": "Indonesian learner pattern",
+    "title": "Avoid redundant back",
+    "formula": "return + place/time",
+    "explanation": "Return already includes the idea of going back, so back is usually unnecessary."
+  },
+  {
+    "id": "ID-019",
+    "wrong": "very beauty",
+    "correct": "very beautiful",
+    "category": "Indonesian learner pattern",
+    "title": "Noun vs adjective",
+    "formula": "be + very + adjective",
+    "explanation": "Beauty is a noun; beautiful is the adjective needed after very."
+  }
+]

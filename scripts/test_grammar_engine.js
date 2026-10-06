@@ -31,6 +31,8 @@ function loadKnowledge() {
     samples: readJson('data/samples.json'),
     externalRules: readJson('data/external/languagetool_runtime.json').rules || [],
     commonWords: [],
+    verbPatterns: readJson('data/verb_patterns.json'),
+    learnerErrors: readJson('data/learner_errors_id.json'),
     loaded: true
   };
 }

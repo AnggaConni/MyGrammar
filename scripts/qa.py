@@ -56,8 +56,40 @@ def main():
             fail(f"Duplicate contraction rule: {wrong}")
         seen.add(wrong)
 
-    for name in ("common_errors.json", "samples.json", "grammar_rules.json"):
+    for name in ("common_errors.json", "samples.json", "grammar_rules.json", "verb_patterns.json", "learner_errors_id.json"):
         load_json(DATA / name)
+
+    verb_patterns = load_json(DATA / "verb_patterns.json")
+    allowed_pattern_kinds = {"gerund_after", "infinitive_after", "fixed_gerund"}
+    pattern_ids = set()
+    for rule in verb_patterns:
+        for key in ("id", "kind", "title", "formula", "explanation"):
+            if not rule.get(key):
+                fail(f"Verb pattern missing {key}: {rule}")
+        if rule["kind"] not in allowed_pattern_kinds:
+            fail(f"Invalid verb pattern kind: {rule['kind']}")
+        if rule["id"] in pattern_ids:
+            fail(f"Duplicate verb pattern id: {rule['id']}")
+        pattern_ids.add(rule["id"])
+        if rule["kind"] != "fixed_gerund" and not rule.get("verbs"):
+            fail(f"Verb pattern has no verbs: {rule['id']}")
+        if rule["kind"] == "fixed_gerund" and not rule.get("phrase"):
+            fail(f"Fixed verb pattern has no phrase: {rule['id']}")
+
+    learner_errors = load_json(DATA / "learner_errors_id.json")
+    learner_ids = set()
+    learner_wrong = set()
+    for rule in learner_errors:
+        for key in ("id", "wrong", "correct", "category", "title", "explanation"):
+            if not rule.get(key):
+                fail(f"Learner error missing {key}: {rule}")
+        if rule["id"] in learner_ids:
+            fail(f"Duplicate learner error id: {rule['id']}")
+        learner_ids.add(rule["id"])
+        wrong = rule["wrong"].lower()
+        if wrong in learner_wrong:
+            fail(f"Duplicate learner error pattern: {wrong}")
+        learner_wrong.add(wrong)
 
     catalog_path = DATA / "external" / "languagetool_catalog.json"
     if catalog_path.exists():
@@ -77,7 +109,7 @@ def main():
             fail("Runtime rule count exceeds catalog count")
 
     print("QA PASS")
-    print(f"tenses={len(tenses)} verbs={len(verbs)} contractions={len(contractions)}")
+    print(f"tenses={len(tenses)} verbs={len(verbs)} contractions={len(contractions)} verb_patterns={len(verb_patterns)} learner_errors_id={len(learner_errors)}")
 
 
 if __name__ == "__main__":

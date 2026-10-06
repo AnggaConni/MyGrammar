@@ -525,6 +525,492 @@
       "type": "clean",
       "input": "Yesterday, she went home.",
       "expected": []
+    },
+    {
+      "id": "VERBPAT-001",
+      "type": "detect",
+      "input": "I suggested to go there.",
+      "expected": [
+        {
+          "wrong": "suggested to go",
+          "correct": "suggested going",
+          "category": "Verb pattern",
+          "title": "Verb pattern: suggest + gerund"
+        }
+      ]
+    },
+    {
+      "id": "VERBPAT-002",
+      "type": "detect",
+      "input": "She enjoys to read.",
+      "expected": [
+        {
+          "wrong": "enjoys to read",
+          "correct": "enjoys reading",
+          "category": "Verb pattern",
+          "title": "Verb pattern: enjoy + gerund"
+        }
+      ]
+    },
+    {
+      "id": "VERBPAT-003",
+      "type": "detect",
+      "input": "They avoid to work late.",
+      "expected": [
+        {
+          "wrong": "avoid to work",
+          "correct": "avoid working",
+          "category": "Verb pattern",
+          "title": "Verb pattern: avoid + gerund"
+        }
+      ]
+    },
+    {
+      "id": "VERBPAT-004",
+      "type": "detect",
+      "input": "We considered to change the plan.",
+      "expected": [
+        {
+          "wrong": "considered to change",
+          "correct": "considered changing",
+          "category": "Verb pattern",
+          "title": "Verb pattern: consider + gerund"
+        }
+      ]
+    },
+    {
+      "id": "VERBPAT-005",
+      "type": "detect",
+      "input": "He finished to write the report.",
+      "expected": [
+        {
+          "wrong": "finished to write",
+          "correct": "finished writing",
+          "category": "Verb pattern",
+          "title": "Verb pattern: finish + gerund"
+        }
+      ]
+    },
+    {
+      "id": "VERBPAT-006",
+      "type": "detect",
+      "input": "I decided going home.",
+      "expected": [
+        {
+          "wrong": "decided going",
+          "correct": "decided to go",
+          "category": "Verb pattern",
+          "title": "Verb pattern: decide + infinitive"
+        }
+      ]
+    },
+    {
+      "id": "VERBPAT-007",
+      "type": "detect",
+      "input": "She wants going there.",
+      "expected": [
+        {
+          "wrong": "wants going",
+          "correct": "wants to go",
+          "category": "Verb pattern",
+          "title": "Verb pattern: want + infinitive"
+        }
+      ]
+    },
+    {
+      "id": "VERBPAT-008",
+      "type": "detect",
+      "input": "They hope finding a solution.",
+      "expected": [
+        {
+          "wrong": "hope finding",
+          "correct": "hope to find",
+          "category": "Verb pattern",
+          "title": "Verb pattern: hope + infinitive"
+        }
+      ]
+    },
+    {
+      "id": "VERBPAT-009",
+      "type": "detect",
+      "input": "We plan traveling next month.",
+      "expected": [
+        {
+          "wrong": "plan traveling",
+          "correct": "plan to travel",
+          "category": "Verb pattern",
+          "title": "Verb pattern: plan + infinitive"
+        }
+      ]
+    },
+    {
+      "id": "VERBPAT-010",
+      "type": "detect",
+      "input": "I recommend to use this method.",
+      "expected": [
+        {
+          "wrong": "recommend to use",
+          "correct": "recommend using",
+          "category": "Verb pattern",
+          "title": "Verb pattern: recommend + gerund"
+        }
+      ]
+    },
+    {
+      "id": "VERBPAT-011",
+      "type": "detect",
+      "input": "I look forward to meet you.",
+      "expected": [
+        {
+          "wrong": "look forward to meet",
+          "correct": "look forward to meeting",
+          "category": "Verb pattern",
+          "title": "Verb pattern: look forward to + gerund"
+        }
+      ]
+    },
+    {
+      "id": "LEARNID-001",
+      "type": "detect",
+      "input": "This is more better.",
+      "expected": [
+        {
+          "wrong": "more better",
+          "correct": "better",
+          "category": "Indonesian learner pattern",
+          "title": "Avoid double comparative"
+        }
+      ]
+    },
+    {
+      "id": "LEARNID-002",
+      "type": "detect",
+      "input": "This is more easier.",
+      "expected": [
+        {
+          "wrong": "more easier",
+          "correct": "easier",
+          "category": "Indonesian learner pattern",
+          "title": "Avoid double comparative"
+        }
+      ]
+    },
+    {
+      "id": "LEARNID-003",
+      "type": "detect",
+      "input": "I very agree with you.",
+      "expected": [
+        {
+          "wrong": "very agree",
+          "correct": "strongly agree",
+          "category": "Indonesian learner pattern",
+          "title": "Natural adverb with agree"
+        }
+      ]
+    },
+    {
+      "id": "LEARNID-004",
+      "type": "detect",
+      "input": "I very like this book.",
+      "expected": [
+        {
+          "wrong": "very like",
+          "correct": "really like",
+          "category": "Indonesian learner pattern",
+          "title": "Natural adverb with like"
+        }
+      ]
+    },
+    {
+      "id": "LEARNID-005",
+      "type": "detect",
+      "input": "According with the report, we agreed.",
+      "expected": [
+        {
+          "wrong": "According with",
+          "correct": "According to",
+          "category": "Indonesian learner pattern",
+          "title": "Preposition after according"
+        }
+      ]
+    },
+    {
+      "id": "LEARNID-006",
+      "type": "detect",
+      "input": "She is responsible of the project.",
+      "expected": [
+        {
+          "wrong": "responsible of",
+          "correct": "responsible for",
+          "category": "Indonesian learner pattern",
+          "title": "Preposition after responsible"
+        }
+      ]
+    },
+    {
+      "id": "LEARNID-007",
+      "type": "detect",
+      "input": "I am interested with the position.",
+      "expected": [
+        {
+          "wrong": "interested with",
+          "correct": "interested in",
+          "category": "Indonesian learner pattern",
+          "title": "Preposition after interested"
+        }
+      ]
+    },
+    {
+      "id": "LEARNID-008",
+      "type": "detect",
+      "input": "It depends of the context.",
+      "expected": [
+        {
+          "wrong": "depends of",
+          "correct": "depends on",
+          "category": "Indonesian learner pattern",
+          "title": "Preposition after depend"
+        }
+      ]
+    },
+    {
+      "id": "LEARNID-009",
+      "type": "detect",
+      "input": "This is different with my version.",
+      "expected": [
+        {
+          "wrong": "different with",
+          "correct": "different from",
+          "category": "Indonesian learner pattern",
+          "title": "Preposition after different"
+        }
+      ]
+    },
+    {
+      "id": "LEARNID-010",
+      "type": "detect",
+      "input": "She is married with a doctor.",
+      "expected": [
+        {
+          "wrong": "married with",
+          "correct": "married to",
+          "category": "Indonesian learner pattern",
+          "title": "Preposition after married"
+        }
+      ]
+    },
+    {
+      "id": "LEARNID-011",
+      "type": "detect",
+      "input": "Please ask to me.",
+      "expected": [
+        {
+          "wrong": "ask to me",
+          "correct": "ask me",
+          "category": "Indonesian learner pattern",
+          "title": "Verb pattern: ask + person"
+        }
+      ]
+    },
+    {
+      "id": "LEARNID-012",
+      "type": "detect",
+      "input": "Please say me the answer.",
+      "expected": [
+        {
+          "wrong": "say me",
+          "correct": "tell me",
+          "category": "Indonesian learner pattern",
+          "title": "Say vs tell"
+        }
+      ]
+    },
+    {
+      "id": "LEARNID-013",
+      "type": "detect",
+      "input": "I listen music every day.",
+      "expected": [
+        {
+          "wrong": "listen music",
+          "correct": "listen to music",
+          "category": "Indonesian learner pattern",
+          "title": "Preposition after listen"
+        }
+      ]
+    },
+    {
+      "id": "LEARNID-014",
+      "type": "detect",
+      "input": "Please wait me here.",
+      "expected": [
+        {
+          "wrong": "wait me",
+          "correct": "wait for me",
+          "category": "Indonesian learner pattern",
+          "title": "Preposition after wait"
+        }
+      ]
+    },
+    {
+      "id": "LEARNID-015",
+      "type": "detect",
+      "input": "I did a mistake.",
+      "expected": [
+        {
+          "wrong": "did a mistake",
+          "correct": "made a mistake",
+          "category": "Indonesian learner pattern",
+          "title": "Collocation: make a mistake"
+        }
+      ]
+    },
+    {
+      "id": "LEARNID-016",
+      "type": "detect",
+      "input": "Please explain me the process.",
+      "expected": [
+        {
+          "wrong": "explain me",
+          "correct": "explain to me",
+          "category": "Indonesian learner pattern",
+          "title": "Verb pattern: explain + to"
+        }
+      ]
+    },
+    {
+      "id": "LEARNID-017",
+      "type": "detect",
+      "input": "He mentioned about the problem.",
+      "expected": [
+        {
+          "wrong": "mentioned about",
+          "correct": "mentioned",
+          "category": "Indonesian learner pattern",
+          "title": "Mention takes an object directly"
+        }
+      ]
+    },
+    {
+      "id": "LEARNID-018",
+      "type": "detect",
+      "input": "Please return back tomorrow.",
+      "expected": [
+        {
+          "wrong": "return back",
+          "correct": "return",
+          "category": "Indonesian learner pattern",
+          "title": "Avoid redundant back"
+        }
+      ]
+    },
+    {
+      "id": "LEARNID-019",
+      "type": "detect",
+      "input": "She is very beauty.",
+      "expected": [
+        {
+          "wrong": "very beauty",
+          "correct": "very beautiful",
+          "category": "Indonesian learner pattern",
+          "title": "Noun vs adjective"
+        }
+      ]
+    },
+    {
+      "id": "VERBPAT-CLEAN-001",
+      "type": "clean",
+      "input": "I suggested going there.",
+      "expected": []
+    },
+    {
+      "id": "VERBPAT-CLEAN-002",
+      "type": "clean",
+      "input": "She enjoys reading.",
+      "expected": []
+    },
+    {
+      "id": "VERBPAT-CLEAN-003",
+      "type": "clean",
+      "input": "I decided to go home.",
+      "expected": []
+    },
+    {
+      "id": "VERBPAT-CLEAN-004",
+      "type": "clean",
+      "input": "We plan to travel next month.",
+      "expected": []
+    },
+    {
+      "id": "VERBPAT-CLEAN-005",
+      "type": "clean",
+      "input": "I recommend using this method.",
+      "expected": []
+    },
+    {
+      "id": "VERBPAT-CLEAN-006",
+      "type": "clean",
+      "input": "I look forward to meeting you.",
+      "expected": []
+    },
+    {
+      "id": "LEARNID-CLEAN-001",
+      "type": "clean",
+      "input": "This is better.",
+      "expected": []
+    },
+    {
+      "id": "LEARNID-CLEAN-002",
+      "type": "clean",
+      "input": "According to the report, we agreed.",
+      "expected": []
+    },
+    {
+      "id": "LEARNID-CLEAN-003",
+      "type": "clean",
+      "input": "She is responsible for the project.",
+      "expected": []
+    },
+    {
+      "id": "LEARNID-CLEAN-004",
+      "type": "clean",
+      "input": "I am interested in the position.",
+      "expected": []
+    },
+    {
+      "id": "LEARNID-CLEAN-005",
+      "type": "clean",
+      "input": "It depends on the context.",
+      "expected": []
+    },
+    {
+      "id": "LEARNID-CLEAN-006",
+      "type": "clean",
+      "input": "Please ask me.",
+      "expected": []
+    },
+    {
+      "id": "LEARNID-CLEAN-007",
+      "type": "clean",
+      "input": "I listen to music every day.",
+      "expected": []
+    },
+    {
+      "id": "LEARNID-CLEAN-008",
+      "type": "clean",
+      "input": "I made a mistake.",
+      "expected": []
+    },
+    {
+      "id": "LEARNID-CLEAN-009",
+      "type": "clean",
+      "input": "Please explain to me the process.",
+      "expected": []
+    },
+    {
+      "id": "LEARNID-CLEAN-010",
+      "type": "clean",
+      "input": "Please return tomorrow.",
+      "expected": []
     }
   ]
 }
