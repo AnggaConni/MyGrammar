@@ -1,23 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#111827"><title>MyGrammar — Offline English Grammar Assistant</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#0f172a">
+<meta name="description" content="Offline English grammar corrector, grammar encyclopedia and verb explorer.">
+<link rel="manifest" href="manifest.json">
+<title>MyGrammar — Offline English Grammar Toolkit</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main class="app">
-<header class="hero"><span class="badge">100% OFFLINE</span><h1>MyGrammar</h1><p>Write English with confidence — grammar rules, explanations and corrections without AI.</p></header>
-<section class="workspace">
-<div class="card editor-card">
-<div class="section-head"><div><h2>Your sentence</h2><p class="hint">Suggestions appear automatically while you type.</p></div><span id="status" class="status">Ready</span></div>
-<div class="editor-wrap"><pre id="highlightLayer" class="highlight-layer" aria-hidden="true"></pre><textarea id="inputText" aria-label="English text editor" spellcheck="true" placeholder="Try: She go to the office every day."></textarea></div>
-<div class="toolbar"><button id="exampleBtn">Try Example</button><button id="clearBtn">Clear</button><span id="score" class="score">—</span></div>
+<div class="shell">
+  <header class="topbar">
+    <div>
+      <div class="brand-row"><span class="offline-dot"></span><span>100% OFFLINE</span></div>
+      <h1>MyGrammar</h1>
+      <p>English grammar corrector, verb dictionary and learning guide — without AI.</p>
+    </div>
+    <div id="kbStatus" class="kb-status">Loading local knowledge…</div>
+  </header>
+
+  <nav class="tabs" aria-label="Main">
+    <button class="tab active" data-tab="corrector">✍️ Corrector</button>
+    <button class="tab" data-tab="samples">🧪 Check Samples</button>
+    <button class="tab" data-tab="verbs">🔤 Verb Explorer</button>
+    <button class="tab" data-tab="guide">📚 Grammar Guide</button>
+  </nav>
+
+  <section id="tab-corrector" class="tab-panel active">
+    <div class="grid-main">
+      <section class="card editor-card">
+        <div class="panel-title">
+          <div><h2>Write your English</h2><p>Suggestions appear automatically as you type.</p></div>
+          <span id="liveStatus" class="mini-status">Ready</span>
+        </div>
+        <textarea id="inputText" spellcheck="true" placeholder="Try: I wouldnt mind marrying you."></textarea>
+        <div class="editor-footer">
+          <div class="button-row">
+            <button id="exampleBtn" class="btn">Try Example</button>
+            <button id="clearBtn" class="btn ghost">Clear</button>
+          </div>
+          <div id="issueSummary" class="issue-summary">No suggestions</div>
+        </div>
+      </section>
+
+      <aside class="card suggestion-card">
+        <div class="panel-title compact">
+          <div><h2>Suggestions</h2><p>Corrections + formulas + guidance</p></div>
+          <span id="issueCount" class="count-badge">0</span>
+        </div>
+        <div id="results" class="suggestions">
+          <div class="empty-state">Start typing. MyGrammar will explain what can be improved.</div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="card quick-guide">
+      <div><span class="eyebrow">LIVE GUIDANCE</span><h3>What MyGrammar can explain</h3></div>
+      <div class="guide-chips">
+        <span>Subject–Verb Agreement</span><span>Contractions</span><span>12 Tenses</span><span>Regular & Irregular Verbs</span><span>Articles</span><span>Prepositions</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="tab-samples" class="tab-panel">
+    <div class="section-heading"><div><span class="eyebrow">PRACTICE</span><h2>Check Sample Sentences</h2><p>Use the built-in examples to test the offline engine.</p></div></div>
+    <div id="sampleList" class="sample-list"></div>
+  </section>
+
+  <section id="tab-verbs" class="tab-panel">
+    <div class="section-heading"><div><span class="eyebrow">DICTIONARY</span><h2>Verb Explorer</h2><p>Search V1, V2 and V3 forms, and learn whether a verb is regular or irregular.</p></div></div>
+    <div class="card dictionary-toolbar">
+      <input id="verbSearch" class="search" type="search" placeholder="Search verb: go, worked, written…">
+      <div class="segmented">
+        <button class="verb-filter active" data-filter="all">All</button>
+        <button class="verb-filter" data-filter="regular">Regular</button>
+        <button class="verb-filter" data-filter="irregular">Irregular</button>
+      </div>
+    </div>
+    <div class="card table-card">
+      <div class="table-scroll"><table><thead><tr><th>V1</th><th>V2</th><th>V3</th><th>Type</th><th>Example</th></tr></thead><tbody id="verbTable"></tbody></table></div>
+    </div>
+  </section>
+
+  <section id="tab-guide" class="tab-panel">
+    <div class="section-heading"><div><span class="eyebrow">ENCYCLOPEDIA</span><h2>Grammar Guide</h2><p>Formula, use, signal words and examples — stored locally in JSON.</p></div></div>
+    <div id="grammarGrid" class="grammar-grid"></div>
+  </section>
+
+  <footer><span>MyGrammar</span><span>Local JSON Knowledge Base • No AI required</span></footer>
 </div>
-<aside class="card side-card"><div class="side-head"><h2>Suggestions</h2><span id="issueCount">0</span></div><div id="results" class="suggestions"><div class="empty">Start typing and MyGrammar will check your sentence automatically.</div></div></aside>
-</section>
-<footer><span>MyGrammar</span><span>Local rules + JSON Knowledge Base</span></footer>
-</main>
 <script src="app.js"></script>
 </body>
 </html>
