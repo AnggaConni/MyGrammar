@@ -1,6 +1,6 @@
 # MyGrammar
 
-An offline-first English grammar assistant built with vanilla HTML, CSS and JavaScript.
+An online-first English grammar assistant built with vanilla HTML, CSS and JavaScript, with automatic offline fallback.
 
 ## Goal
 MyGrammar is a personal backup for English writing when cloud AI services are unavailable.
@@ -31,10 +31,12 @@ The knowledge base is separated from JavaScript so rules can grow without rewrit
 - Question formation
 - More Indonesian-English common errors
 - LocalStorage personal dictionary
-- PWA offline installation
+- PWA installation with online-first updates and offline fallback
 
-## Offline
-No AI or external grammar API is used. JSON knowledge files live in the repository.
+## Online-first, offline-second
+MyGrammar uses the network when available so updated application files and knowledge-base assets can be received without manually changing a cache version. The service worker uses a network-first strategy and falls back to the locally cached application when the network is unavailable. Documents remain in the browser.
+
+No AI or external grammar API is required for the local grammar engine. JSON knowledge files live in the repository.
 
 
 ## Knowledge Base Pipeline
@@ -73,7 +75,7 @@ LanguageTool rules remain separately identified as LGPL-2.1-or-later data, and w
 
 ## Document Checker
 
-`Document.html` provides long-document offline grammar checking using Harper.js plus the local MyGrammar engine. It supports pasted text, TXT/Markdown import, and local DOCX text extraction using a vendored Mammoth browser bundle.
+`Document.html` provides long-document grammar checking using Harper.js plus the local MyGrammar engine. The app is online-first for updates and automatically falls back to its local engines and cached data when offline. It supports pasted text, TXT/Markdown import, and local DOCX text extraction using a vendored Mammoth browser bundle.
 
 Current Document Checker features include:
 - Hybrid Harper + MyGrammar findings
