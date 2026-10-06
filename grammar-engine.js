@@ -126,6 +126,236 @@
     return out;
   }
 
+function escapeRegex(value){
+    return String(value||'').replace(/[|\\{}()[\]^$+*?.-]/g,'\\  function buildReasoning(issue){');
+  }
+
+function splitForms(value){
+    return String(value||'').split('/').map(function(v){return v.trim().toLowerCase();}).filter(Boolean);
+  }
+
+  function thirdPersonForm(base){
+    base=String(base||'').toLowerCase();
+    if(base==='be')return 'is';
+    if(base==='have')return 'has';
+    if(base==='do'||base==='go')return base+'es';
+    if(/(s|sh|ch|x|z|o)$/.test(base))return base+'es';
+    if(/[^aeiou]y$/.test(base))return base.slice(0,-1)+'ies';
+    return base+'s';
+  }
+
+  function ingForm(base){
+    base=String(base||'').toLowerCase();
+    const overrides={be:'being',have:'having',do:'doing',go:'going',see:'seeing'};
+    if(overrides[base])return overrides[base];
+    if(/ie$/.test(base))return base.slice(0,-2)+'ying';
+    if(/e$/.test(base)&&!/ee$|ye$/.test(base))return base.slice(0,-1)+'ing';
+    if(/[^aeiou][aeiou][^aeiouyw]$/.test(base)&&base.length<=5)return base+base.slice(-1)+'ing';
+    return base+'ing';
+  }
+
+  function buildVerbLexicon(kb){
+    const byForm={};
+    function add(form,row,kind){
+      const key=String(form||'').toLowerCase();
+      if(!key)return;
+      if(!byForm[key])byForm[key]=[];
+      if(!byForm[key].some(function(item){return item.row===row&&item.kind===kind;})){
+        byForm[key].push({row:row,kind:kind});
+      }
+    }
+    (kb.verbs||[]).forEach(function(row){
+      const base=String(row.v1||'').toLowerCase();
+      if(!base)return;
+      add(base,row,'base');
+      splitForms(row.v2).forEach(function(form){add(form,row,'past');});
+      splitForms(row.v3).forEach(function(form){add(form,row,'participle');});
+      if(base!=='be')add(thirdPersonForm(base),row,'third');
+      add(ingForm(base),row,'ing');
+    });
+    return byForm;
+  }
+
+  function findVerbMatch(lexicon,token){
+    const matches=lexicon[String(token||'').toLowerCase()]||[];
+    return matches.length?matches[0]:null;
+  }
+
+  function correctPastForm(row,subject){
+    const base=String(row.v1||'').toLowerCase();
+    if(base==='be'){
+      const s=String(subject||'').toLowerCase();
+      return (s==='i'||s==='he'||s==='she'||s==='it')?'was':'were';
+    }
+    return splitForms(row.v2)[0]||base;
+  }
+
+  function sentenceAround(text,index,end){
+    const left=text.lastIndexOf('.',index);
+    const q=text.lastIndexOf('?',index);
+    const ex=text.lastIndexOf('!',index);
+    const start=Math.max(left,q,ex)+1;
+    const rDot=text.indexOf('.',end);
+    const rQ=text.indexOf('?',end);
+    const rEx=text.indexOf('!',end);
+    const candidates=[rDot,rQ,rEx].filter(function(v){return v>=0;});
+    const finish=candidates.length?Math.min.apply(null,candidates):text.length;
+    return text.slice(start,finish);
+  }
+
+  function dynamicSubjectVerbIssues(text,kb){
+    const out=[];
+    const lexicon=buildVerbLexicon(kb);
+    const bases=(kb.verbs||[]).map(function(v){return String(v.v1||'').toLowerCase();})
+      .filter(function(v){return v&&v!=='be';})
+      .sort(function(a,b){return b.length-a.length;})
+      .map(escapeRegex);
+    if(bases.length){
+      const re=new RegExp('\\b(he|she|it)\\s+('+bases.join('|')+')\\b','gi');
+      let m;
+      while((m=re.exec(text))){
+        const sentence=sentenceAround(text,m.index,m.index+m[0].length);
+        if(/\b(yesterday|last\s+\w+|\d+\s+days?\s+ago)\b/i.test(sentence))continue;
+        const row=findVerbMatch(lexicon,m[2]);
+        if(!row)continue;
+        const form=thirdPersonForm(m[2]);
+        if(form.toLowerCase()===m[2].toLowerCase())continue;
+        out.push({
+          start:m.index,end:m.index+m[0].length,
+          wrong:m[0],correct:m[1]+' '+form,
+          title:'Subject–verb agreement',
+          category:'Grammar',severity:'error',priority:120,
+          explanation:'He/She/It normally takes the third-person singular form in the Present Simple.',
+          formula:'He / She / It + V1 + s/es',
+          reasoning:[
+            'Subject: '+m[1]+' = third-person singular',
+            'Tense: Present Simple',
+            'Verb: '+m[2]+' → '+form
+          ]
+        });
+      }
+    }
+
+    const beRules=[
+      {re:/\b(he|she|it)\s+(am|are)\b/gi,form:'is'},
+      {re:/\b(i)\s+(is|are)\b/gi,form:'am'},
+      {re:/\b(you|we|they)\s+(is|am)\b/gi,form:'are'}
+    ];
+    beRules.forEach(function(rule){
+      let m;
+      while((m=rule.re.exec(text))){
+        out.push({
+          start:m.index,end:m.index+m[0].length,
+          wrong:m[0],correct:m[1]+' '+rule.form,
+          title:'Subject–be agreement',
+          category:'Grammar',severity:'error',priority:125,
+          explanation:'The verb be must agree with the subject.',
+          formula:'I + am | He/She/It + is | You/We/They + are',
+          reasoning:[
+            'Subject: '+m[1],
+            'Verb: '+m[2]+' is the wrong form of be for this subject',
+            'Correct form: '+m[1]+' '+rule.form
+          ]
+        });
+      }
+    });
+    return out;
+  }
+
+  function verbFormIssues(text,kb){
+    const out=[];
+    const lexicon=buildVerbLexicon(kb);
+    const entries=Object.keys(lexicon);
+
+    function add(issue){
+      issue.reasoning=issue.reasoning||[];
+      out.push(issue);
+    }
+
+    if(entries.length){
+      const tokenPattern=entries.sort(function(a,b){return b.length-a.length;})
+        .map(escapeRegex).join('|');
+
+      const modalRe=new RegExp('\\b(can|could|may|might|must|shall|should|will|would)\\s+('+tokenPattern+')\\b','gi');
+      let m;
+      while((m=modalRe.exec(text))){
+        const match=findVerbMatch(lexicon,m[2]);
+        if(!match||match.kind==='base')continue;
+        add({
+          start:m.index,end:m.index+m[0].length,
+          wrong:m[0],correct:m[1]+' '+match.row.v1,
+          title:'Modal + base form',category:'Verb form',severity:'error',priority:119,
+          explanation:'Modal verbs such as can, should and would are followed by the base form (V1).',
+          formula:'Modal + V1',
+          reasoning:[
+            'Modal: '+m[1],
+            'Rule: modal + V1',
+            'Verb form: '+m[2]+' → '+match.row.v1
+          ]
+        });
+      }
+
+      const perfectRe=new RegExp('\\b(have|has|had)\\s+('+tokenPattern+')\\b','gi');
+      while((m=perfectRe.exec(text))){
+        const match=findVerbMatch(lexicon,m[2]);
+        if(!match)continue;
+        const validParticiple=splitForms(match.row.v3).includes(String(m[2]).toLowerCase());
+        if(validParticiple)continue;
+        if(match.kind!=='base'&&match.kind!=='past'&&match.kind!=='third')continue;
+        add({
+          start:m.index,end:m.index+m[0].length,
+          wrong:m[0],correct:m[1]+' '+match.row.v3.split('/')[0],
+          title:'Perfect + past participle',category:'Verb form',severity:'error',priority:118,
+          explanation:'Have/has/had is followed by the past participle (V3) in perfect constructions.',
+          formula:'Have / Has / Had + V3',
+          reasoning:[
+            'Auxiliary: '+m[1],
+            'Rule: have/has/had + V3',
+            'Verb form: '+m[2]+' → '+match.row.v3.split('/')[0]
+          ]
+        });
+      }
+
+      const continuousRe=new RegExp('\\b(am|is|are|was|were)\\s+('+tokenPattern+')\\b','gi');
+      while((m=continuousRe.exec(text))){
+        const match=findVerbMatch(lexicon,m[2]);
+        if(!match||match.kind!=='base')continue;
+        add({
+          start:m.index,end:m.index+m[0].length,
+          wrong:m[0],correct:m[1]+' '+ingForm(match.row.v1),
+          title:'Continuous + V-ing',category:'Verb form',severity:'error',priority:117,
+          explanation:'A continuous construction uses a form of be followed by the -ing form.',
+          formula:'Be + V-ing',
+          reasoning:[
+            'Auxiliary: '+m[1],
+            'Rule: be + V-ing',
+            'Verb form: '+m[2]+' → '+ingForm(match.row.v1)
+          ]
+        });
+      }
+
+      const infinitiveRe=new RegExp('\\bto\\s+('+tokenPattern+')\\b','gi');
+      while((m=infinitiveRe.exec(text))){
+        const match=findVerbMatch(lexicon,m[1]);
+        if(!match||match.kind==='base')continue;
+        add({
+          start:m.index,end:m.index+m[0].length,
+          wrong:m[0],correct:'to '+match.row.v1,
+          title:'Infinitive + base form',category:'Verb form',severity:'error',priority:116,
+          explanation:'The infinitive marker to is followed by the base form (V1).',
+          formula:'to + V1',
+          reasoning:[
+            'Marker: to',
+            'Rule: to + V1',
+            'Verb form: '+m[1]+' → '+match.row.v1
+          ]
+        });
+      }
+    }
+
+    return out;
+  }
+
   function buildReasoning(issue){
     if(issue.reasoning&&issue.reasoning.length)return issue.reasoning;
     const steps=[];
@@ -217,31 +447,8 @@
     return out;
   }
 
-  function thirdPersonIssues(text){
-    const out=[];
-    const re=/\b(he|she|it)\s+(go|do|have|watch|wash|fix|study|try|play|work|live|like|want|need|use|make|take|read|write)\b/gi;
-    let m;
-    while((m=re.exec(text))){
-      const base=m[2].toLowerCase();
-      let form=base+'s';
-      if(base==='go'||base==='do'||/(watch|wash|fix)$/.test(base))form=base+'es';
-      else if(/[^aeiou]y$/.test(base))form=base.slice(0,-1)+'ies';
-      out.push({
-        start:m.index,end:m.index+m[0].length,
-        wrong:m[0],correct:m[1]+' '+form,
-        title:'Subject–verb agreement',
-        category:'Grammar',severity:'error',priority:110,
-        explanation:'He/She/It normally takes the third-person singular form in the Present Simple.',
-        formula:'He / She / It + V1 + s/es',
-        reasoning:[
-          'Subject: '+m[1]+' = third-person singular',
-          'Tense: Present Simple',
-          'Rule: He / She / It + V1 + s/es',
-          'Verb: '+base+' → '+form
-        ]
-      });
-    }
-    return out;
+  function thirdPersonIssues(text,kb){
+    return dynamicSubjectVerbIssues(text,kb);
   }
 
   function auxiliaryIssues(text){
@@ -271,38 +478,55 @@
     return out;
   }
 
-  function tenseIssues(text){
+function escapeRegex(value){
+    return String(value||'').replace(/[|\\{}()[\]^$+*?.-]/g,'\\$&');
+  }
+
+function tenseIssues(text,kb){
     const out=[];
     const lower=text.toLowerCase();
     if(/\b(yesterday|last\s+\w+|\d+\s+days?\s+ago)\b/.test(lower)){
-      const bad=text.match(/\b(he|she|it|i|we|they|you)\s+(go|come|see|eat|write|take|work|play|walk)\b/i);
-      if(bad){
-        const map={go:'went',come:'came',see:'saw',eat:'ate',write:'wrote',take:'took',work:'worked',play:'played',walk:'walked'};
-        out.push({
-          start:bad.index,end:bad.index+bad[0].length,
-          wrong:bad[0],correct:bad[1]+' '+map[bad[2].toLowerCase()],
-          title:'Past Simple',category:'Tense',severity:'error',priority:90,
-          explanation:'A completed past-time marker such as “yesterday” normally calls for the Past Simple.',
-          formula:'Subject + V2',
-          reasoning:[
-            'Signal word: a completed past-time marker was detected',
-            'Tense: Past Simple',
-            'Formula: Subject + V2',
-            'Verb: '+bad[2]+' → '+map[bad[2].toLowerCase()]
-          ]
-        });
+      const lexicon=buildVerbLexicon(kb);
+      const bases=(kb.verbs||[]).map(function(v){return String(v.v1||'').toLowerCase();})
+        .filter(Boolean)
+        .sort(function(a,b){return b.length-a.length;})
+        .map(escapeRegex);
+      if(bases.length){
+        const re=new RegExp('\\b(he|she|it|i|we|they|you)\\s+('+bases.join('|')+')\\b','gi');
+        let m;
+        while((m=re.exec(text))){
+          const match=findVerbMatch(lexicon,m[2]);
+          if(!match||match.kind!=='base')continue;
+          const past=correctPastForm(match.row,m[1]);
+          if(String(past).toLowerCase()===String(m[2]).toLowerCase())continue;
+          out.push({
+            start:m.index,end:m.index+m[0].length,
+            wrong:m[0],correct:m[1]+' '+past,
+            title:'Past Simple',category:'Tense',severity:'error',priority:90,
+            explanation:'A completed past-time marker such as “yesterday” normally calls for the Past Simple.',
+            formula:'Subject + V2',
+            reasoning:[
+              'Signal word: a completed past-time marker was detected',
+              'Tense: Past Simple',
+              'Formula: Subject + V2',
+              'Verb: '+m[2]+' → '+past
+            ]
+          });
+        }
       }
     }
     return out;
   }
 
+
   function analyze(text,kb){
     const source=kb||defaultKnowledge();
     let list=commonErrorIssues(text,source)
       .concat(contractionIssues(text,source))
-      .concat(thirdPersonIssues(text))
+      .concat(thirdPersonIssues(text,source))
       .concat(auxiliaryIssues(text))
-      .concat(tenseIssues(text))
+      .concat(verbFormIssues(text,source))
+      .concat(tenseIssues(text,source))
       .concat(externalLanguageToolIssues(text,source));
 
     const seen={};

@@ -282,6 +282,249 @@
           "title": "Spelling"
         }
       ]
+    },
+    {
+      "id": "VERB-001",
+      "type": "detect",
+      "input": "He do his work every day.",
+      "expected": [
+        {
+          "wrong": "He do",
+          "correct": "He does",
+          "category": "Grammar",
+          "title": "Subject–verb agreement"
+        }
+      ]
+    },
+    {
+      "id": "VERB-002",
+      "type": "detect",
+      "input": "She have a car.",
+      "expected": [
+        {
+          "wrong": "She have",
+          "correct": "She has",
+          "category": "Grammar",
+          "title": "Subject–verb agreement"
+        }
+      ]
+    },
+    {
+      "id": "VERB-003",
+      "type": "detect",
+      "input": "They can goes there.",
+      "expected": [
+        {
+          "wrong": "can goes",
+          "correct": "can go",
+          "category": "Verb form",
+          "title": "Modal + base form"
+        }
+      ]
+    },
+    {
+      "id": "VERB-004",
+      "type": "detect",
+      "input": "I have went there.",
+      "expected": [
+        {
+          "wrong": "have went",
+          "correct": "have gone",
+          "category": "Verb form",
+          "title": "Perfect + past participle"
+        }
+      ]
+    },
+    {
+      "id": "VERB-005",
+      "type": "detect",
+      "input": "She has wrote a report.",
+      "expected": [
+        {
+          "wrong": "has wrote",
+          "correct": "has written",
+          "category": "Verb form",
+          "title": "Perfect + past participle"
+        }
+      ]
+    },
+    {
+      "id": "VERB-006",
+      "type": "detect",
+      "input": "I had ate before.",
+      "expected": [
+        {
+          "wrong": "had ate",
+          "correct": "had eaten",
+          "category": "Verb form",
+          "title": "Perfect + past participle"
+        }
+      ]
+    },
+    {
+      "id": "VERB-007",
+      "type": "detect",
+      "input": "She is work now.",
+      "expected": [
+        {
+          "wrong": "is work",
+          "correct": "is working",
+          "category": "Verb form",
+          "title": "Continuous + V-ing"
+        }
+      ]
+    },
+    {
+      "id": "VERB-008",
+      "type": "detect",
+      "input": "They are go home now.",
+      "expected": [
+        {
+          "wrong": "are go",
+          "correct": "are going",
+          "category": "Verb form",
+          "title": "Continuous + V-ing"
+        }
+      ]
+    },
+    {
+      "id": "VERB-009",
+      "type": "detect",
+      "input": "He wants to goes there.",
+      "expected": [
+        {
+          "wrong": "to goes",
+          "correct": "to go",
+          "category": "Verb form",
+          "title": "Infinitive + base form"
+        }
+      ]
+    },
+    {
+      "id": "VERB-010",
+      "type": "detect",
+      "input": "They should went yesterday.",
+      "expected": [
+        {
+          "wrong": "should went",
+          "correct": "should go",
+          "category": "Verb form",
+          "title": "Modal + base form"
+        }
+      ]
+    },
+    {
+      "id": "VERB-011",
+      "type": "detect",
+      "input": "Yesterday, we go to Jakarta.",
+      "expected": [
+        {
+          "wrong": "we go",
+          "correct": "we went",
+          "category": "Tense",
+          "title": "Past Simple"
+        }
+      ]
+    },
+    {
+      "id": "VERB-012",
+      "type": "detect",
+      "input": "Yesterday, she see him.",
+      "expected": [
+        {
+          "wrong": "she see",
+          "correct": "she saw",
+          "category": "Tense",
+          "title": "Past Simple"
+        }
+      ]
+    },
+    {
+      "id": "VERB-013",
+      "type": "detect",
+      "input": "She are happy.",
+      "expected": [
+        {
+          "wrong": "She are",
+          "correct": "She is",
+          "category": "Grammar",
+          "title": "Subject–be agreement"
+        }
+      ]
+    },
+    {
+      "id": "VERB-014",
+      "type": "detect",
+      "input": "They is ready.",
+      "expected": [
+        {
+          "wrong": "They is",
+          "correct": "They are",
+          "category": "Grammar",
+          "title": "Subject–be agreement"
+        }
+      ]
+    },
+    {
+      "id": "VERB-015",
+      "type": "detect",
+      "input": "I is ready.",
+      "expected": [
+        {
+          "wrong": "I is",
+          "correct": "I am",
+          "category": "Grammar",
+          "title": "Subject–be agreement"
+        }
+      ]
+    },
+    {
+      "id": "VERB-CLEAN-001",
+      "type": "clean",
+      "input": "He does his work every day.",
+      "expected": []
+    },
+    {
+      "id": "VERB-CLEAN-002",
+      "type": "clean",
+      "input": "She has a car.",
+      "expected": []
+    },
+    {
+      "id": "VERB-CLEAN-003",
+      "type": "clean",
+      "input": "They can go there.",
+      "expected": []
+    },
+    {
+      "id": "VERB-CLEAN-004",
+      "type": "clean",
+      "input": "I have gone there.",
+      "expected": []
+    },
+    {
+      "id": "VERB-CLEAN-005",
+      "type": "clean",
+      "input": "She is working now.",
+      "expected": []
+    },
+    {
+      "id": "VERB-CLEAN-006",
+      "type": "clean",
+      "input": "They should go tomorrow.",
+      "expected": []
+    },
+    {
+      "id": "VERB-CLEAN-007",
+      "type": "clean",
+      "input": "He wants to go there.",
+      "expected": []
+    },
+    {
+      "id": "VERB-CLEAN-008",
+      "type": "clean",
+      "input": "Yesterday, she went home.",
+      "expected": []
     }
   ]
 }
