@@ -13,6 +13,21 @@
       "repository": "https://github.com/aparrish/wordfreq-en-25000",
       "license": "CC-BY-SA-4.0",
       "runtimeOutput": "data/external/common_words.json"
+    },
+    {
+      "id": "harper-js",
+      "name": "Harper.js",
+      "repository": "https://github.com/Automattic/harper",
+      "license": "Apache-2.0",
+      "runtimeOutput": "vendor/harper.bundle.js",
+      "version": "2.12.0"
+    },
+    {
+      "id": "languagetool-catalog",
+      "name": "LanguageTool English catalog",
+      "repository": "https://github.com/languagetool-org/languagetool",
+      "license": "LGPL-2.1-or-later",
+      "runtimeOutput": "data/external/languagetool_catalog.json"
     }
   ]
 }
