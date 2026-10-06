@@ -44,7 +44,7 @@ async function checkDocument(){
     findings=lints.map(function(lint,index){
       const span=lint.span();
       const suggestions=lint.suggestion_count()>0?lint.suggestions():[];
-      return {index,start:span.start,end:span.end,message:lint.message(),suggestions,display:span};
+      return {index,start:span.start,end:span.end,message:lint.message(),suggestions,display:span,lint};
     });
     issueStat.textContent=findings.length+' issues';
     progressBar.style.width='100%';
@@ -77,7 +77,7 @@ results.addEventListener('click',async function(e){
   const f=findings[Number(button.dataset.apply)];
   if(!f||!f.suggestions.length)return;
   try{
-    currentText=await linter.applySuggestion(currentText,findings[Number(button.dataset.apply)]._lint||{},f.suggestions[0]);
+    currentText=await linter.applySuggestion(currentText,f.lint,f.suggestions[0]);
   }catch(error){
     const suggestion=f.suggestions[0];
     if(suggestion&&suggestion.text){
