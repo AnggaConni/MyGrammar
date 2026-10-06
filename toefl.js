@@ -142,7 +142,7 @@ function renderFeedback(targetId,text,min,expectedCount,answers){
   const missing=Math.max(0,(expectedCount||0)-completed);
   document.getElementById(targetId).innerHTML=
     '<div class="feedback"><div class="score-strip">'+
-    '<div class="metric"><b>'+s.overall+'</b><span>Writing readiness</span></div>'+
+    '<div class="metric"><b>'+s.overall+'</b><span>Practice readiness</span></div>'+
     '<div class="metric"><b>'+s.grammar+'</b><span>Grammar</span></div>'+
     '<div class="metric"><b>'+s.development+'</b><span>Development</span></div>'+
     '</div>'+
