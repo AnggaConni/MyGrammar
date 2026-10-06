@@ -40,7 +40,7 @@ The generated external data keeps source and license metadata. Do not remove the
 
 Repository: https://github.com/Automattic/harper
 
-Version pinned for the offline browser bundle: `2.12.0`.
+Version pinned for the offline browser bundle: `2.10.0` (the published npm package used by the build workflow).
 
 License: Apache-2.0.
 
