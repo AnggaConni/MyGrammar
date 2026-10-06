@@ -81,6 +81,12 @@ def token_regex(token: Any) -> str | None:
 
 def build_runtime_pattern(pattern: Any) -> str | None:
     tokens = list(pattern.findall("token"))
+    # Only export single-token rules to the browser runtime. Multi-token
+    # LanguageTool rules often use markers/unification/POS context, and a
+    # naive regex conversion can produce false positives or replace the
+    # wrong span. Those remain upstream-only reference rules.
+    if len(tokens) != 1:
+        return None
     if not tokens:
         return None
 
@@ -161,10 +167,12 @@ def collect_rules(xml_bytes: bytes) -> tuple[list[dict[str, Any]], dict[str, int
             # concrete replacement. Match references like \1 or POS-dependent
             # suggestions are deliberately excluded.
             safe_suggestion = (
-                suggestions[0]
-                if suggestions and not re.search(r"\\[0-9]|<match", suggestions[0])
+                suggestions[0].strip()
+                if suggestions and not re.search(r"\\[0-9]|<match|<suggestion", suggestions[0])
                 else ""
             )
+            if safe_suggestion and len(safe_suggestion) > 80:
+                safe_suggestion = ""
             if runtime and safe_suggestion and len(runtime_rules) < MAX_RUNTIME_RULES:
                 runtime_rules.append(
                     {
@@ -197,13 +205,7 @@ def load_wordfreq(raw: bytes) -> list[dict[str, Any]]:
     for row in data:
         if isinstance(row, list) and len(row) == 2:
             word, score = row
-            rows.append({
-                "word": word,
-                "log_frequency": score,
-                "source": "wordfreq-en-25000",
-                "source_url": WORDFREQ_URL,
-                "license": "CC-BY-SA-4.0",
-            })
+            rows.append([word, score])
     return rows
 
 
@@ -263,6 +265,7 @@ def main() -> int:
                     "license": "CC-BY-SA-4.0",
                 },
                 "count": len(words),
+                "format": "[word, log_frequency]",
                 "words": words,
             },
         )
