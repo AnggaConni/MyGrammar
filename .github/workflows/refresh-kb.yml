@@ -12,6 +12,7 @@ on:
       - 'app.js'
       - 'toefl.js'
       - 'index.html'
+      - 'Document.html'
       - 'sw.js'
       - 'data/verbs.json'
       - 'data/learner_errors_id.json'
