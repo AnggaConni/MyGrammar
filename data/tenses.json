@@ -12,10 +12,11 @@
       "never"
     ],
     "description": "Habits, routines, facts and repeated actions.",
-    "examples": [
-      "I love you.",
-      "He loves it."
-    ]
+    "examples": {
+      "positive": "I love you.",
+      "negative": "I do not love you.",
+      "question": "Do you love me?"
+    }
   },
   {
     "id": "present_continuous",
@@ -28,10 +29,11 @@
       "today"
     ],
     "description": "Actions happening now or around the current period.",
-    "examples": [
-      "I am loving this moment.",
-      "She is reading a book."
-    ]
+    "examples": {
+      "positive": "I am reading a book.",
+      "negative": "I am not reading a book.",
+      "question": "Are you reading a book?"
+    }
   },
   {
     "id": "present_perfect",
@@ -47,10 +49,11 @@
       "for"
     ],
     "description": "Past actions connected with the present or unfinished time periods.",
-    "examples": [
-      "I have loved this place for years.",
-      "He has finished his work."
-    ]
+    "examples": {
+      "positive": "I have finished my work.",
+      "negative": "I have not finished my work.",
+      "question": "Have you finished your work?"
+    }
   },
   {
     "id": "present_perfect_continuous",
@@ -62,10 +65,11 @@
       "all day"
     ],
     "description": "An activity that started in the past and continues or has a visible recent result.",
-    "examples": [
-      "I have been waiting for you.",
-      "She has been studying all day."
-    ]
+    "examples": {
+      "positive": "I have been waiting for you.",
+      "negative": "I have not been waiting for long.",
+      "question": "Have you been waiting for me?"
+    }
   },
   {
     "id": "past_simple",
@@ -77,10 +81,11 @@
       "last"
     ],
     "description": "Completed actions in the past.",
-    "examples": [
-      "I loved the movie.",
-      "He went home yesterday."
-    ]
+    "examples": {
+      "positive": "I loved the movie.",
+      "negative": "I did not love the movie.",
+      "question": "Did you love the movie?"
+    }
   },
   {
     "id": "past_continuous",
@@ -91,10 +96,11 @@
       "at that time"
     ],
     "description": "An action that was in progress at a particular past time.",
-    "examples": [
-      "I was watching TV.",
-      "They were working at that time."
-    ]
+    "examples": {
+      "positive": "I was watching TV.",
+      "negative": "I was not watching TV.",
+      "question": "Were you watching TV?"
+    }
   },
   {
     "id": "past_perfect",
@@ -106,10 +112,11 @@
       "by the time"
     ],
     "description": "An action completed before another past action.",
-    "examples": [
-      "I had finished the report before lunch.",
-      "She had left when I arrived."
-    ]
+    "examples": {
+      "positive": "I had finished the report before lunch.",
+      "negative": "I had not finished the report before lunch.",
+      "question": "Had you finished the report before lunch?"
+    }
   },
   {
     "id": "past_perfect_continuous",
@@ -121,10 +128,11 @@
       "before"
     ],
     "description": "An activity that continued up to a point in the past.",
-    "examples": [
-      "I had been waiting for an hour.",
-      "They had been working since morning."
-    ]
+    "examples": {
+      "positive": "I had been waiting for an hour.",
+      "negative": "I had not been waiting for an hour.",
+      "question": "Had you been waiting for an hour?"
+    }
   },
   {
     "id": "future_simple",
@@ -137,10 +145,11 @@
       "later"
     ],
     "description": "Predictions, decisions and future actions.",
-    "examples": [
-      "I will love you forever.",
-      "He will call you tomorrow."
-    ]
+    "examples": {
+      "positive": "I will call you tomorrow.",
+      "negative": "I will not call you tomorrow.",
+      "question": "Will you call me tomorrow?"
+    }
   },
   {
     "id": "future_continuous",
@@ -151,10 +160,11 @@
       "at 8 tomorrow"
     ],
     "description": "An action that will be in progress at a future time.",
-    "examples": [
-      "I will be working tomorrow morning.",
-      "She will be traveling this time next week."
-    ]
+    "examples": {
+      "positive": "I will be working tomorrow morning.",
+      "negative": "I will not be working tomorrow morning.",
+      "question": "Will you be working tomorrow morning?"
+    }
   },
   {
     "id": "future_perfect",
@@ -165,10 +175,11 @@
       "by the time"
     ],
     "description": "An action that will be completed before a future point.",
-    "examples": [
-      "I will have finished the report by Friday.",
-      "He will have arrived by then."
-    ]
+    "examples": {
+      "positive": "I will have finished the report by Friday.",
+      "negative": "I will not have finished the report by Friday.",
+      "question": "Will you have finished the report by Friday?"
+    }
   },
   {
     "id": "future_perfect_continuous",
@@ -179,9 +190,10 @@
       "by the time"
     ],
     "description": "An activity continuing up to a future point.",
-    "examples": [
-      "I will have been working here for a year by June.",
-      "She will have been studying for three hours by noon."
-    ]
+    "examples": {
+      "positive": "I will have been working here for a year by June.",
+      "negative": "I will not have been working here for a year by June.",
+      "question": "Will you have been working here for a year by June?"
+    }
   }
 ]
