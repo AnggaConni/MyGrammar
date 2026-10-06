@@ -130,10 +130,16 @@ document.querySelectorAll('.verb-filter').forEach(function(btn){btn.addEventList
 function renderGuide(){
   var root=document.getElementById('grammarGrid');
   root.innerHTML=KB.tenses.map(function(t){
-    var examples=(t.examples||[]).map(function(example,index){
-      return '<div class="example-line"><span class="example-label">'+(index===0?'Example 1':'Example 2')+'</span><span>'+escapeHtml(example)+'</span></div>';
-    }).join('');
-    return '<article class="grammar-card"><span class="eyebrow">TENSE</span><h3>'+escapeHtml(t.name)+'</h3><div class="grammar-formula">'+escapeHtml(t.formula)+'</div><p>'+escapeHtml(t.description||'')+'</p><div class="example-box"><div class="formula-label">Examples</div>'+examples+'</div><div class="signal-list">'+(t.signals||[]).map(function(s){return '<span>'+escapeHtml(s)+'</span>';}).join('')+'</div></article>';
+    var ex=t.examples||{};
+    return '<article class="grammar-card"><span class="eyebrow">TENSE</span><h3>'+escapeHtml(t.name)+'</h3><div class="grammar-formula">'+escapeHtml(t.formula)+'</div><p>'+escapeHtml(t.description||'')+'</p>'+
+      '<div class="example-box">'+
+        '<div class="formula-label">Examples</div>'+
+        '<div class="example-line positive"><span class="example-label">Positive</span><span>✅ '+escapeHtml(ex.positive||'')+'</span></div>'+
+        '<div class="example-line negative"><span class="example-label">Negative</span><span>❌ '+escapeHtml(ex.negative||'')+'</span></div>'+
+        '<div class="example-line question"><span class="example-label">Question</span><span>❓ '+escapeHtml(ex.question||'')+'</span></div>'+
+      '</div>'+
+      '<div class="signal-list">'+(t.signals||[]).map(function(s){return '<span>'+escapeHtml(s)+'</span>';}).join('')+'</div>'+
+    '</article>';
   }).join('');
 }
 loadKnowledge().then(runCheck);
