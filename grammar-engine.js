@@ -316,9 +316,22 @@
 
     list.sort(function(a,b){
       const priority=(b.priority||0)-(a.priority||0);
-      return priority||a.start-b.start;
+      if(priority)return priority;
+      const start=a.start-b.start;
+      if(start)return start;
+      return (b.end-b.start)-(a.end-a.start);
     });
-    return list;
+
+    const filtered=[];
+    list.forEach(function(issue){
+      const duplicateOverlap=filtered.some(function(existing){
+        return existing.start===issue.start &&
+          existing.correct===issue.correct &&
+          existing.end>=issue.end;
+      });
+      if(!duplicateOverlap)filtered.push(issue);
+    });
+    return filtered;
   }
 
   function unique(arr){
