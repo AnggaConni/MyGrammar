@@ -34,3 +34,14 @@ GitHub Actions also refreshes the data weekly and exposes a manual **Run workflo
 ## Important
 
 The generated external data keeps source and license metadata. Do not remove these attribution fields when transforming or redistributing the generated datasets.
+
+
+## 3. Harper.js
+
+Repository: https://github.com/Automattic/harper
+
+Version pinned for the offline browser bundle: `2.12.0`.
+
+License: Apache-2.0.
+
+Harper is used as the long-document browser grammar engine. Its WebAssembly build is bundled into the repository by GitHub Actions so the Document Checker can operate without a network connection.
