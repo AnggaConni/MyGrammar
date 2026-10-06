@@ -77,3 +77,7 @@ LanguageTool rules remain separately identified as LGPL-2.1-or-later data, and w
 The Knowledge Base pipeline stores the complete imported LanguageTool catalog for reference in `data/external/languagetool_catalog.json`, while only explicitly safe single-token rules are eligible for the lightweight browser rule set.
 
 The Harper bundle is rebuilt from the pinned `harper.js@2.10.0` package by GitHub Actions.
+
+## Live Corrector Runtime
+
+The live Corrector now loads the generated LanguageTool runtime knowledge base. The pipeline may produce dozens of single-token candidates, but only a conservative vetted subset is enabled in the browser to avoid context-loss false positives. Native MyGrammar rules are ranked above external rules, and each finding can expose an explainable **"Why is this wrong?"** reasoning chain.
