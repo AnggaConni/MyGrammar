@@ -219,7 +219,7 @@
 
   function thirdPersonIssues(text){
     const out=[];
-    const re=/\\b(he|she|it)\\s+(go|do|have|watch|wash|fix|study|try|play|work|live|like|want|need|use|make|take|read|write)\\b/gi;
+    const re=/\b(he|she|it)\s+(go|do|have|watch|wash|fix|study|try|play|work|live|like|want|need|use|make|take|read|write)\b/gi;
     let m;
     while((m=re.exec(text))){
       const base=m[2].toLowerCase();
@@ -247,8 +247,8 @@
   function auxiliaryIssues(text){
     const out=[];
     const rules=[
-      {re:/\\b(he|she|it)\\s+don't\\b/gi,r:"doesn't"},
-      {re:/\\b(i|you|we|they)\\s+doesn't\\b/gi,r:"don't"}
+      {re:/\b(he|she|it)\s+don't\b/gi,r:"doesn't"},
+      {re:/\b(i|you|we|they)\s+doesn't\b/gi,r:"don't"}
     ];
     rules.forEach(function(rule){
       let m;
@@ -274,8 +274,8 @@
   function tenseIssues(text){
     const out=[];
     const lower=text.toLowerCase();
-    if(/\\b(yesterday|last\\s+\\w+|\\d+\\s+days?\\s+ago)\\b/.test(lower)){
-      const bad=text.match(/\\b(he|she|it|i|we|they|you)\\s+(go|come|see|eat|write|take|work|play|walk)\\b/i);
+    if(/\b(yesterday|last\s+\w+|\d+\s+days?\s+ago)\b/.test(lower)){
+      const bad=text.match(/\b(he|she|it|i|we|they|you)\s+(go|come|see|eat|write|take|work|play|walk)\b/i);
       if(bad){
         const map={go:'went',come:'came',see:'saw',eat:'ate',write:'wrote',take:'took',work:'worked',play:'played',walk:'walked'};
         out.push({
@@ -338,7 +338,7 @@
     if(trimmed&& !/[.!?]$/.test(trimmed)){
       messages.push('Consider ending the response with punctuation.');
     }
-    const count=trimmed?trimmed.split(/\\s+/).length:0;
+    const count=trimmed?trimmed.split(/\s+/).length:0;
     if(count>0&&count<12){
       messages.push('Your response is very short. Add details, reasons or examples to develop the idea.');
     }
