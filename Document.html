@@ -100,5 +100,18 @@
 <script src="vendor/mammoth.bundle.js"></script>
 <script src="grammar-engine.js"></script>
 <script src="document.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' })
+      .then(function (registration) {
+        return registration.update();
+      })
+      .catch(function (error) {
+        console.warn('Service Worker registration failed:', error);
+      });
+  });
+}
+</script>
 </body>
 </html>
