@@ -1,0 +1,5 @@
+{
+  "subject_verb_agreement":{"name":"Subject–Verb Agreement","description":"The verb form should agree with the grammatical subject.","patterns":["I/You/We/They + V1","He/She/It + V1+s/es"]},
+  "present_simple":{"name":"Present Simple","description":"Used for routines, habits, facts and general truths.","formula":"Subject + V1 (He/She/It → V1+s/es)"},
+  "present_continuous":{"name":"Present Continuous","description":"Used for actions happening now or around the current period.","formula":"Subject + am/is/are + V-ing"}
+}
