@@ -1,0 +1,15 @@
+{
+  "be":{"past":"was/were","participle":"been"},
+  "go":{"past":"went","participle":"gone"},
+  "eat":{"past":"ate","participle":"eaten"},
+  "see":{"past":"saw","participle":"seen"},
+  "write":{"past":"wrote","participle":"written"},
+  "take":{"past":"took","participle":"taken"},
+  "come":{"past":"came","participle":"come"},
+  "make":{"past":"made","participle":"made"},
+  "buy":{"past":"bought","participle":"bought"},
+  "send":{"past":"sent","participle":"sent"},
+  "do":{"past":"did","participle":"done"},
+  "have":{"past":"had","participle":"had"},
+  "read":{"past":"read","participle":"read"}
+}
