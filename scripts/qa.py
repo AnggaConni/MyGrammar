@@ -59,6 +59,14 @@ def main():
     for name in ("common_errors.json", "samples.json", "grammar_rules.json"):
         load_json(DATA / name)
 
+    catalog_path = DATA / "external" / "languagetool_catalog.json"
+    if catalog_path.exists():
+        catalog = load_json(catalog_path)
+        if catalog.get("count", 0) < 1000:
+            fail("LanguageTool catalog unexpectedly small")
+        if len(catalog.get("rules", [])) != catalog.get("count"):
+            fail("LanguageTool catalog count does not match rule entries")
+
     summary_path = DATA / "external" / "build_summary.json"
     if summary_path.exists():
         summary = load_json(summary_path)
