@@ -62,7 +62,7 @@ function commonErrorIssues(text) {
 function contractionIssues(text) {
   var out = [];
   KB.contractions.forEach(function(rule) {
-    var re = new RegExp('\\\\b' + rule.wrong + '\\\\b', 'gi');
+    var re = new RegExp('\\b' + rule.wrong + '\\b', 'gi');
     var match;
     while ((match = re.exec(text)) !== null) {
       out.push({
