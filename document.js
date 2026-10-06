@@ -103,7 +103,7 @@ function styleModeIssues(text,mode){
   const rules={
     Academic:[
       {re:/\b(a lot of)\b/gi,to:'many',title:'Academic precision',message:'Academic writing often benefits from more precise quantifiers.',priority:28},
-      {re:/\b(can't|cannot|don't|doesn't|didn't|won't|isn't|aren't|wasn't|weren't)\b/gi,toMap:{can't:'cannot',cannot:'cannot',don't:'do not',doesn't:'does not',didn't:'did not',won't:'will not',isn't:'is not',aren't:'are not',wasn't:'was not',weren't:'were not'},title:'Formal academic style',message:'Consider expanding the contraction in formal academic writing.',priority:26}
+      {re:/\b(can't|don't|doesn't|didn't|won't|isn't|aren't|wasn't|weren't)\b/gi,toMap:{can't:'cannot',don't:'do not',doesn't:'does not',didn't:'did not',won't:'will not',isn't:'is not',aren't:'are not',wasn't:'was not',weren't:'were not'},title:'Formal academic style',message:'Consider expanding the contraction in formal academic writing.',priority:26}
     ],
     Professional:[
       {re:/\bASAP\b/gi,to:'as soon as possible',title:'Professional tone',message:'Consider replacing shorthand with a clearer professional phrase.',priority:28},

@@ -15,8 +15,6 @@ on:
       - 'Document.html'
       - 'document.js'
       - 'sw.js'
-      - 'Document.html'
-      - 'sw.js'
       - 'data/verbs.json'
       - 'data/learner_errors_id.json'
       - 'data/verb_patterns.json'
