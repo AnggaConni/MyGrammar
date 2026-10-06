@@ -342,6 +342,12 @@ function splitForms(value){
 
       const infinitiveRe=new RegExp('\\bto\\s+('+tokenPattern+')\\b','gi');
       while((m=infinitiveRe.exec(text))){
+        const before=text.slice(Math.max(0,m.index-80),m.index).toLowerCase();
+        const isPrepositionalTo=(kb.verbPatterns||[]).some(function(rule){
+          return rule.kind==='fixed_gerund' && rule.phrase &&
+            before.endsWith(String(rule.phrase).toLowerCase());
+        });
+        if(isPrepositionalTo)continue;
         const match=findVerbMatch(lexicon,m[1]);
         if(!match||match.kind==='base')continue;
         add({
@@ -363,13 +369,22 @@ function splitForms(value){
   }
 
   
+  function preserveCase(original,replacement){
+    const source=String(original||'');
+    const target=String(replacement||'');
+    if(!source||!target)return replacement;
+    if(source===source.toUpperCase())return target.toUpperCase();
+    if(source[0]===source[0].toUpperCase())return target.charAt(0).toUpperCase()+target.slice(1);
+    return target;
+  }
+
   function learnerErrorIssues(text,kb){
     const out=[];
     (kb.learnerErrors||[]).forEach(function(rule){
       findExactRanges(text,rule.wrong).forEach(function(r){
         out.push({
           start:r[0],end:r[1],
-          wrong:text.slice(r[0],r[1]),correct:rule.correct,
+          wrong:text.slice(r[0],r[1]),correct:preserveCase(text.slice(r[0],r[1]),rule.correct),
           title:rule.title||'Indonesian learner pattern',
           category:rule.category||'Learner pattern',
           severity:rule.severity||'error',
@@ -428,9 +443,7 @@ function splitForms(value){
           const re=new RegExp('\\b('+verbSurface+')\\s+to\\s+('+basePattern+')\\b','gi');
           let m;
           while((m=re.exec(text))){
-            const next=findVerbMatch(lexicon,m[2]);
-            if(!next||next.kind!=='base')continue;
-            const correct=m[1]+' '+ingForm(next.row.v1);
+            const correct=m[1]+' '+ingForm(m[2]);
             out.push({
               start:m.index,end:m.index+m[0].length,wrong:m[0],correct:correct,
               title:rule.title||'Verb pattern',category:'Verb pattern',severity:'error',
