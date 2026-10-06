@@ -1,6 +1,7 @@
 let linter=null;
 let findings=[];
 let currentText='';
+let currentDialect=localStorage.getItem('mygrammar-dialect')||'American';
 
 const textArea=document.getElementById('docText');
 const results=document.getElementById('results');
@@ -21,11 +22,12 @@ function snippet(text,start,end){
   const a=Math.max(0,start-70),b=Math.min(text.length,end+70);
   return text.slice(a,b);
 }
+function dialectEnum(name){return MyGrammarHarper.Dialect[name] ?? MyGrammarHarper.Dialect.American;}
 async function setupEngine(){
   if(!window.MyGrammarHarper) throw new Error('Harper bundle is missing. Run the GitHub Action once.');
   linter=new MyGrammarHarper.WorkerLinter({
     binary:MyGrammarHarper.binaryInlined,
-    dialect:MyGrammarHarper.Dialect.American
+    dialect:dialectEnum(currentDialect)
   });
   if(linter.setup) await linter.setup();
   try{if(linter.getDefaultLintConfig) await linter.getDefaultLintConfig();}catch(e){}
@@ -91,8 +93,24 @@ results.addEventListener('click',async function(e){
   await checkDocument();
 });
 document.getElementById('checkBtn').addEventListener('click',checkDocument);
+document.getElementById('dialectSelect').value=currentDialect;
+document.getElementById('dialectSelect').addEventListener('change',async function(){
+  currentDialect=this.value;localStorage.setItem('mygrammar-dialect',currentDialect);
+  if(linter){try{await linter.setDialect(dialectEnum(currentDialect));}catch(e){console.warn(e);}}
+  if(textArea.value.trim()) await checkDocument();
+});
+document.getElementById('applyAllBtn').addEventListener('click',async function(){
+  if(!findings.length)return;
+  const sorted=findings.filter(function(f){return f.suggestions&&f.suggestions.length;}).slice().sort(function(a,b){return b.start-a.start;});
+  let text=currentText, boundary=Infinity;
+  for(const f of sorted){
+    if(f.end>boundary)continue;
+    try{text=await linter.applySuggestion(text,f.lint,f.suggestions[0]);boundary=f.start;}catch(e){console.warn('Skipped suggestion',e);}
+  }
+  currentText=text;textArea.value=text;updateStats();await checkDocument();
+});
 document.getElementById('clearBtn').addEventListener('click',function(){textArea.value='';currentText='';findings=[];issueStat.textContent='0 issues';progressBar.style.width='0%';updateStats();results.innerHTML='<div style="padding:16px;color:#64748b;font-size:13px">Paste text and click Check Document.</div>';});
-document.getElementById('copyBtn').addEventListener('click',async function(){await navigator.clipboard.writeText(textArea.value);this.textContent='✓ Copied';setTimeout(()=>this.textContent='Copy Clean Text',1200);});
+document.getElementById('copyBtn').addEventListener('click',async function(){await navigator.clipboard.writeText(textArea.value);this.textContent='✓ Copied';setTimeout(()=>this.textContent='Copy Text',1200);});
 document.getElementById('fileInput').addEventListener('change',function(){
   const file=this.files[0];if(!file)return;
   const reader=new FileReader();
