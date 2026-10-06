@@ -342,10 +342,10 @@ function splitForms(value){
 
       const infinitiveRe=new RegExp('\\bto\\s+('+tokenPattern+')\\b','gi');
       while((m=infinitiveRe.exec(text))){
-        const before=text.slice(Math.max(0,m.index-80),m.index).toLowerCase();
+        const context=text.slice(Math.max(0,m.index-100),m.index+2).toLowerCase();
         const isPrepositionalTo=(kb.verbPatterns||[]).some(function(rule){
           return rule.kind==='fixed_gerund' && rule.phrase &&
-            before.endsWith(String(rule.phrase).toLowerCase());
+            context.endsWith(String(rule.phrase).toLowerCase());
         });
         if(isPrepositionalTo)continue;
         const match=findVerbMatch(lexicon,m[1]);
