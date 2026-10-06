@@ -1,7 +1,7 @@
 const CACHE='mygrammar-v5';
 const ASSETS=[
   './','./index.html','./Toefl.html','./Document.html',
-  './style.css','./app.js','./toefl.js','./document.js',
+  './style.css','./grammar-engine.js','./app.js','./toefl.js','./document.js',
   './manifest.json','./vendor/harper.bundle.js',
   './data/grammar_rules.json','./data/tenses.json','./data/common_errors.json',
   './data/contractions.json','./data/verbs.json','./data/samples.json',
