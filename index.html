@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111827">
+<title>MyGrammar — Offline English Grammar Assistant</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="app">
+  <header class="hero">
+    <span class="badge">100% OFFLINE</span>
+    <h1>MyGrammar</h1>
+    <p>Your personal English grammar assistant — powered by rules, not AI.</p>
+  </header>
+  <section class="card editor-card">
+    <div class="section-head"><h2>Check your sentence</h2><span id="status" class="status">Ready</span></div>
+    <textarea id="inputText" placeholder="Example: She go to the office every day."></textarea>
+    <div class="actions">
+      <button id="checkBtn" class="primary">🔍 Check Grammar</button>
+      <button id="clearBtn">Clear</button>
+      <button id="exampleBtn">Try Example</button>
+    </div>
+  </section>
+  <section id="results" class="results"></section>
+  <footer><span>MyGrammar</span><span>Offline Grammar Knowledge Base</span></footer>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
