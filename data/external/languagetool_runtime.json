@@ -1,0 +1,13 @@
+{
+  "source": {
+    "name": "LanguageTool English",
+    "url": "https://github.com/languagetool-org/languagetool",
+    "license": "LGPL-2.1-or-later"
+  },
+  "stats": {
+    "all_rules": 0,
+    "runtime_safe_rules": 0,
+    "advanced_or_skipped": 0
+  },
+  "rules": []
+}
