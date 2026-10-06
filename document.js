@@ -22,28 +22,34 @@ function updateStats(){
   document.getElementById('charStat').textContent=t.length+' characters';
   document.getElementById('paraStat').textContent=(t.trim()?t.trim().split(/\n\s*\n/).length:0)+' paragraphs';
 }
+function setText(id,value){
+  const el=document.getElementById(id);
+  if(el)el.textContent=String(value);
+}
 function updateHealth(){
-  const counts={Grammar:0,Verb:0,Learner:0,Spelling:0};
+  const counts={Grammar:0,Verb:0,Learner:0,Spelling:0,Style:0};
   findings.forEach(function(f){
     const c=f.category||'';
     if(c==='Grammar'||c==='Tense')counts.Grammar++;
     else if(c==='Verb'||c==='Verb form'||c==='Verb pattern')counts.Verb++;
     else if(c==='Indonesian learner pattern'||c==='Learner pattern')counts.Learner++;
     else if(c==='Spelling')counts.Spelling++;
+    else if(c==='Style')counts.Style++;
   });
-  document.getElementById('healthGrammar').textContent=counts.Grammar;
-  document.getElementById('healthVerb').textContent=counts.Verb;
-  document.getElementById('healthLearner').textContent=counts.Learner;
-  document.getElementById('healthSpelling').textContent=counts.Spelling;
-
+  setText('healthGrammar',counts.Grammar);
+  setText('healthVerb',counts.Verb);
+  setText('healthLearner',counts.Learner);
+  setText('healthSpelling',counts.Spelling);
+  setText('healthStyle',counts.Style);
   const stats=sentenceHealth(currentText,findings);
-  document.getElementById('healthScore').textContent=stats.score;
-  document.getElementById('healthScoreLabel').textContent=stats.label;
-  document.getElementById('healthSentence').textContent=stats.count;
-  document.getElementById('sentenceMeta').textContent=stats.avg.toFixed(1)+' words avg';
-  document.getElementById('sentenceNote').textContent=stats.count
-    ? 'Sentence Health: '+stats.label+'. Average '+stats.avg.toFixed(1)+' words/sentence; '+stats.long+' sentence(s) exceed 30 words; '+stats.issueDensity.toFixed(2)+' findings per sentence.'
-    : 'Sentence Health will summarize average sentence length and long-sentence pressure after a check.';
+  setText('healthScore',stats.score);
+  setText('healthScoreLabel',stats.label);
+  const note=document.getElementById('sentenceNote');
+  if(note){
+    note.textContent=stats.count
+      ? 'Sentence Health: '+stats.label+'. Average '+stats.avg.toFixed(1)+' words/sentence; '+stats.long+' sentence(s) exceed 30 words; '+stats.issueDensity.toFixed(2)+' findings per sentence.'
+      : 'Sentence Health will summarize average sentence length and long-sentence pressure after a check.';
+  }
 }
 function sentenceHealth(text,issues){
   const clean=String(text||'').trim();
@@ -150,7 +156,7 @@ async function setupEngine(){
   if(linter.setup)await linter.setup();
   try{if(linter.getDefaultLintConfig)await linter.getDefaultLintConfig();}catch(e){}
   KB=await MyGrammarGrammarEngine.loadKnowledge();
-  engineStat.textContent='Engine: Harper + MyGrammar • offline';
+  engineStat.textContent='Engine: Harper + MyGrammar • online first / offline fallback';
 }
 function dedupeFindings(list){
   const seen={};
@@ -227,7 +233,7 @@ async function checkDocument(){
     console.error(error);
     findings=[];
     issueStat.textContent='0 issues';
-    updateHealth();
+    try{updateHealth();}catch(e){console.error('Health panel update failed:',e);}
     results.innerHTML='<div class="ok-state" style="color:#b91c1c;background:#fef2f2;border-color:#fecaca">The offline document engines could not complete the check. Try a shorter section or reload the page.</div>';
     progressBar.style.width='0%';
   }
