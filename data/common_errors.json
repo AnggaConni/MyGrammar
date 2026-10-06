@@ -1,0 +1,7 @@
+[
+  {"wrong":"I am agree","correct":"I agree","category":"Common learner error","explanation":"Agree is normally used as a verb, so it does not need the auxiliary 'am' here."},
+  {"wrong":"I am understand","correct":"I understand","category":"Common learner error","explanation":"Understand is normally a verb, not an adjective requiring 'am'."},
+  {"wrong":"She very beautiful","correct":"She is very beautiful","category":"Missing auxiliary","explanation":"A sentence with an adjective as its main complement normally needs a form of 'be'."},
+  {"wrong":"Discuss about","correct":"Discuss","category":"Preposition","explanation":"The verb 'discuss' normally takes its object directly: 'discuss the issue'."},
+  {"wrong":"I already send it","correct":"I have already sent it","category":"Tense / verb form","explanation":"For a completed action connected to the present, Present Perfect is often appropriate: have + past participle."}
+]
