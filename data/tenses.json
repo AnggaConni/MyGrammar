@@ -1,14 +1,187 @@
 [
-{"id":"present_simple","name":"Present Simple","formula":"Subject + V1 (He/She/It → V1+s/es)","signals":["every day","usually","always","often","sometimes","never"],"description":"Habits, routines, facts and repeated actions.","examples":["I work every day.","She works every day."]},
-{"id":"present_continuous","name":"Present Continuous","formula":"Subject + am/is/are + V-ing","signals":["now","currently","at the moment","today"],"description":"Actions happening now or around the current period.","examples":["I am working now.","They are studying."]},
-{"id":"present_perfect","name":"Present Perfect","formula":"Subject + have/has + V3","signals":["already","just","ever","never","yet","since","for"],"description":"Past actions connected with the present or unfinished time periods.","examples":["I have finished.","She has lived here for two years."]},
-{"id":"present_perfect_continuous","name":"Present Perfect Continuous","formula":"Subject + have/has been + V-ing","signals":["for","since","all day"],"description":"An activity that started in the past and continues or has a visible recent result.","examples":["I have been working for two hours."]},
-{"id":"past_simple","name":"Past Simple","formula":"Subject + V2","signals":["yesterday","ago","last"],"description":"Completed actions in the past.","examples":["I went yesterday.","She worked last week."]},
-{"id":"past_continuous","name":"Past Continuous","formula":"Subject + was/were + V-ing","signals":["while","at that time"],"description":"An action that was in progress at a particular past time.","examples":["I was working when she called."]},
-{"id":"past_perfect","name":"Past Perfect","formula":"Subject + had + V3","signals":["before","after","by the time"],"description":"An action completed before another past action.","examples":["I had left before he arrived."]},
-{"id":"past_perfect_continuous","name":"Past Perfect Continuous","formula":"Subject + had been + V-ing","signals":["for","since","before"],"description":"An activity that continued up to a point in the past.","examples":["She had been working for hours before lunch."]},
-{"id":"future_simple","name":"Future Simple","formula":"Subject + will + V1","signals":["tomorrow","next","soon","later"],"description":"Predictions, decisions and future actions.","examples":["I will call you tomorrow."]},
-{"id":"future_continuous","name":"Future Continuous","formula":"Subject + will be + V-ing","signals":["this time tomorrow","at 8 tomorrow"],"description":"An action that will be in progress at a future time.","examples":["I will be working at eight."]},
-{"id":"future_perfect","name":"Future Perfect","formula":"Subject + will have + V3","signals":["by","by the time"],"description":"An action that will be completed before a future point.","examples":["I will have finished by Friday."]},
-{"id":"future_perfect_continuous","name":"Future Perfect Continuous","formula":"Subject + will have been + V-ing","signals":["for","by the time"],"description":"An activity continuing up to a future point.","examples":["By June, I will have been working here for a year."]}
+  {
+    "id": "present_simple",
+    "name": "Present Simple",
+    "formula": "Subject + V1 (He/She/It → V1+s/es)",
+    "signals": [
+      "every day",
+      "usually",
+      "always",
+      "often",
+      "sometimes",
+      "never"
+    ],
+    "description": "Habits, routines, facts and repeated actions.",
+    "examples": [
+      "I love you.",
+      "He loves it."
+    ]
+  },
+  {
+    "id": "present_continuous",
+    "name": "Present Continuous",
+    "formula": "Subject + am/is/are + V-ing",
+    "signals": [
+      "now",
+      "currently",
+      "at the moment",
+      "today"
+    ],
+    "description": "Actions happening now or around the current period.",
+    "examples": [
+      "I am loving this moment.",
+      "She is reading a book."
+    ]
+  },
+  {
+    "id": "present_perfect",
+    "name": "Present Perfect",
+    "formula": "Subject + have/has + V3",
+    "signals": [
+      "already",
+      "just",
+      "ever",
+      "never",
+      "yet",
+      "since",
+      "for"
+    ],
+    "description": "Past actions connected with the present or unfinished time periods.",
+    "examples": [
+      "I have loved this place for years.",
+      "He has finished his work."
+    ]
+  },
+  {
+    "id": "present_perfect_continuous",
+    "name": "Present Perfect Continuous",
+    "formula": "Subject + have/has been + V-ing",
+    "signals": [
+      "for",
+      "since",
+      "all day"
+    ],
+    "description": "An activity that started in the past and continues or has a visible recent result.",
+    "examples": [
+      "I have been waiting for you.",
+      "She has been studying all day."
+    ]
+  },
+  {
+    "id": "past_simple",
+    "name": "Past Simple",
+    "formula": "Subject + V2",
+    "signals": [
+      "yesterday",
+      "ago",
+      "last"
+    ],
+    "description": "Completed actions in the past.",
+    "examples": [
+      "I loved the movie.",
+      "He went home yesterday."
+    ]
+  },
+  {
+    "id": "past_continuous",
+    "name": "Past Continuous",
+    "formula": "Subject + was/were + V-ing",
+    "signals": [
+      "while",
+      "at that time"
+    ],
+    "description": "An action that was in progress at a particular past time.",
+    "examples": [
+      "I was watching TV.",
+      "They were working at that time."
+    ]
+  },
+  {
+    "id": "past_perfect",
+    "name": "Past Perfect",
+    "formula": "Subject + had + V3",
+    "signals": [
+      "before",
+      "after",
+      "by the time"
+    ],
+    "description": "An action completed before another past action.",
+    "examples": [
+      "I had finished the report before lunch.",
+      "She had left when I arrived."
+    ]
+  },
+  {
+    "id": "past_perfect_continuous",
+    "name": "Past Perfect Continuous",
+    "formula": "Subject + had been + V-ing",
+    "signals": [
+      "for",
+      "since",
+      "before"
+    ],
+    "description": "An activity that continued up to a point in the past.",
+    "examples": [
+      "I had been waiting for an hour.",
+      "They had been working since morning."
+    ]
+  },
+  {
+    "id": "future_simple",
+    "name": "Future Simple",
+    "formula": "Subject + will + V1",
+    "signals": [
+      "tomorrow",
+      "next",
+      "soon",
+      "later"
+    ],
+    "description": "Predictions, decisions and future actions.",
+    "examples": [
+      "I will love you forever.",
+      "He will call you tomorrow."
+    ]
+  },
+  {
+    "id": "future_continuous",
+    "name": "Future Continuous",
+    "formula": "Subject + will be + V-ing",
+    "signals": [
+      "this time tomorrow",
+      "at 8 tomorrow"
+    ],
+    "description": "An action that will be in progress at a future time.",
+    "examples": [
+      "I will be working tomorrow morning.",
+      "She will be traveling this time next week."
+    ]
+  },
+  {
+    "id": "future_perfect",
+    "name": "Future Perfect",
+    "formula": "Subject + will have + V3",
+    "signals": [
+      "by",
+      "by the time"
+    ],
+    "description": "An action that will be completed before a future point.",
+    "examples": [
+      "I will have finished the report by Friday.",
+      "He will have arrived by then."
+    ]
+  },
+  {
+    "id": "future_perfect_continuous",
+    "name": "Future Perfect Continuous",
+    "formula": "Subject + will have been + V-ing",
+    "signals": [
+      "for",
+      "by the time"
+    ],
+    "description": "An activity continuing up to a future point.",
+    "examples": [
+      "I will have been working here for a year by June.",
+      "She will have been studying for three hours by noon."
+    ]
+  }
 ]
