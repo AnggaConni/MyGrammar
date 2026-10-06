@@ -45,7 +45,8 @@ results.addEventListener('click',function(e){
   if(apply){var i=Number(apply.dataset.apply),x=issues[i];if(!x)return;input.value=input.value.slice(0,x.start)+x.correct+input.value.slice(x.end);runCheck();input.focus();}
   if(ignore){issues.splice(Number(ignore.dataset.ignore),1);renderIssues();}
 });
-document.querySelectorAll('.tab').forEach(function(btn){btn.addEventListener('click',function(){document.querySelectorAll('.tab').forEach(function(b){b.classList.remove('active')});document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active')});btn.classList.add('active');document.getElementById('tab-'+btn.dataset.tab).classList.add('active');});});
+function activateTab(name){document.querySelectorAll('.nav-item').forEach(function(b){b.classList.toggle('active',b.dataset.tab===name)});document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active')});var panel=document.getElementById('tab-'+name);if(panel)panel.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+document.querySelectorAll('[data-tab]').forEach(function(btn){btn.addEventListener('click',function(){activateTab(btn.dataset.tab);});});
 function renderSamples(){
   var root=document.getElementById('sampleList');
   root.innerHTML=KB.samples.length?KB.samples.map(function(s,i){return '<article class="sample"><div><h3>'+escapeHtml(s.title||('Sample '+(i+1)))+'</h3><p class="sample-bad">❌ '+escapeHtml(s.wrong)+'</p><p class="sample-good">✅ '+escapeHtml(s.correct)+'</p><p>'+escapeHtml(s.explanation||'')+'</p></div><button data-sample="'+i+'">Load & Check</button></article>';}).join(''):'<div class="card" style="padding:18px">No samples loaded.</div>';
@@ -73,6 +74,20 @@ function renderGuide(){
     '</article>';
   }).join('');
 }
+var howToModal=document.getElementById('howToModal');
+var howToBtn=document.getElementById('howToBtn');
+var closeHowTo=document.getElementById('closeHowTo');
+var closeHowToSecondary=document.getElementById('closeHowToSecondary');
+var startCorrectorBtn=document.getElementById('startCorrectorBtn');
+function openHowTo(){if(!howToModal)return;howToModal.hidden=false;document.body.style.overflow='hidden';}
+function closeHowToModal(){if(!howToModal)return;howToModal.hidden=true;document.body.style.overflow='';}
+if(howToBtn)howToBtn.addEventListener('click',openHowTo);
+if(closeHowTo)closeHowTo.addEventListener('click',closeHowToModal);
+if(closeHowToSecondary)closeHowToSecondary.addEventListener('click',closeHowToModal);
+if(startCorrectorBtn)startCorrectorBtn.addEventListener('click',function(){closeHowToModal();activateTab('corrector');input.focus();});
+if(howToModal)howToModal.addEventListener('click',function(e){if(e.target===howToModal)closeHowToModal();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&howToModal&&!howToModal.hidden)closeHowToModal();});
+
 loadKnowledge().then(runCheck);
 
 if ('serviceWorker' in navigator) {
