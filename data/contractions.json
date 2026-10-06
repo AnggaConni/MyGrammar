@@ -1,0 +1,21 @@
+[
+  {"wrong":"wouldnt","correct":"wouldn't","category":"Spelling","formula":"wouldn't + V1","explanation":"The negative form of 'would' is written with an apostrophe: wouldn't."},
+  {"wrong":"couldnt","correct":"couldn't","category":"Spelling","formula":"couldn't + V1","explanation":"The negative form of 'could' is written with an apostrophe: couldn't."},
+  {"wrong":"shouldnt","correct":"shouldn't","category":"Spelling","formula":"shouldn't + V1","explanation":"The negative form of 'should' is written with an apostrophe: shouldn't."},
+  {"wrong":"dont","correct":"don't","category":"Spelling","formula":"do not → don't","explanation":"The contraction of 'do not' is written as don't."},
+  {"wrong":"doesnt","correct":"doesn't","category":"Spelling","formula":"does not → doesn't","explanation":"The contraction of 'does not' is written as doesn't."},
+  {"wrong":"didnt","correct":"didn't","category":"Spelling","formula":"did not → didn't","explanation":"The contraction of 'did not' is written as didn't."},
+  {"wrong":"cant","correct":"can't","category":"Spelling","formula":"cannot → can't","explanation":"The common contraction of 'cannot' is written as can't."},
+  {"wrong":"wont","correct":"won't","category":"Spelling","formula":"will not → won't","explanation":"The contraction of 'will not' is written as won't."},
+  {"wrong":"isnt","correct":"isn't","category":"Spelling","formula":"is not → isn't","explanation":"The contraction of 'is not' is written as isn't."},
+  {"wrong":"arent","correct":"aren't","category":"Spelling","formula":"are not → aren't","explanation":"The contraction of 'are not' is written as aren't."},
+  {"wrong":"wasnt","correct":"wasn't","category":"Spelling","formula":"was not → wasn't","explanation":"The contraction of 'was not' is written as wasn't."},
+  {"wrong":"werent","correct":"weren't","category":"Spelling","formula":"were not → weren't","explanation":"The contraction of 'were not' is written as weren't."},
+  {"wrong":"havent","correct":"haven't","category":"Spelling","formula":"have not → haven't","explanation":"The contraction of 'have not' is written as haven't."},
+  {"wrong":"hasnt","correct":"hasn't","category":"Spelling","formula":"has not → hasn't","explanation":"The contraction of 'has not' is written as hasn't."},
+  {"wrong":"hadnt","correct":"hadn't","category":"Spelling","formula":"had not → hadn't","explanation":"The contraction of 'had not' is written as hadn't."},
+  {"wrong":"im","correct":"I'm","category":"Spelling","formula":"I am → I'm","explanation":"When using the contraction of 'I am', include the apostrophe: I'm."},
+  {"wrong":"ive","correct":"I've","category":"Spelling","formula":"I have → I've","explanation":"The contraction of 'I have' is written as I've."},
+  {"wrong":"id","correct":"I'd","category":"Spelling","formula":"I would / I had → I'd","explanation":"The contraction 'I'd' can mean 'I would' or 'I had', depending on context."},
+  {"wrong":"ill","correct":"I'll","category":"Spelling","formula":"I will → I'll","explanation":"The contraction of 'I will' is written as I'll."}
+]
