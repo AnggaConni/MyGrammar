@@ -30,7 +30,7 @@ function loadKnowledge() {
     verbs: readJson('data/verbs.json'),
     samples: readJson('data/samples.json'),
     externalRules: readJson('data/external/languagetool_runtime.json').rules || [],
-    commonWords: readJson('data/external/common_words.json').words || [],
+    commonWords: [],
     loaded: true
   };
 }
