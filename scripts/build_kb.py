@@ -14,7 +14,6 @@ from __future__ import annotations
 import argparse
 import json
 import re
-import sys
 import urllib.request
 from pathlib import Path
 from typing import Any
@@ -108,7 +107,7 @@ def build_runtime_pattern(pattern: Any) -> str | None:
     return r"\s+".join(pieces)
 
 
-def collect_rules(xml_bytes: bytes) -> tuple[list[dict[str, Any]], dict[str, int]]:
+def collect_rules(xml_bytes: bytes) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, int]]:
     try:
         from lxml import etree
     except ImportError as exc:
@@ -195,12 +194,10 @@ def collect_rules(xml_bytes: bytes) -> tuple[list[dict[str, Any]], dict[str, int
         "runtime_safe_rules": len(runtime_rules),
         "advanced_or_skipped": skipped,
     }
-    return runtime_rules, {
-        **stats,
-    }
+    return all_rules, runtime_rules, stats
 
 
-def load_wordfreq(raw: bytes) -> list[dict[str, Any]]:
+def load_wordfreq(raw: bytes) -> list[list[Any]]:
     data = json.loads(raw.decode("utf-8"))
     rows = []
     for row in data:
@@ -240,7 +237,7 @@ def main() -> int:
 
     if args.source in ("all", "languagetool"):
         raw = download(LANGUAGETOOL_URL)
-        runtime_rules, stats = collect_rules(raw)
+        all_rules, runtime_rules, stats = collect_rules(raw)
         write_json(
             DATA / "languagetool_catalog.json",
             {
