@@ -61,6 +61,7 @@ jobs:
           node --check app.js
           node --check toefl.js
           node --check document.js
+          node scripts/test_grammar_engine.js
 
       - name: Show generated statistics
         run: |
