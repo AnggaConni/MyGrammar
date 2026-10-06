@@ -35,35 +35,29 @@ function loadKnowledge() {
   };
 }
 
+function comparableFinding(item) {
+  return {
+    wrong: item.wrong,
+    correct: item.correct,
+    category: item.category,
+    title: item.title
+  };
+}
+
+function sortComparable(items) {
+  return items.slice().sort((a, b) => {
+    const left = JSON.stringify(a);
+    const right = JSON.stringify(b);
+    return left < right ? -1 : (left > right ? 1 : 0);
+  });
+}
+
 function normalizeFindings(findings) {
-  return findings
-    .map((item) => ({
-      start: item.start,
-      end: item.end,
-      wrong: item.wrong,
-      correct: item.correct,
-      category: item.category,
-      title: item.title
-    }))
-    .sort((a, b) =>
-      a.start - b.start ||
-      a.end - b.end ||
-      a.correct.localeCompare(b.correct)
-    );
+  return sortComparable(findings.map(comparableFinding));
 }
 
 function normalizeExpected(items) {
-  return items
-    .map((item) => ({
-      wrong: item.wrong,
-      correct: item.correct,
-      category: item.category,
-      title: item.title
-    }))
-    .sort((a, b) =>
-      a.wrong.localeCompare(b.wrong) ||
-      a.correct.localeCompare(b.correct)
-    );
+  return sortComparable(items.map(comparableFinding));
 }
 
 function compareCase(engine, kb, testCase) {
@@ -71,20 +65,16 @@ function compareCase(engine, kb, testCase) {
   const actual = normalizeFindings(findings);
   const expected = normalizeExpected(testCase.expected || []);
 
-  const comparableActual = actual.map(({ wrong, correct, category, title }) => ({
-    wrong, correct, category, title
-  }));
-
-  const pass = JSON.stringify(comparableActual) === JSON.stringify(expected);
-
-  const reasoningPass = pass && findings.every((finding) =>
+  const contentPass = JSON.stringify(actual) === JSON.stringify(expected);
+  const reasoningPass = findings.every((finding) =>
     Array.isArray(finding.reasoning) && finding.reasoning.length > 0
   );
 
   return {
-    pass: pass && reasoningPass,
-    actual: comparableActual,
+    pass: contentPass && reasoningPass,
+    actual,
     expected,
+    contentPass,
     reasoningPass
   };
 }
@@ -128,7 +118,7 @@ function main() {
     console.error('  Expected:', JSON.stringify(result.expected));
     console.error('  Actual:  ', JSON.stringify(result.actual));
     if (result.reasoningPass === false) {
-      console.error('  Reasoning: missing reasoning chain.');
+      console.error('  Reasoning: one or more findings are missing a reasoning chain.');
     }
   }
 
