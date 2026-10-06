@@ -1,6 +1,11 @@
 name: Refresh MyGrammar Knowledge Base
 
 on:
+  push:
+    paths:
+      - 'scripts/build_kb.py'
+      - 'scripts/harper_entry.mjs'
+      - '.github/workflows/refresh-kb.yml'
   workflow_dispatch:
     inputs:
       force:
@@ -29,6 +34,19 @@ jobs:
       - name: Install builder dependency
         run: python -m pip install lxml
 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Harper bundler dependencies
+        run: npm install --no-save harper.js@2.12.0 esbuild@0.27.0
+
+      - name: Build offline Harper bundle
+        run: |
+          mkdir -p vendor
+          npx esbuild scripts/harper_entry.mjs --bundle --format=iife --platform=browser --target=es2020 --minify --outfile=vendor/harper.bundle.js
+
       - name: Refresh Knowledge Base
         run: python scripts/build_kb.py --force
 
@@ -40,7 +58,7 @@ jobs:
         run: |
           git config user.name "MyGrammar KB Bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/external/
+          git add data/external/ vendor/harper.bundle.js
           if git diff --cached --quiet; then
             echo "No Knowledge Base changes."
           else
