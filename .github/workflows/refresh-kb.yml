@@ -5,6 +5,7 @@ on:
     paths:
       - 'scripts/build_kb.py'
       - 'scripts/harper_entry.mjs'
+      - 'scripts/qa.py'
       - '.github/workflows/refresh-kb.yml'
   workflow_dispatch:
     inputs:
@@ -49,6 +50,15 @@ jobs:
 
       - name: Refresh Knowledge Base
         run: python scripts/build_kb.py --force
+
+      - name: Validate JSON Knowledge Base
+        run: python scripts/qa.py
+
+      - name: Validate JavaScript syntax
+        run: |
+          node --check app.js
+          node --check toefl.js
+          node --check document.js
 
       - name: Show generated statistics
         run: |
