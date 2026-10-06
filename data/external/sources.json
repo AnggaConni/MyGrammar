@@ -1,0 +1,18 @@
+{
+  "sources": [
+    {
+      "id": "languagetool-en",
+      "name": "LanguageTool English",
+      "repository": "https://github.com/languagetool-org/languagetool",
+      "license": "LGPL-2.1-or-later",
+      "runtimeOutput": "data/external/languagetool_runtime.json"
+    },
+    {
+      "id": "wordfreq-en-25000",
+      "name": "wordfreq-en-25000",
+      "repository": "https://github.com/aparrish/wordfreq-en-25000",
+      "license": "CC-BY-SA-4.0",
+      "runtimeOutput": "data/external/common_words.json"
+    }
+  ]
+}
