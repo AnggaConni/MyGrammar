@@ -76,4 +76,4 @@ LanguageTool rules remain separately identified as LGPL-2.1-or-later data, and w
 
 The Knowledge Base pipeline stores the complete imported LanguageTool catalog for reference in `data/external/languagetool_catalog.json`, while only explicitly safe single-token rules are eligible for the lightweight browser rule set.
 
-The Harper bundle is rebuilt from the pinned `harper.js@2.12.0` package by GitHub Actions.
+The Harper bundle is rebuilt from the pinned `harper.js@2.10.0` package by GitHub Actions.
