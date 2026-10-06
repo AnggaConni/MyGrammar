@@ -145,7 +145,7 @@
   function contractionIssues(text,kb){
     const out=[];
     (kb.contractions||[]).forEach(function(rule){
-      const re=new RegExp('\\\\b'+rule.wrong+'\\\\b','gi');
+      const re=new RegExp('\\b'+rule.wrong+'\\b','gi');
       let m;
       while((m=re.exec(text))){
         out.push({
