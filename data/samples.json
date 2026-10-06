@@ -1,0 +1,9 @@
+[
+{"title":"Contraction","wrong":"I wouldnt mind marrying you.","correct":"I wouldn't mind marrying you.","explanation":"Use an apostrophe in the negative contraction 'wouldn't'."},
+{"title":"Present Simple","wrong":"She go to the office every day.","correct":"She goes to the office every day.","explanation":"He/She/It takes V1+s/es in the Present Simple."},
+{"title":"Auxiliary","wrong":"She don't like coffee.","correct":"She doesn't like coffee.","explanation":"Use doesn't with a third-person singular subject."},
+{"title":"Common learner error","wrong":"I am agree with you.","correct":"I agree with you.","explanation":"Agree is a main verb, so 'am' is not needed."},
+{"title":"Past Simple","wrong":"Yesterday I go to the office.","correct":"Yesterday I went to the office.","explanation":"A completed past-time marker such as yesterday normally calls for V2."},
+{"title":"Present Perfect","wrong":"I already send the email.","correct":"I have already sent the email.","explanation":"Present Perfect uses have/has + V3 for a completed action connected with the present."},
+{"title":"Adjective","wrong":"She very beautiful.","correct":"She is very beautiful.","explanation":"An adjective complement normally needs a form of be."}
+]
