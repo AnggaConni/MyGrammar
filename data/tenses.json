@@ -1,0 +1,6 @@
+[
+  {"id":"present_simple","name":"Present Simple","formula":"Subject + V1 (He/She/It → V1+s/es)","signals":["every","usually","always","often","sometimes","never"],"description":"Commonly used for habits, routines, facts and repeated actions."},
+  {"id":"present_continuous","name":"Present Continuous","formula":"Subject + am/is/are + V-ing","signals":["now","currently","today","tonight"],"description":"Used for actions happening now or around the current period."},
+  {"id":"past_simple","name":"Past Simple","formula":"Subject + V2","signals":["yesterday","ago","last"],"description":"Used for completed actions in the past."},
+  {"id":"present_perfect","name":"Present Perfect","formula":"Subject + have/has + V3","signals":["already","just","ever","never","yet","since","for"],"description":"Connects a past action with the present or describes an unfinished time period."}
+]
