@@ -35,6 +35,7 @@ WORDFREQ_URL = (
 
 HEADERS = {"User-Agent": "MyGrammar-KB-Builder/1.0"}
 MAX_RUNTIME_RULES = 5000
+BUILDER_VERSION = "1.1-safe-runtime"
 
 
 def download(url: str) -> bytes:
@@ -232,6 +233,7 @@ def main() -> int:
 
     summary: dict[str, Any] = {
         "builder": "MyGrammar Knowledge Base Builder",
+        "builder_version": BUILDER_VERSION,
         "forced": args.force,
         "sources": {},
     }
