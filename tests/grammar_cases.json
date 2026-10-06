@@ -193,11 +193,11 @@
     {
       "id": "LT-004",
       "type": "detect",
-      "input": "Please sign-out of the system.",
+      "input": "The system was signed-out yesterday.",
       "expected": [
         {
-          "wrong": "sign-out",
-          "correct": "sign out",
+          "wrong": "signed-out",
+          "correct": "signed out",
           "category": "LanguageTool",
           "title": "...because your Mac has been signed-out (signed out) from iCloud"
         }
