@@ -129,7 +129,12 @@ document.getElementById('verbSearch').addEventListener('input',renderVerbs);
 document.querySelectorAll('.verb-filter').forEach(function(btn){btn.addEventListener('click',function(){document.querySelectorAll('.verb-filter').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');activeVerbFilter=btn.dataset.filter;renderVerbs();});});
 function renderGuide(){
   var root=document.getElementById('grammarGrid');
-  root.innerHTML=KB.tenses.map(function(t){return '<article class="grammar-card"><span class="eyebrow">TENSE</span><h3>'+escapeHtml(t.name)+'</h3><div class="grammar-formula">'+escapeHtml(t.formula)+'</div><p>'+escapeHtml(t.description||'')+'</p><div class="signal-list">'+(t.signals||[]).map(function(s){return '<span>'+escapeHtml(s)+'</span>';}).join('')+'</div></article>';}).join('');
+  root.innerHTML=KB.tenses.map(function(t){
+    var examples=(t.examples||[]).map(function(example,index){
+      return '<div class="example-line"><span class="example-label">'+(index===0?'Example 1':'Example 2')+'</span><span>'+escapeHtml(example)+'</span></div>';
+    }).join('');
+    return '<article class="grammar-card"><span class="eyebrow">TENSE</span><h3>'+escapeHtml(t.name)+'</h3><div class="grammar-formula">'+escapeHtml(t.formula)+'</div><p>'+escapeHtml(t.description||'')+'</p><div class="example-box"><div class="formula-label">Examples</div>'+examples+'</div><div class="signal-list">'+(t.signals||[]).map(function(s){return '<span>'+escapeHtml(s)+'</span>';}).join('')+'</div></article>';
+  }).join('');
 }
 loadKnowledge().then(runCheck);
 
