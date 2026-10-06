@@ -1,4 +1,4 @@
-let KB={rules:{},tenses:[],commonErrors:[],contractions:[],verbs:[],samples:[],loaded:false};
+let KB={rules:{},tenses:[],commonErrors:[],contractions:[],verbs:[],samples:[],externalRules:[],commonWords:[],loaded:false};
 let issues=[]; let activeVerbFilter='all';
 
 const input=document.getElementById('inputText');
@@ -17,7 +17,9 @@ const FALLBACK={
     {v1:'go',v2:'went',v3:'gone',type:'irregular',example:'I went to work.'},
     {v1:'write',v2:'wrote',v3:'written',type:'irregular',example:'She has written a report.'}
   ],
-  samples:[]
+  samples:[],
+  externalRules:[],
+  commonWords:[]
 };
 
 function escapeHtml(v){return String(v).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'})[c];});}
@@ -36,9 +38,11 @@ async function loadKnowledge(){
     loadJSON('data/common_errors.json',FALLBACK.commonErrors),
     loadJSON('data/contractions.json',FALLBACK.contractions),
     loadJSON('data/verbs.json',FALLBACK.verbs),
-    loadJSON('data/samples.json',FALLBACK.samples)
+    loadJSON('data/samples.json',FALLBACK.samples),
+    loadJSON('data/external/languagetool_runtime.json',{rules:[]}),
+    loadJSON('data/external/common_words.json',{words:[]})
   ]);
-  KB.rules=data[0];KB.tenses=data[1];KB.commonErrors=data[2];KB.contractions=data[3];KB.verbs=data[4];KB.samples=data[5];KB.loaded=true;
+  KB.rules=data[0];KB.tenses=data[1];KB.commonErrors=data[2];KB.contractions=data[3];KB.verbs=data[4];KB.samples=data[5];KB.externalRules=(data[6].rules||[]);KB.commonWords=(data[7].words||[]);KB.loaded=true;
   kbStatus.textContent='✓ Local knowledge loaded';
   renderVerbs();renderSamples();renderGuide();
 }
@@ -57,6 +61,29 @@ function contractionIssues(text){
       out.push({start:m.index,end:m.index+m[0].length,wrong:m[0],correct:rule.correct,title:rule.category||'Spelling',category:'Spelling',severity:'error',explanation:rule.explanation,formula:rule.formula||''});
     }
   });return out;
+}
+function externalLanguageToolIssues(text){
+  var out=[];
+  if(text.length>5000)return out;
+  KB.externalRules.slice(0,2500).forEach(function(rule){
+    try{
+      var re=new RegExp(rule.regex,'gi'),m;
+      while((m=re.exec(text))){
+        if(!rule.suggestion || m[0]===rule.suggestion) continue;
+        out.push({
+          start:m.index,end:m.index+m[0].length,
+          wrong:m[0],correct:rule.suggestion,
+          title:rule.name||'LanguageTool rule',
+          category:'External rule',
+          severity:'error',
+          explanation:rule.message||'LanguageTool grammar rule.',
+          formula:'External LanguageTool rule'
+        });
+        if(out.length>=80)return;
+      }
+    }catch(e){}
+  });
+  return out;
 }
 function commonErrorIssues(text){
   var out=[];
@@ -91,7 +118,7 @@ function tenseIssues(text){
   }return out;
 }
 function analyze(text){
-  var list=commonErrorIssues(text).concat(contractionIssues(text),thirdPersonIssues(text),auxiliaryIssues(text),tenseIssues(text)),seen={};
+  var list=commonErrorIssues(text).concat(contractionIssues(text),externalLanguageToolIssues(text),thirdPersonIssues(text),auxiliaryIssues(text),tenseIssues(text)),seen={};
   list=list.filter(function(i){var k=i.start+'|'+i.end+'|'+i.correct;if(seen[k])return false;seen[k]=true;return true;});
   list.sort(function(a,b){return a.start-b.start;});return list;
 }
