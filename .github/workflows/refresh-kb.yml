@@ -41,7 +41,7 @@ jobs:
           node-version: '20'
 
       - name: Install Harper bundler dependencies
-        run: npm install --no-save harper.js@2.12.0 esbuild@0.27.0
+        run: npm install --no-save harper.js@2.10.0 esbuild@0.27.0
 
       - name: Build offline Harper bundle
         run: |
