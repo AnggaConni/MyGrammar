@@ -1,4 +1,4 @@
 const CACHE='mygrammar-v1';
-const ASSETS=['./','./index.html','./style.css','./app.js','./manifest.json','./data/grammar_rules.json','./data/tenses.json','./data/common_errors.json','./data/contractions.json','./data/verbs.json','./data/samples.json'];
+const ASSETS=['./','./index.html','./Toefl.html','./style.css','./app.js','./toefl.js','./manifest.json','./data/grammar_rules.json','./data/tenses.json','./data/common_errors.json','./data/contractions.json','./data/verbs.json','./data/samples.json'];
 self.addEventListener('install',function(event){event.waitUntil(caches.open(CACHE).then(function(cache){return cache.addAll(ASSETS);}));});
 self.addEventListener('fetch',function(event){event.respondWith(caches.match(event.request).then(function(cached){return cached||fetch(event.request).then(function(response){var copy=response.clone();caches.open(CACHE).then(function(cache){cache.put(event.request,copy);});return response;});}));});
