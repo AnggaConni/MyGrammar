@@ -38,11 +38,9 @@ async function loadKnowledge(){
     loadJSON('data/common_errors.json',FALLBACK.commonErrors),
     loadJSON('data/contractions.json',FALLBACK.contractions),
     loadJSON('data/verbs.json',FALLBACK.verbs),
-    loadJSON('data/samples.json',FALLBACK.samples),
-    loadJSON('data/external/languagetool_runtime.json',{rules:[]}),
-    loadJSON('data/external/common_words.json',{words:[]})
+    loadJSON('data/samples.json',FALLBACK.samples)
   ]);
-  KB.rules=data[0];KB.tenses=data[1];KB.commonErrors=data[2];KB.contractions=data[3];KB.verbs=data[4];KB.samples=data[5];KB.externalRules=(data[6].rules||[]);KB.commonWords=(data[7].words||[]);KB.loaded=true;
+  KB.rules=data[0];KB.tenses=data[1];KB.commonErrors=data[2];KB.contractions=data[3];KB.verbs=data[4];KB.samples=data[5];KB.externalRules=[];KB.commonWords=[];KB.loaded=true;
   kbStatus.textContent='✓ Local knowledge loaded';
   renderVerbs();renderSamples();renderGuide();
 }
@@ -118,7 +116,7 @@ function tenseIssues(text){
   }return out;
 }
 function analyze(text){
-  var list=commonErrorIssues(text).concat(contractionIssues(text),externalLanguageToolIssues(text),thirdPersonIssues(text),auxiliaryIssues(text),tenseIssues(text)),seen={};
+  var list=commonErrorIssues(text).concat(contractionIssues(text),thirdPersonIssues(text),auxiliaryIssues(text),tenseIssues(text)),seen={};
   list=list.filter(function(i){var k=i.start+'|'+i.end+'|'+i.correct;if(seen[k])return false;seen[k]=true;return true;});
   list.sort(function(a,b){return a.start-b.start;});return list;
 }
