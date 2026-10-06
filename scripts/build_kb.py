@@ -240,6 +240,18 @@ def main() -> int:
         raw = download(LANGUAGETOOL_URL)
         runtime_rules, stats = collect_rules(raw)
         write_json(
+            DATA / "languagetool_catalog.json",
+            {
+                "source": {
+                    "name": "LanguageTool English",
+                    "url": LANGUAGETOOL_URL,
+                    "license": "LGPL-2.1-or-later",
+                },
+                "count": stats["all_rules"],
+                "rules": all_rules,
+            },
+        )
+        write_json(
             DATA / "languagetool_runtime.json",
             {
                 "source": {
