@@ -1,4 +1,4 @@
-let KB = { rules: {}, tenses: [], commonErrors: [], irregularVerbs: {} };
+let KB = { rules: {}, tenses: [], commonErrors: [], contractions: [], irregularVerbs: {} };
 let issues = [];
 let timer = null;
 
@@ -14,12 +14,14 @@ async function loadKnowledgeBase() {
     fetch('data/grammar_rules.json').then(function(r){ return r.json(); }),
     fetch('data/tenses.json').then(function(r){ return r.json(); }),
     fetch('data/common_errors.json').then(function(r){ return r.json(); }),
+    fetch('data/contractions.json').then(function(r){ return r.json(); }),
     fetch('data/irregular_verbs.json').then(function(r){ return r.json(); })
   ]);
   KB.rules = data[0];
   KB.tenses = data[1];
   KB.commonErrors = data[2];
-  KB.irregularVerbs = data[3];
+  KB.contractions = data[3];
+  KB.irregularVerbs = data[4];
 }
 
 function escapeHtml(value) {
@@ -53,6 +55,29 @@ function commonErrorIssues(text) {
         category: 'Suggestion', severity: rule.severity || 'error'
       });
     });
+  });
+  return out;
+}
+
+function contractionIssues(text) {
+  var out = [];
+  KB.contractions.forEach(function(rule) {
+    var re = new RegExp('\\\\b' + rule.wrong + '\\\\b', 'gi');
+    var match;
+    while ((match = re.exec(text)) !== null) {
+      out.push({
+        id: 'contraction-' + match.index + '-' + rule.wrong,
+        start: match.index,
+        end: match.index + match[0].length,
+        wrong: match[0],
+        correct: rule.correct,
+        title: rule.category || 'Spelling',
+        explanation: rule.explanation,
+        formula: rule.formula || '',
+        category: 'Spelling',
+        severity: 'error'
+      });
+    }
   });
   return out;
 }
@@ -108,7 +133,7 @@ function detectTenses(text) {
 }
 
 function analyze(text) {
-  var list = commonErrorIssues(text).concat(thirdPersonIssues(text), auxiliaryIssues(text));
+  var list = commonErrorIssues(text).concat(contractionIssues(text), thirdPersonIssues(text), auxiliaryIssues(text));
   var seen = {};
   list = list.filter(function(item) {
     var key = item.start+'|'+item.end+'|'+item.correct;
